@@ -28,14 +28,18 @@ class RecipeRepo {
   filterRecipesByIngredients(ingredientData, ingredientName) {
     const ingredients = new IngredientRepo(ingredientData);
     const ingredientId = ingredients.returnIngredientId(ingredientName);
+    console.log(ingredients);
     const filteredRecipes = [];
     this.recipes.filter(recipe => {
       recipe.ingredients.forEach(ingredient => {
         if (ingredient.id === ingredientId) {
           filteredRecipes.push(recipe);
+          console.log(ingredient.id);
+          console.log(ingredientId);
         }
       });
     });
+    console.log(filteredRecipes);
     return filteredRecipes;
   }
 }
