@@ -259,7 +259,6 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-  
   .single-recipe {
     margin-top: 25px;
   }
@@ -267,6 +266,7 @@ body {
   .single-recipe-container {
     width: 95%;
   }
+
   .single-recipe-image {
     width: 95%;
   }
@@ -274,6 +274,7 @@ body {
   .single-recipe-list-container {
     margin: 0px;
   }
+}
 
 /* ------------------state---------------------------- */
 
