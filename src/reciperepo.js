@@ -3,26 +3,31 @@ const IngredientRepo = require('../src/IngredientRepo');
 
 class RecipeRepo {
   constructor(recipeData = []) {
-    this.recipes = recipeData.map(recipe => new Recipe(
-      recipe.id,
-      recipe.image,
-      recipe.ingredients,
-      recipe.instructions,
-      recipe.name,
-      recipe.tags
-    ))
+    this.recipes = recipeData.map(
+      recipe =>
+        new Recipe(
+          recipe.id,
+          recipe.image,
+          recipe.ingredients,
+          recipe.instructions,
+          recipe.name,
+          recipe.tags
+        )
+    );
   }
 
   filterRecipesByTag(tag) {
     const searchByTag = this.recipes.filter(recipe => {
       return recipe.tags.includes(tag);
-    })
+    });
     return searchByTag;
   }
 
   filterRecipesByName(recipeName) {
     const searchRecipeName = recipeName.toLowerCase();
-    return this.recipes.find(recipe => recipe.name.toLowerCase() === searchRecipeName);
+    return this.recipes.find(
+      recipe => recipe.name.toLowerCase() === searchRecipeName
+    );
   }
 
   filterRecipesByIngredients(ingredientData, ingredientName) {
@@ -31,7 +36,10 @@ class RecipeRepo {
     const filteredRecipes = [];
     this.recipes.filter(recipe => {
       recipe.ingredients.forEach(ingredient => {
-        if (ingredient.id === ingredientId) {
+        if (
+          ingredient.id === ingredientId &&
+          !filteredRecipes.includes(recipe)
+        ) {
           filteredRecipes.push(recipe);
         }
       });
@@ -40,13 +48,6 @@ class RecipeRepo {
   }
 }
 
-
-
-
-
-
-
-
-if (typeof module !== "undefined") {
+if (typeof module !== 'undefined') {
   module.exports = RecipeRepo;
 }
