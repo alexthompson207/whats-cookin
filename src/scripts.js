@@ -3,8 +3,7 @@ const recipesRepo = new RecipeRepo(recipeData);
 const searchBtn = document.querySelector('#searchRecipes');
 const searchInput = document.querySelector('.search-bar');
 
-var option = document.getElementsByTagName("option")[0];
-
+window.addEventListener('load', displayPageLoad);
 searchBtn.addEventListener('click', handleSearchDropDown)
 
 function displayAllRecipeCards(allRecipeData) {
@@ -20,16 +19,12 @@ function displayAllRecipeCards(allRecipeData) {
 }
 
 function searchByIngrients() {
-  // event.preventDefault();
   const searchResultRecipes = recipesRepo.filterRecipesByIngredients(ingredientsData, searchInput.value);
-  console.log(searchResultRecipes);
   displayAllRecipeCards({ recipes: searchResultRecipes });
 }
 
 function searchByRecipeName() {
-  // event.preventDefault();
   const searchResultName = recipesRepo.filterRecipesByName(searchInput.value);
-  console.log(searchResultName);
   displayAllRecipeCards({ recipes: [searchResultName] });
 }
 
@@ -41,5 +36,9 @@ function handleSearchDropDown(event) {
   } else if (searchBy === 'ingredient') {
     searchByIngrients(event);
   }
+}
+
+function displayPageLoad() {
+  displayAllRecipeCards(recipesRepo);
 }
 
