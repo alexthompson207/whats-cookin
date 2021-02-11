@@ -11,9 +11,12 @@ const recipeListCard = document.querySelector('.recipe-list');
 const recipesRepo = new RecipeRepo(recipeData);
 const searchBtn = document.querySelector('#searchRecipes');
 const searchInput = document.querySelector('.search-bar');
+const filterTagSection = document.querySelector('.recipe-tags');
+
 
 window.addEventListener('load', displayPageLoad);
-searchBtn.addEventListener('click', handleSearchDropDown)
+searchBtn.addEventListener('click', handleSearchDropDown);
+filterTagSection.addEventListener('click', filterRecipesByTags);
 
 function displayAllRecipeCards(allRecipeData) {
   recipeListCard.innerHTML = '';
@@ -50,5 +53,14 @@ function handleSearchDropDown(event) {
 
 function displayPageLoad() {
   displayAllRecipeCards(recipesRepo);
+}
+
+
+function filterRecipesByTags(event) {
+  console.log(event.target.id);
+  const filteredRecipes = recipesRepo.filterRecipesByTag(event.target.value);
+  // event.preventDefault();
+  // console.log(filteredRecipes);
+  displayAllRecipeCards({ recipes: filteredRecipes });
 }
 
