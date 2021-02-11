@@ -1,5 +1,5 @@
 
-const ingredientInstances = ingredientData.map(ingredient => {
+const ingredientInstances = ingredientsData.map(ingredient => {
   return new Ingredient(
     ingredient.id,
     ingredient.name,

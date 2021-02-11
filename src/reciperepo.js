@@ -25,37 +25,26 @@ class RecipeRepo {
 
   filterRecipesByName(recipeName) {
     const searchRecipeName = recipeName.toLowerCase();
-    return this.recipes.find(
-      recipe => recipe.name.toLowerCase() === searchRecipeName
-    );
+    return this.recipes.find(recipe => recipe.name.toLowerCase() === searchRecipeName);
   }
 
   filterRecipesByIngredients(ingredientData, ingredientName) {
     const ingredients = new IngredientRepo(ingredientData);
     const ingredientId = ingredients.returnIngredientId(ingredientName);
-    console.log(ingredients);
     const filteredRecipes = [];
     this.recipes.filter(recipe => {
       recipe.ingredients.forEach(ingredient => {
-        if (
-          ingredient.id === ingredientId &&
-          !filteredRecipes.includes(recipe)
-        ) {
+        if (ingredient.id === ingredientId && !filteredRecipes.includes(recipe)) {
           filteredRecipes.push(recipe);
           console.log(ingredient.id);
           console.log(ingredientId);
         }
       });
     });
-    console.log(filteredRecipes);
     return filteredRecipes;
   }
 }
 
-<<<<<<< HEAD
-if (typeof module !== "undefined") {
-=======
 if (typeof module !== 'undefined') {
->>>>>>> main
   module.exports = RecipeRepo;
 }

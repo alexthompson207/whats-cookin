@@ -200,40 +200,28 @@ describe('RecipeRepo', () => {
 
     it('should be able to filter recipes by an ingredient', () => {
       recipeList = new RecipeRepo([buffaloChicken, beefNoodle, spaghetti]);
-      const result = recipeList.filterRecipesByIngredients(
-        ingredientData,
-        'hawaiian sweet rolls'
-      );
+      const result = recipeList.filterRecipesByIngredients(ingredientData, 'hawaiian sweet rolls');
 
       expect(result).deep.equal([buffaloChicken]);
     });
 
     it('should be able return all recipes that include an ingredient', () => {
       recipeList = new RecipeRepo([buffaloChicken, beefNoodle, spaghetti]);
-      const result = recipeList.filterRecipesByIngredients(
-        ingredientData,
-        'butter'
-      );
+      const result = recipeList.filterRecipesByIngredients(ingredientData, 'butter');
 
       expect(result).deep.equal([buffaloChicken, spaghetti]);
     });
 
     it('should not return duplicate recipes', () => {
       recipeList = new RecipeRepo([buffaloChicken, beefNoodle, spaghetti]);
-      const result = recipeList.filterRecipesByIngredients(
-        ingredientData,
-        'butter'
-      );
+      const result = recipeList.filterRecipesByIngredients(ingredientData, 'butter');
 
       expect(result).deep.equal([buffaloChicken, spaghetti]);
     });
 
     it('should return an empty array if no ingredients are in a recipe', () => {
       recipeList = new RecipeRepo([buffaloChicken, beefNoodle, spaghetti]);
-      const result = recipeList.filterRecipesByIngredients(
-        ingredientData,
-        'paprika'
-      );
+      const result = recipeList.filterRecipesByIngredients(ingredientData, 'paprika');
 
       expect(result).deep.equal([]);
     });
