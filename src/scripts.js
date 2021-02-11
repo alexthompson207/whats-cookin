@@ -1,3 +1,12 @@
+
+const ingredientInstances = ingredientData.map(ingredient => {
+  return new Ingredient(
+    ingredient.id,
+    ingredient.name,
+    ingredient.estimatedCostInCents
+  );
+});
+const ingredientRepo = new IngredientRepo(ingredientInstances);
 const recipeListCard = document.querySelector('.recipe-list');
 const recipesRepo = new RecipeRepo(recipeData);
 const searchBtn = document.querySelector('#searchRecipes');

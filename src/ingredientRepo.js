@@ -2,13 +2,7 @@
 
 class IngredientRepo {
   constructor(ingredientData = []) {
-    this.ingredients = ingredientData.map(ingredient => {
-      return new Ingredient(
-        ingredient.id,
-        ingredient.name,
-        ingredient.estimatedCostInCents
-      );
-    });
+    this.ingredients = ingredientData;
   }
   returnIngredientId(ingredientName) {
     const ingredient = this.ingredients.find(ingredient => {

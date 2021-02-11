@@ -259,7 +259,6 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-  
   .single-recipe {
     margin-top: 25px;
   }
@@ -267,6 +266,7 @@ body {
   .single-recipe-container {
     width: 95%;
   }
+
   .single-recipe-image {
     width: 95%;
   }
@@ -275,6 +275,10 @@ body {
     margin: 0px;
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 /* ------------------state---------------------------- */
 
 .hidden {
