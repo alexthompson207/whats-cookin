@@ -36,6 +36,7 @@ function handleSearchDropDown(event) {
   } else if (searchBy === 'ingredient') {
     searchByIngrients(event);
   }
+  searchInput.value = '';
 }
 
 function displayPageLoad() {
