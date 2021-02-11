@@ -1,4 +1,4 @@
-const Ingredient = require('../src/Ingredient');
+// const Ingredient = require('../src/Ingredient');
 
 class IngredientRepo {
   constructor(ingredientData = []) {
