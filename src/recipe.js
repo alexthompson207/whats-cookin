@@ -51,14 +51,12 @@ class Recipe {
     return ingredientAmounts
   }
 
-  calculateRecipeCost(ingredientData) {
-    const recipeIngredients = this.findIngredients(ingredientData);
-    const ingredientCost = recipeIngredients.map(
-      ingredientCost => ingredientCost.estimatedCostInCents
-    );
-    const cost = ingredientCost.reduce((totalCost, ingredientCost) => {
-      return totalCost + ingredientCost;
-    }, 0);
+   calculateRecipeCost(ingredientData) {
+    const costPerUnit = [];
+    this.ingredients.forEach(recipeIngredient => {
+      return costPerUnit.push((recipeIngredient.quantity.amount) * (ingredientData.find(ingredient => recipeIngredient.id === ingredient.id).estimatedCostInCents));
+    });
+    const cost = costPerUnit.reduce((totalCost, ingredientCost) => totalCost + ingredientCost, 0);
     return Number((cost / 100).toFixed(2));
   }
 
