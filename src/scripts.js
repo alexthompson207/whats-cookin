@@ -12,18 +12,22 @@ const recipesRepo = new RecipeRepo(recipeData);
 const searchBtn = document.querySelector('#searchRecipes');
 const searchInput = document.querySelector('.search-bar');
 const filterTagSection = document.querySelector('.recipe-tags');
+const allRecipesView = document.querySelector('.all-recipes');
+const singleRecipeView = document.querySelector('.single-recipe');
+
 
 
 window.addEventListener('load', displayPageLoad);
 searchBtn.addEventListener('click', handleSearchDropDown);
 filterTagSection.addEventListener('click', filterRecipesByTags);
+recipeListCard.addEventListener('click', handleRecipeClick);
 
 function displayAllRecipeCards(allRecipeData) {
   recipeListCard.innerHTML = '';
   allRecipeData.recipes.forEach(recipe => {
     recipeListCard.innerHTML +=
       `<div class='recipe-img-container'>
-    <img class='recipe-img' src="${recipe.image}"
+    <img class='recipe-img' id="${recipe.id}" src="${recipe.image}"
       alt="${recipe.name}">
       <p class='recipe-name'>${recipe.name}</p>
   </div>`
@@ -65,3 +69,14 @@ function filterRecipesByTags(event) {
   }
 }
 
+function handleRecipeClick(event) {
+  console.log(event.target.closest('.recipe-img-container').children[0].id);
+  if (event.target.className.includes('recipe-img') || event.target.className.includes('recipe-name')) {
+    hideAllRecipes();
+  }
+}
+
+function hideAllRecipes() {
+  allRecipesView.classList.add('hidden');
+  singleRecipeView.classList.remove('hidden');
+}
