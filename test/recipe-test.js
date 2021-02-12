@@ -161,9 +161,11 @@ describe('Recipe', () => {
     ]);
   });
 
-  it('should return the amount of each ingredient', () => {});
+  it('should return the amount of each ingredient', () => {
+    const ingredientAmount = recipe1.returnIngredientAmounts(ingredientData); 
 
-  // should return 1 amount here, account for duplicate ingredients
+    expect(ingredientAmount).to.deep.equal(['1.5 c', '0.5 tsp', '3 large'])
+  });
 
   it('should return the total cost of all ingredients in recipe', () => {
     const totalCost = recipe1.calculateRecipeCost(ingredientData);
