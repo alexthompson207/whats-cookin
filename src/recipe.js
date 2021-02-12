@@ -25,6 +25,32 @@ class Recipe {
     return [...new Set(ingredientNames)];
   }
 
+  returnIngredientAmounts() {
+    const recipeIngredients = this.ingredients;
+    const amounts = recipeIngredients.reduce((ingredientAmounts, ingredient) => {
+      const ingredientInfo = ingredientAmounts[ingredient.id];
+          if(!ingredientInfo) {
+            ingredientAmounts[ingredient.id] = Object.values(ingredient.quantity); 
+          } else {
+            ingredientInfo.push(ingredient.quantity.amount, ingredient.quantity.unit)
+            let amount = 0; 
+             ingredientInfo.forEach(item => {
+              if(typeof(item) === "number") {
+                amount += item; 
+              }
+            })
+            ingredientAmounts[ingredient.id] = [amount, ingredient.quantity.unit] 
+          } 
+        return ingredientAmounts; 
+    }, {})
+    let ingredientAmounts = [];
+    Object.values(amounts).forEach(ingredientAmount => {
+        ingredientAmounts.push(ingredientAmount.join(' '))
+      }) 
+    ingredientAmounts = ingredientAmounts.reverse(); 
+    return ingredientAmounts
+  }
+
   calculateRecipeCost(ingredientData) {
     const recipeIngredients = this.findIngredients(ingredientData);
     const ingredientCost = recipeIngredients.map(
