@@ -167,7 +167,7 @@ describe('Recipe', () => {
 
   it('should return the total cost of all ingredients in recipe', () => {
     const totalCost = recipe1.calculateRecipeCost(ingredientData);
-    expect(totalCost).to.equal(11.96);
+    expect(totalCost).to.equal(16.68);
   });
 
   it('should return the instructions for the recipe', () => {
