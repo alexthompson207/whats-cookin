@@ -55,10 +55,12 @@ function displayPageLoad() {
   displayAllRecipeCards(recipesRepo);
 }
 
-
 function filterRecipesByTags(event) {
   const filteredRecipes = recipesRepo.filterRecipesByTag(event.target.value);
-  if (event.target.value) {
+  console.log(event.target.value);
+  if (event.target.value === 'all recipes') {
+    displayAllRecipeCards(recipesRepo);
+  } else if (event.target.value) {
     displayAllRecipeCards({ recipes: filteredRecipes });
   }
 }
