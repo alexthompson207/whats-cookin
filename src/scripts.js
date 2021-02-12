@@ -57,10 +57,9 @@ function displayPageLoad() {
 
 
 function filterRecipesByTags(event) {
-  console.log(event.target.id);
   const filteredRecipes = recipesRepo.filterRecipesByTag(event.target.value);
-  // event.preventDefault();
-  // console.log(filteredRecipes);
-  displayAllRecipeCards({ recipes: filteredRecipes });
+  if (event.target.value) {
+    displayAllRecipeCards({ recipes: filteredRecipes });
+  }
 }
 
