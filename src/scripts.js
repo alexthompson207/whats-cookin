@@ -16,6 +16,7 @@ const filterTagSection = document.querySelector('.recipe-tags');
 const allRecipesView = document.querySelector('.all-recipes');
 const singleRecipeView = document.querySelector('.single-recipe');
 const singleRecipeImage = document.getElementById('singleRecipeImage');
+const singleRecipeList = document.getElementById('singleRecipeList');
 const pageTitleText = document.querySelector('.navigation-title');
 
 
@@ -76,6 +77,7 @@ function handleRecipeClick(event) {
   console.log(event.target.closest('.recipe-img-container').children[0].id);
   displaySingleRecipe(event);
   displayCostOfRecipe(event);
+
 }
 function displaySingleRecipe(event) {
   if (event.target.parentNode.className.includes('recipe-img-container')) {
@@ -85,6 +87,7 @@ function displaySingleRecipe(event) {
     singleRecipeImage.src = recipeImage;
     singleRecipeImage.alt = altText;
     pageTitleText.innerText = altText;
+    displayRecipeIngredients(event);
   }
 }
 
@@ -99,6 +102,28 @@ function displayCostOfRecipe(event) {
   const totalCost = clickedRecipe.calculateRecipeCost(ingredientInstances);
   const costHTML = document.querySelector('.single-recipe-info-title');
   costHTML.children[1].innerText = `Recipe Cost: $${totalCost}`;
+}
+
+function displayRecipeIngredients(event) {
+  const ingredients = findIngredients(event);
+  ingredients.forEach(ingredient => {
+    singleRecipeList.innerHTML += `<li class="single-recipe-info">
+    <p class="single-recipe-number">2</p>
+    <p class="single-recipe-ingredient">${ingredient}</p>
+  </li>`
+  })
+}
+function findIngredients(event) {
+  const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
+  const clickedRecipe = recipesRepo.recipes.find(recipe => {
+    return recipe.id === recipeId;
+  })
+  const ingredients = clickedRecipe.returnIngredientNames(ingredientInstances)
+  return ingredients;
+}
+
+function viewRecipeInstructions() {
+
 }
 
 // function findRecipeById(recipeId) {
