@@ -18,6 +18,10 @@ const singleRecipeView = document.querySelector('.single-recipe');
 const singleRecipeImage = document.getElementById('singleRecipeImage');
 const singleRecipeList = document.getElementById('singleRecipeList');
 const pageTitleText = document.querySelector('.navigation-title');
+const singleRecipeBtns = document.querySelector('.single-recipe-buttons');
+const topBarNavBtns = document.querySelector('.navigation-buttons');
+const singleRecipeInfo = document.querySelector('.single-recipe-info');
+
 
 
 
@@ -25,6 +29,8 @@ window.addEventListener('load', displayPageLoad);
 searchBtn.addEventListener('click', handleSearchDropDown);
 filterTagSection.addEventListener('click', filterRecipesByTags);
 recipeListCard.addEventListener('click', handleRecipeClick);
+singleRecipeBtns.addEventListener('click', handleSingleRecipeButtons);
+topBarNavBtns.addEventListener('click', handleNavButtons);
 
 function displayAllRecipeCards(allRecipeData) {
   recipeListCard.innerHTML = '';
@@ -74,21 +80,18 @@ function filterRecipesByTags(event) {
 }
 
 function handleRecipeClick(event) {
-  console.log(event.target.closest('.recipe-img-container').children[0].id);
-  displaySingleRecipe(event);
-  displayCostOfRecipe(event);
+  const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
+  const clickedRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
+  displaySingleRecipe(clickedRecipe);
+  // displayCostOfRecipe(clickedRecipe);
 
 }
-function displaySingleRecipe(event) {
-  if (event.target.parentNode.className.includes('recipe-img-container')) {
-    hideAllRecipes(event);
-    const recipeImage = event.target.closest('.recipe-img-container').children[0].src
-    const altText = event.target.closest('.recipe-img-container').children[0].alt
-    singleRecipeImage.src = recipeImage;
-    singleRecipeImage.alt = altText;
-    pageTitleText.innerText = altText;
-    displayRecipeIngredients(event);
-  }
+function displaySingleRecipe(recipe) {
+  hideAllRecipes();
+  singleRecipeImage.src = recipe.image;
+  singleRecipeImage.alt = recipe.name;
+  pageTitleText.innerText = recipe.name;
+  displayRecipeIngredients(recipe);
 }
 
 function hideAllRecipes() {
@@ -96,35 +99,57 @@ function hideAllRecipes() {
   singleRecipeView.classList.remove('hidden');
 }
 
-function displayCostOfRecipe(event) {
-  const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-  const clickedRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
-  const totalCost = clickedRecipe.calculateRecipeCost(ingredientInstances);
-  const costHTML = document.querySelector('.single-recipe-info-title');
-  costHTML.children[1].innerText = `Recipe Cost: $${totalCost}`;
-}
+// function displayCostOfRecipe(event) {
+//   // const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
+//   // const clickedRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
+//   const totalCost = clickedRecipe.calculateRecipeCost(ingredientInstances);
+//   const costHTML = document.querySelector('.single-recipe-info-title');
+//   costHTML.children[1].innerText = `Recipe Cost: $${totalCost}`;
+// }
 
-function displayRecipeIngredients(event) {
-  const ingredients = findIngredients(event);
-  ingredients.forEach(ingredient => {
+function displayRecipeIngredients(recipe) {
+  singleRecipeList.innerHTML = '';
+  const ingredients = findIngredients(recipe);
+  recipe.ingredients.forEach(ingredient => {
     singleRecipeList.innerHTML += `<li class="single-recipe-info">
-    <p class="single-recipe-number">2</p>
-    <p class="single-recipe-ingredient">${ingredient}</p>
+    <p class="single-recipe-number">${ingredient.quantity.amount} ${ingredient.quantity.unit}</p>
   </li>`
   })
-}
-function findIngredients(event) {
-  const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-  const clickedRecipe = recipesRepo.recipes.find(recipe => {
-    return recipe.id === recipeId;
+  ingredients.forEach(ingredient => {
+    singleRecipeInfo.innerHTML += `<p class="single-recipe-ingredient">${ingredient}</p>`
+    // singleRecipeInfo.insertAdjacentHTML('beforeend', ingredientHTML);
   })
-  const ingredients = clickedRecipe.returnIngredientNames(ingredientInstances)
+}
+/* <p class="single-recipe-ingredient">${ingredient.id}</p> */
+
+function findIngredients(recipe) {
+  const ingredients = recipe.returnIngredientNames(ingredientInstances)
   return ingredients;
 }
 
-function viewRecipeInstructions() {
+function handleSingleRecipeButtons(event) {
+  if (event.target.innerText === 'View Instructions') {
+    console.log('yeeehawww');
+    displayRecipeIngredients(event);
+  }
+}
+
+function unhideHomeView() {
+  allRecipesView.classList.remove('hidden');
+  singleRecipeView.classList.add('hidden');
+  displayAllRecipeCards(recipesRepo);
 
 }
+
+function handleNavButtons(event) {
+  if (event.target.innerText === 'Return to Recipes') {
+    console.log(event.target.innerText);
+    unhideHomeView();
+
+  }
+}
+
+
 
 // function findRecipeById(recipeId) {
 //   const foundRecipe = recipeData.find(recipe => {
