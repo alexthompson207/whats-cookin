@@ -11,7 +11,8 @@ class Recipe {
     const recipeIngredients = [];
     this.ingredients.forEach(recipeIngredient => {
       return recipeIngredients.push(
-        ingredientData.find(ingredient => recipeIngredient.id === ingredient.id));
+        ingredientData.find(ingredient => recipeIngredient.id === ingredient.id)
+      );
     });
     return recipeIngredients;
   }
@@ -26,36 +27,20 @@ class Recipe {
 
   returnIngredientAmounts() {
     const recipeIngredients = this.ingredients;
-    const amounts = recipeIngredients.reduce((ingredientAmounts, ingredient) => {
-      const ingredientInfo = ingredientAmounts[ingredient.id];
-      if (!ingredientInfo) {
-        ingredientAmounts[ingredient.id] = Object.values(ingredient.quantity);
-      } else {
-        ingredientInfo.push(ingredient.quantity.amount, ingredient.quantity.unit)
-        let amount = 0;
-        ingredientInfo.forEach(item => {
-          if (typeof (item) === "number") {
-            amount += item;
-          }
-        })
-        ingredientAmounts[ingredient.id] = [amount, ingredient.quantity.unit]
-      }
-      return ingredientAmounts;
-    }, {})
-    let ingredientAmounts = [];
-    Object.values(amounts).forEach(ingredientAmount => {
-      ingredientAmounts.push(ingredientAmount.join(' '))
+    const amounts = []
+    recipeIngredients.forEach(ingredient => {
+      const amount = Object.values(ingredient.quantity);
+      amounts.push(amount.join(" "));
     })
-    ingredientAmounts = ingredientAmounts.reverse();
-    return ingredientAmounts
+    return amounts
   }
 
   calculateRecipeCost(ingredientData) {
-    const recipeIngredients = this.findIngredients(ingredientData);
-    const ingredientCost = recipeIngredients.map(ingredientCost => ingredientCost.estimatedCostInCents);
-    const cost = ingredientCost.reduce((totalCost, ingredientCost) => {
-      return totalCost + ingredientCost;
-    }, 0);
+    const costPerUnit = [];
+    this.ingredients.forEach(recipeIngredient => {
+      return costPerUnit.push((recipeIngredient.quantity.amount) * (ingredientData.find(ingredient => recipeIngredient.id === ingredient.id).estimatedCostInCents));
+    });
+    const cost = costPerUnit.reduce((totalCost, ingredientCost) => totalCost + ingredientCost, 0);
     return Number((cost / 100).toFixed(2));
   }
 
@@ -64,6 +49,6 @@ class Recipe {
   }
 }
 
-if (typeof module !== "undefined") {
+if (typeof module !== 'undefined') {
   module.exports = Recipe;
 }
