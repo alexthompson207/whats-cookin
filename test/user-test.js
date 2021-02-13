@@ -202,4 +202,12 @@ describe.only('User', () => {
 
   });
 
+  it('should add recipes to user\'s cook list', () => {
+
+    saige.addToCookList(buffaloChicken); 
+    saige.addToCookList(spaghetti); 
+
+    expect(saige.recipesToCook).to.have.lengthOf(2); 
+    expect(saige.recipesToCook[0]).to.be.an.instanceOf(Recipe); 
+  })
 });
