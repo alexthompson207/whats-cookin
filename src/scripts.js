@@ -161,6 +161,8 @@ function handleNavButtons(event) {
   if (event.target.innerText === 'Return to Recipes') {
     unhideHomeView();
     pageTitleText.innerText = 'Whats Cookin';
+  } else if (event.target.innerText === 'My Favorites') {
+    displayFavoriteRecipesView();
   }
 }
 
