@@ -151,11 +151,10 @@ function handleNavButtons(event) {
   if (event.target.innerText === 'Return to Recipes') {
     console.log(event.target.innerText);
     unhideHomeView();
+    pageTitleText.innerText = 'Whats Cookin';
 
   }
 }
-
-
 
 
 // function displayRecipeIngredients(recipe) {
