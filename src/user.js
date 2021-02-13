@@ -10,8 +10,8 @@ class User {
   }
 
   addFavoriteRecipe(recipe) {
-    if(!this.favoriteRecipes.includes(recipe)){
-    this.favoriteRecipes.push(recipe); 
+    if (!this.favoriteRecipes.includes(recipe)) {
+      this.favoriteRecipes.push(recipe); 
     }
   }
 
@@ -24,10 +24,10 @@ class User {
   }
 
   addToCookList(recipe) {
-    if(!this.recipesToCook.includes(recipe)) {
+    if (!this.recipesToCook.includes(recipe)) {
       this.recipesToCook.push(recipe); 
     }
-  };
+  }
 
   filterFavoritesByTag(tag) {
     const searchByTag = this.favoriteRecipes.filter(recipe => {
@@ -48,12 +48,12 @@ class User {
       });
     });
     return filteredRecipes; 
-  };
+  }
 
   filterFavoritesByName(recipeName) {
     const searchRecipeName = recipeName.toLowerCase();
     return this.favoriteRecipes.find(recipe => recipe.name.toLowerCase() === searchRecipeName);
   }
-};
+}
 
 module.exports = User; 

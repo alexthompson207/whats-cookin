@@ -2,8 +2,6 @@ const chai = require('chai');
 const expect = chai.expect;
 const User = require('../src/User');
 const Recipe = require('../src/Recipe');
-const IngredientRepo = require('../src/IngredientRepo');
-const user = require('../src/User');
 
 describe.only('User', () => {
   let userData, ingredientData, recipe1, recipe2, recipe3, buffaloChicken, beefNoodle, spaghetti, saige; 
@@ -36,8 +34,8 @@ describe.only('User', () => {
           }
         ]
       }
-     ];
-     ingredientData = [
+    ];
+    ingredientData = [
       {
         id: 98871,
         name: 'hawaiian sweet rolls',
@@ -64,7 +62,7 @@ describe.only('User', () => {
         estimatedCostInCents: 200,
       },
     ];
-     recipe1 = {
+    recipe1 = {
       id: 991136,
       image: 'https://spoonacular.com/recipeImages/991136-556x370.jpg',
       ingredients: [
@@ -163,7 +161,7 @@ describe.only('User', () => {
   })
 
   it('should be a function', () => { 
-      expect(User).to.be.a('function'); 
+    expect(User).to.be.a('function'); 
   });
 
   it('should be an instance of user', () => {
