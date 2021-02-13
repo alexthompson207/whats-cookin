@@ -1,3 +1,5 @@
+const IngredientRepo = require('./IngredientRepo')
+
 class User {
   constructor(name, id, pantry) {
     this.name = name; 
@@ -33,6 +35,20 @@ class User {
     });
     return searchByTag;
   }
-}
+
+  filterFavoritesByIngredients(ingredientData, ingredientName) {
+    const ingredients = new IngredientRepo(ingredientData);
+    const ingredientId = ingredients.returnIngredientId(ingredientName);
+    const filteredRecipes = [];
+    this.favoriteRecipes.filter(recipe => {
+      recipe.ingredients.forEach(ingredient => {
+        if (ingredient.id === ingredientId && !filteredRecipes.includes(recipe)) {
+          filteredRecipes.push(recipe);
+        }
+      });
+    });
+    return filteredRecipes; 
+  };
+};
 
 module.exports = User; 
