@@ -232,4 +232,18 @@ describe.only('User', () => {
     expect(saige.recipesToCook[1].name).to.equal('Beef Noodle');  
 
   })
+
+  it('should filter favorite recipes by tag name', () => {
+
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(spaghetti);
+    saige.addFavoriteRecipe(beefNoodle);  
+
+    const results = saige.filterFavoritesByTag('lunch') 
+
+    expect(results).to.have.lengthOf(2)
+    expect(results[1].name).to.equal('Spaghetti');
+  });
+
+  
 });
