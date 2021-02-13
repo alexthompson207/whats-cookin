@@ -188,6 +188,17 @@ describe.only('User', () => {
     expect(saige.favoriteRecipes[0]).to.be.an.instanceOf(Recipe); 
   });
 
+  it('should prevent duplicate recipes from being added to favorites', () => {
+    
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(buffaloChicken); 
+    saige.addFavoriteRecipe(beefNoodle);
+
+    expect(saige.favoriteRecipes).to.have.lengthOf(2); 
+    expect(saige.favoriteRecipes[1].name).to.equal('Beef Noodle');  
+
+  })
+
 
   it('should remove a recipe from user\'s favorites', () => {
    
@@ -209,5 +220,16 @@ describe.only('User', () => {
 
     expect(saige.recipesToCook).to.have.lengthOf(2); 
     expect(saige.recipesToCook[0]).to.be.an.instanceOf(Recipe); 
+  });
+
+  it('should prevent duplicate recipes from being added to cook list', () => {
+    
+    saige.addToCookList(buffaloChicken);
+    saige.addToCookList(buffaloChicken); 
+    saige.addToCookList(beefNoodle);
+
+    expect(saige.recipesToCook).to.have.lengthOf(2); 
+    expect(saige.recipesToCook[1].name).to.equal('Beef Noodle');  
+
   })
 });
