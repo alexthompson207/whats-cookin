@@ -21,7 +21,7 @@ const pageTitleText = document.querySelector('.navigation-title');
 const singleRecipeBtns = document.querySelector('.single-recipe-buttons');
 const topBarNavBtns = document.querySelector('.navigation-buttons');
 const singleRecipeInfo = document.querySelector('.single-recipe-info');
-
+let currentRecipe;
 
 
 
@@ -83,7 +83,7 @@ function handleRecipeClick(event) {
   const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
   const clickedRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
   displaySingleRecipe(clickedRecipe);
-  // displayCostOfRecipe(clickedRecipe);
+  displayCostOfRecipe(clickedRecipe);
 
 }
 function displaySingleRecipe(recipe) {
@@ -99,32 +99,38 @@ function hideAllRecipes() {
   singleRecipeView.classList.remove('hidden');
 }
 
-// function displayCostOfRecipe(event) {
-//   // const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-//   // const clickedRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
-//   const totalCost = clickedRecipe.calculateRecipeCost(ingredientInstances);
-//   const costHTML = document.querySelector('.single-recipe-info-title');
-//   costHTML.children[1].innerText = `Recipe Cost: $${totalCost}`;
-// }
+function displayCostOfRecipe(recipe) {
+  const totalCost = recipe.calculateRecipeCost(ingredientInstances);
+  const costHTML = document.querySelector('.single-recipe-info-title');
+  costHTML.children[1].innerText = `Recipe Cost: $${totalCost}`;
+}
+
+//Builds an object of recipe names and their ingredient amounts
+function findIngredientInfo(recipe) {
+  const amounts = recipe.returnIngredientAmounts()
+  const ingredients = recipe.returnIngredientNames(ingredientInstances)
+  // turn two arrays of strings into an array of objects with two keys holding the elements of each array
+  // build one object that holds a key of "chicken"; " 1 tbs"
+  const recipeInfo = {}
+  ingredients.forEach((ingredient, i) => {
+    recipeInfo[ingredient] = amounts[i];
+  })
+  return recipeInfo
+}
 
 function displayRecipeIngredients(recipe) {
   singleRecipeList.innerHTML = '';
-  const ingredients = findIngredients(recipe);
-  recipe.ingredients.forEach(ingredient => {
-    singleRecipeList.innerHTML += `<li class="single-recipe-info">
-    <p class="single-recipe-number">${ingredient.quantity.amount} ${ingredient.quantity.unit}</p>
-  </li>`
-  })
-  ingredients.forEach(ingredient => {
-    singleRecipeInfo.innerHTML += `<p class="single-recipe-ingredient">${ingredient}</p>`
-    // singleRecipeInfo.insertAdjacentHTML('beforeend', ingredientHTML);
-  })
-}
-/* <p class="single-recipe-ingredient">${ingredient.id}</p> */
-
-function findIngredients(recipe) {
-  const ingredients = recipe.returnIngredientNames(ingredientInstances)
-  return ingredients;
+  // This is an object that holds key value pairs of {ingredientName: amount}
+  const ingredientInfo = findIngredientInfo(recipe);
+  console.log(ingredientInfo);
+  // Use destructuring to use [key, value] to then dynamically add values to the HTML
+  for (let [ingredient, amount] of Object.entries(ingredientInfo)) {
+    singleRecipeList.innerHTML +=
+      `<li class="single-recipe-info">
+    <p class="single-recipe-number">${amount}</p>
+    <p class="single-recipe-ingredient">${ingredient}</p>
+     </li>`
+  }
 }
 
 function handleSingleRecipeButtons(event) {
@@ -149,6 +155,28 @@ function handleNavButtons(event) {
   }
 }
 
+
+
+
+// function displayRecipeIngredients(recipe) {
+//   singleRecipeList.innerHTML = '';
+//   const ingredients = findIngredients(recipe);
+//   recipe.ingredients.forEach(ingredient => {
+//     singleRecipeList.innerHTML += `<li class="single-recipe-info">
+//     <p class="single-recipe-number">${ingredient.quantity.amount} ${ingredient.quantity.unit}</p>
+//   </li>`
+//   })
+//   ingredients.forEach(ingredient => {
+//     singleRecipeInfo.innerHTML += `<p class="single-recipe-ingredient">${ingredient}</p>`
+//     // singleRecipeInfo.insertAdjacentHTML('beforeend', ingredientHTML);
+//   })
+// }
+// /* <p class="single-recipe-ingredient">${ingredient.id}</p> */
+
+// function findIngredients(recipe) {
+//   const ingredients = recipe.returnIngredientNames(ingredientInstances)
+//   return ingredients;
+// }
 
 
 // function findRecipeById(recipeId) {
