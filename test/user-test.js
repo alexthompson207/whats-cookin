@@ -1,10 +1,18 @@
 const chai = require('chai');
-const User = require('../src/User');
 const expect = chai.expect;
+const User = require('../src/User');
+const Recipe = require('../src/Recipe'); 
 const user = require('../src/User');
 
 describe.only('User', () => {
   let userData; 
+  let recipe1; 
+  let recipe2; 
+  let recipe3; 
+  let buffaloChicken; 
+  let beefNoodle; 
+  let spaghetti; 
+  let saige; 
   beforeEach(() => {
     userData = [
       {
@@ -32,61 +40,106 @@ describe.only('User', () => {
             'amount': 5
           }
         ]
-      },
-      {
-        'name': 'Georgia o\'Keeffe',
-        'id': 2,
-        'pantry': [
-          {
-            'ingredient': 18371,
-            'amount': 4
+      }
+     ]
+     recipe1 = {
+      id: 991136,
+      image: 'https://spoonacular.com/recipeImages/991136-556x370.jpg',
+      ingredients: [
+        {
+          id: 1001,
+          quantity: {
+            amount: 0.25,
+            unit: 'cup',
           },
-          {
-            'ingredient': 19336,
-            'amount': 4
+        },
+        {
+          id: 98871,
+          quantity: {
+            amount: 12,
+            unit: 'unit',
           },
-          {
-            'ingredient': 11215,
-            'amount': 10
+        },
+      ],
+      instructions: [
+        { instruction: 'step 1', number: 1 },
+        { instruction: 'step 2', number: 2 },
+        { instruction: 'step 3', number: 3 },
+      ],
+      name: 'Buffalo Chicken Example',
+      tags: ['lunch', 'main course', 'main dish', 'dinner'],
+    };
+    recipe2 = {
+      id: 2,
+      image: 'https://spoonacular.com/recipeImages/595736-556x370.jpg',
+      ingredients: [
+        {
+          id: 302,
+          quantity: {
+            amount: 10,
+            unit: 'cup',
           },
-          {
-            'ingredient': 9152,
-            'amount': 5
+        },
+        {
+          id: 410,
+          quantity: {
+            amount: 3,
+            unit: 'tbs',
           },
-          {
-            'ingredient': 11297,
-            'amount': 5
-          }
-        ]
-      },
-      {
-        'name': 'Charlie Chapman',
-        'id': 3,
-        'pantry': [
-          {
-            'ingredient': 1001,
-            'amount': 4
+        },
+      ],
+      instructions: [
+        { instruction: 'step 1', number: 1 },
+        { instruction: 'step 2', number: 2 },
+        { instruction: 'step 3', number: 3 },
+      ],
+      name: 'Beef Noodle',
+      tags: ['noodles', 'main dish', 'hot dish'],
+    };
+    recipe3 = {
+      id: 1234,
+      image: 'https://spoonacular.com/recipeImages/991136-556x370.jpg',
+      ingredients: [
+        {
+          id: 1001,
+          quantity: {
+            amount: 0.25,
+            unit: 'cup',
           },
-          {
-            'ingredient': 11529,
-            'amount': 4
+        },
+        {
+          id: 91,
+          quantity: {
+            amount: 12,
+            unit: 'unit',
           },
-          {
-            'ingredient': 1082047,
-            'amount': 10
+        },
+        {
+          id: 1001,
+          quantity: {
+            amount: 4,
+            unit: 'unit',
           },
-          {
-            'ingredient': 20081,
-            'amount': 5
-          },
-          {
-            'ingredient': 2021,
-            'amount': 5
-          }
-        ]
-      },
-    ]
-  });
+        },
+      ],
+      instructions: [
+        { instruction: 'step 1', number: 1 },
+        { instruction: 'step 2', number: 2 },
+        { instruction: 'step 3', number: 3 },
+      ],
+      name: 'Spaghetti',
+      tags: ['lunch', 'main course', 'main dish', 'dinner'],
+    };
+    saige = new User(userData[0].name, userData[0].id, userData[0].pantry);
+
+    buffaloChicken = new Recipe(recipe1.id, recipe1.image, recipe1.ingredients, recipe1.instructions, recipe1.name, recipe1.tags); 
+
+    beefNoodle = new Recipe(recipe2.id, recipe2.image, recipe2.ingredients, recipe2.instructions, recipe2.name, recipe2.tags); 
+
+    spaghetti = new Recipe(recipe3.id, recipe3.image, recipe3.ingredients, recipe3.instructions, recipe3.name, recipe3.tags); 
+    
+  })
+
   it('should be a function', () => { 
       expect(User).to.be.a('function'); 
   });
@@ -97,10 +150,10 @@ describe.only('User', () => {
   })
 
   it('should have a name, id, pantry, favorite recipes, and recipes to cook', () => {
-    const saige = new User(userData[0].name, userData[0].id, userData[0].pantry);
+  
     expect(saige.name).to.equal('Saige O\'Kon');
     expect(saige.id).to.equal(1); 
-    expect(saige.pantry).to.equal([
+    expect(saige.pantry).to.deep.equal([
       {
         'ingredient': 11477,
         'amount': 4
@@ -122,8 +175,31 @@ describe.only('User', () => {
         'amount': 5
       }
     ]); 
-    expect(user.favoriteRecipes).to.equal([]); 
-    expect(user.recipesToCook).to.equal([]);
+    expect(saige.favoriteRecipes).to.deep.equal([]); 
+    expect(saige.recipesToCook).to.deep.equal([]);
   })
+
+  it('should add recipes to user\'s favorites', () => {
+  
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(beefNoodle); 
+
+    expect(saige.favoriteRecipes).to.have.lengthOf(2); 
+    expect(saige.favoriteRecipes[0]).to.be.an.instanceOf(Recipe); 
+  });
+
+
+  it('should remove a recipe from user\'s favorites', () => {
+   
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(spaghetti);
+    saige.addFavoriteRecipe(beefNoodle);  
+
+    saige.removeFavoriteRecipe(spaghetti);
+
+    expect(saige.favoriteRecipes).to.have.lengthOf(2); 
+    expect(saige.favoriteRecipes[1].name).to.equal('Beef Noodle');
+
+  });
 
 });
