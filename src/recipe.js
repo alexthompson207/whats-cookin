@@ -33,9 +33,9 @@ class Recipe {
       amounts.push(amount.join(" "));
     })
     return amounts
-    }
+  }
 
-   calculateRecipeCost(ingredientData) {
+  calculateRecipeCost(ingredientData) {
     const costPerUnit = [];
     this.ingredients.forEach(recipeIngredient => {
       return costPerUnit.push((recipeIngredient.quantity.amount) * (ingredientData.find(ingredient => recipeIngredient.id === ingredient.id).estimatedCostInCents));

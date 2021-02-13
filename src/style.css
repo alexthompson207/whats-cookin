@@ -227,6 +227,7 @@ body {
 .single-recipe-list {
   display: flex;
   flex-direction: column;
+  flex: 1;
   list-style-type: none;
   font-size: 1em;
 }
@@ -275,7 +276,6 @@ body {
     margin: 0px;
   }
 }
-
 /* ------------------state---------------------------- */
 
 .hidden {

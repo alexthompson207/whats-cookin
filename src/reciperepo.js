@@ -1,5 +1,5 @@
-const Recipe = require('../src/Recipe');
-const IngredientRepo = require('../src/IngredientRepo');
+// const Recipe = require('../src/Recipe');
+// const IngredientRepo = require('../src/IngredientRepo');
 
 class RecipeRepo {
   constructor(recipeData = []) {
@@ -25,9 +25,7 @@ class RecipeRepo {
 
   filterRecipesByName(recipeName) {
     const searchRecipeName = recipeName.toLowerCase();
-    return this.recipes.find(
-      recipe => recipe.name.toLowerCase() === searchRecipeName
-    );
+    return this.recipes.find(recipe => recipe.name.toLowerCase() === searchRecipeName);
   }
 
   filterRecipesByIngredients(ingredientData, ingredientName) {
@@ -36,11 +34,10 @@ class RecipeRepo {
     const filteredRecipes = [];
     this.recipes.filter(recipe => {
       recipe.ingredients.forEach(ingredient => {
-        if (
-          ingredient.id === ingredientId &&
-          !filteredRecipes.includes(recipe)
-        ) {
+        if (ingredient.id === ingredientId && !filteredRecipes.includes(recipe)) {
           filteredRecipes.push(recipe);
+          console.log(ingredient.id);
+          console.log(ingredientId);
         }
       });
     });
