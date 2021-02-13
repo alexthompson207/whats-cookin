@@ -1,4 +1,5 @@
 
+
 const ingredientInstances = ingredientsData.map(ingredient => {
   return new Ingredient(
     ingredient.id,
@@ -14,6 +15,8 @@ const searchInput = document.querySelector('.search-bar');
 const filterTagSection = document.querySelector('.recipe-tags');
 const allRecipesView = document.querySelector('.all-recipes');
 const singleRecipeView = document.querySelector('.single-recipe');
+const singleRecipeImage = document.getElementById('singleRecipeImage');
+const pageTitleText = document.querySelector('.navigation-title');
 
 
 
@@ -71,12 +74,46 @@ function filterRecipesByTags(event) {
 
 function handleRecipeClick(event) {
   console.log(event.target.closest('.recipe-img-container').children[0].id);
-  if (event.target.className.includes('recipe-img') || event.target.className.includes('recipe-name')) {
-    hideAllRecipes();
+  displaySingleRecipe(event);
+  displayCostOfRecipe(event);
+}
+function displaySingleRecipe(event) {
+  if (event.target.parentNode.className.includes('recipe-img-container')) {
+    hideAllRecipes(event);
+    const recipeImage = event.target.closest('.recipe-img-container').children[0].src
+    const altText = event.target.closest('.recipe-img-container').children[0].alt
+    singleRecipeImage.src = recipeImage;
+    singleRecipeImage.alt = altText;
+    pageTitleText.innerText = altText;
   }
 }
 
 function hideAllRecipes() {
   allRecipesView.classList.add('hidden');
   singleRecipeView.classList.remove('hidden');
+}
+
+function displayCostOfRecipe(event) {
+  const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
+  const clickedRecipe = recipesRepo.recipes.find(recipe => {
+    return recipe.id === recipeId;
+  })
+  let cost = clickedRecipe.calculateRecipeCost(ingredientInstances);
+  console.log(cost);
+}
+
+function findRecipeById(recipeId) {
+  const foundRecipe = recipeData.find(recipe => {
+    return recipe.id === recipeID
+  })
+}
+
+function displayRecipeIngredients(event) {
+  const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
+  const clickedRecipe = recipesRepo.recipes.find(recipe => {
+    return recipe.id === recipeId;
+  })
+  console.log(clickedRecipe);
+  const ingredients = clickedRecipe.returnIngredientNames(ingredientInstances)
+  console.log(ingredients);
 }
