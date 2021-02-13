@@ -11,23 +11,36 @@ class Recipe {
     const recipeIngredients = [];
     this.ingredients.forEach(recipeIngredient => {
       return recipeIngredients.push(
-        ingredientData.find(ingredient => recipeIngredient.id === ingredient.id));
+        ingredientData.find(ingredient => recipeIngredient.id === ingredient.id)
+      );
     });
     return recipeIngredients;
   }
 
   returnIngredientNames(ingredientData) {
     const recipeIngredients = this.findIngredients(ingredientData);
-    const ingredientNames = recipeIngredients.map(ingredient => ingredient.name);
-    return ingredientNames;
+    const ingredientNames = recipeIngredients.map(
+      ingredient => ingredient.name
+    );
+    return [...new Set(ingredientNames)];
   }
 
-  calculateRecipeCost(ingredientData) {
-    const recipeIngredients = this.findIngredients(ingredientData);
-    const ingredientCost = recipeIngredients.map(ingredientCost => ingredientCost.estimatedCostInCents);
-    const cost = ingredientCost.reduce((totalCost, ingredientCost) => {
-      return totalCost + ingredientCost;
-    }, 0);
+  returnIngredientAmounts() {
+    const recipeIngredients = this.ingredients;
+    const amounts = []
+    recipeIngredients.forEach(ingredient => {
+      const amount = Object.values(ingredient.quantity);
+      amounts.push(amount.join(" "));
+    })
+    return amounts
+    }
+
+   calculateRecipeCost(ingredientData) {
+    const costPerUnit = [];
+    this.ingredients.forEach(recipeIngredient => {
+      return costPerUnit.push((recipeIngredient.quantity.amount) * (ingredientData.find(ingredient => recipeIngredient.id === ingredient.id).estimatedCostInCents));
+    });
+    const cost = costPerUnit.reduce((totalCost, ingredientCost) => totalCost + ingredientCost, 0);
     return Number((cost / 100).toFixed(2));
   }
 
@@ -36,6 +49,6 @@ class Recipe {
   }
 }
 
-if (typeof module !== "undefined") {
+if (typeof module !== 'undefined') {
   module.exports = Recipe;
 }

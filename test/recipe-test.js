@@ -7,6 +7,7 @@ describe('Recipe', () => {
   let ingredient1;
   let ingredient2;
   let ingredient3;
+  let ingredient4;
   let instruction1;
   let instruction2;
   let instruction3;
@@ -63,6 +64,13 @@ describe('Recipe', () => {
         unit: 'large',
       },
     };
+    ingredient4 = {
+      id: 1123,
+      quantity: {
+        amount: 2,
+        unit: 'large',
+      },
+    };
 
     instruction1 = {
       instruction: 'Gather your ingredients',
@@ -81,7 +89,7 @@ describe('Recipe', () => {
     recipe1 = new Recipe(
       1,
       'https://spoonacular.com/recipeImages/595736-556x370.jpg',
-      [ingredient1, ingredient2, ingredient3],
+      [ingredient1, ingredient2, ingredient3, ingredient4],
       [instruction1, instruction2, instruction3],
       'Choclate Chip Cookies',
       ['dessert', 'starter', 'snack']
@@ -105,6 +113,7 @@ describe('Recipe', () => {
       ingredient1,
       ingredient2,
       ingredient3,
+      ingredient4,
     ]);
 
     expect(recipe1.instructions).to.deep.equal([
@@ -134,21 +143,33 @@ describe('Recipe', () => {
         name: 'eggs',
         estimatedCostInCents: 472,
       },
+      {
+        id: 1123,
+        name: 'eggs',
+        estimatedCostInCents: 472,
+      },
     ]);
   });
 
-  it('should return names of the ingredients', () => {
+  it('should return a unique list of ingredients', () => {
     const ingredientNames = recipe1.returnIngredientNames(ingredientData);
-    expect(ingredientNames).to.deep.equal([
+
+    expect(ingredientNames).deep.equal([
       'wheat flour',
       'bicarbonate of soda',
       'eggs',
     ]);
   });
 
+  it('should return the amount of each ingredient', () => {
+    const ingredientAmount = recipe1.returnIngredientAmounts(ingredientData); 
+
+    expect(ingredientAmount).to.deep.equal(['1.5 c', '0.5 tsp', '1 large', '2 large'])
+  });
+
   it('should return the total cost of all ingredients in recipe', () => {
     const totalCost = recipe1.calculateRecipeCost(ingredientData);
-    expect(totalCost).to.equal(11.96);
+    expect(totalCost).to.equal(19.20);
   });
 
   it('should return the instructions for the recipe', () => {
