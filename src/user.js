@@ -49,6 +49,11 @@ class User {
     });
     return filteredRecipes; 
   };
+
+  filterFavoritesByName(recipeName) {
+    const searchRecipeName = recipeName.toLowerCase();
+    return this.favoriteRecipes.find(recipe => recipe.name.toLowerCase() === searchRecipeName);
+  }
 };
 
 module.exports = User; 
