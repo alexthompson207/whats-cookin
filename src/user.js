@@ -26,6 +26,13 @@ class User {
       this.recipesToCook.push(recipe); 
     }
   };
+
+  filterFavoritesByTag(tag) {
+    const searchByTag = this.favoriteRecipes.filter(recipe => {
+      return recipe.tags.includes(tag);
+    });
+    return searchByTag;
+  }
 }
 
 module.exports = User; 
