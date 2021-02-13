@@ -108,7 +108,7 @@ describe.only('User', () => {
           },
         },
         {
-          id: 91,
+          id: 11549,
           quantity: {
             amount: 12,
             unit: 'unit',
@@ -199,7 +199,6 @@ describe.only('User', () => {
 
   })
 
-
   it('should remove a recipe from user\'s favorites', () => {
    
     saige.addFavoriteRecipe(buffaloChicken);
@@ -256,6 +255,37 @@ describe.only('User', () => {
     expect(result).deep.equal([]);
   });
 
+  it('should filter recipes by ingredient', () => {
 
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(spaghetti);
+    saige.addFavoriteRecipe(beefNoodle);
+
+    const results = saige.filterFavoritesByIngredients(ingredientData, 'canned tomato sauce')
+    expect(results).to.have.lengthOf(1);
+    expect(results[0].name).to.equal('Spaghetti');
+  })
+
+  it('should not return duplicate recipes', () => {
+  
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(spaghetti);
+    saige.addFavoriteRecipe(beefNoodle);
+
+    const results = saige.filterFavoritesByIngredients(ingredientData, 'butter')
+
+    expect(results).deep.equal([buffaloChicken, spaghetti]);
+  });
+
+  it('should return an empty array if no ingredients are in a recipe', () => {
+
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(spaghetti);
+    saige.addFavoriteRecipe(beefNoodle);
+
+    const results = saige.filterFavoritesByIngredients(ingredientData, 'paprika')
+    
+    expect(results).deep.equal([]);
+  });
 
 });
