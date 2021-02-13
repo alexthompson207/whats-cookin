@@ -162,7 +162,7 @@ describe('Recipe', () => {
   });
 
   it('should return the amount of each ingredient', () => {
-    const ingredientAmount = recipe1.returnIngredientAmounts(ingredientData); 
+    const ingredientAmount = recipe1.returnIngredientAmounts(ingredientData);
 
     expect(ingredientAmount).to.deep.equal(['1.5 c', '0.5 tsp', '1 large', '2 large'])
   });
