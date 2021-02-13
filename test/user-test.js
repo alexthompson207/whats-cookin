@@ -245,5 +245,17 @@ describe.only('User', () => {
     expect(results[1].name).to.equal('Spaghetti');
   });
 
-  
+  it("should return an empty array if tag isn't found", () => {
+
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(spaghetti);
+    saige.addFavoriteRecipe(beefNoodle);  
+   
+    const result = saige.filterFavoritesByTag('snack');
+
+    expect(result).deep.equal([]);
+  });
+
+
+
 });
