@@ -71,7 +71,6 @@ function displayPageLoad() {
 
 function filterRecipesByTags(event) {
   const filteredRecipes = recipesRepo.filterRecipesByTag(event.target.value);
-  console.log(event.target.value);
   if (event.target.value === 'all recipes') {
     displayAllRecipeCards(recipesRepo);
   } else if (event.target.value) {
@@ -81,9 +80,9 @@ function filterRecipesByTags(event) {
 
 function handleRecipeClick(event) {
   const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-  const clickedRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
-  displaySingleRecipe(clickedRecipe);
-  displayCostOfRecipe(clickedRecipe);
+  currentRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
+  displaySingleRecipe(currentRecipe);
+  displayCostOfRecipe(currentRecipe);
 
 }
 function displaySingleRecipe(recipe) {
@@ -122,7 +121,6 @@ function displayRecipeIngredients(recipe) {
   singleRecipeList.innerHTML = '';
   // This is an object that holds key value pairs of {ingredientName: amount}
   const ingredientInfo = findIngredientInfo(recipe);
-  console.log(ingredientInfo);
   // Use destructuring to use [key, value] to then dynamically add values to the HTML
   for (let [ingredient, amount] of Object.entries(ingredientInfo)) {
     singleRecipeList.innerHTML +=
@@ -131,12 +129,27 @@ function displayRecipeIngredients(recipe) {
     <p class="single-recipe-ingredient">${ingredient}</p>
      </li>`
   }
+  singleRecipeBtns.children[0].innerText = 'View Instructions';
+}
+
+function displayRecipeInstructions(recipe) {
+  const recipeInstructions = recipe.returnRecipeInstructions();
+  singleRecipeList.innerHTML = '';
+  recipeInstructions.forEach(instruction => {
+    singleRecipeList.innerHTML +=
+      `<li class="single-recipe-info">
+    <p class="single-recipe-number">${instruction.number}</p>
+    <p class="single-recipe-ingredient">${instruction.instruction}</p>
+     </li>`
+  })
+  singleRecipeBtns.children[0].innerText = 'View Ingredients';
 }
 
 function handleSingleRecipeButtons(event) {
   if (event.target.innerText === 'View Instructions') {
-    console.log('yeeehawww');
-    displayRecipeIngredients(event);
+    displayRecipeInstructions(currentRecipe);
+  } else if (event.target.innerText === 'View Ingredients') {
+    displayRecipeIngredients(currentRecipe)
   }
 }
 
@@ -144,7 +157,6 @@ function unhideHomeView() {
   allRecipesView.classList.remove('hidden');
   singleRecipeView.classList.add('hidden');
   displayAllRecipeCards(recipesRepo);
-
 }
 
 function handleNavButtons(event) {
@@ -152,7 +164,6 @@ function handleNavButtons(event) {
     console.log(event.target.innerText);
     unhideHomeView();
     pageTitleText.innerText = 'Whats Cookin';
-
   }
 }
 
