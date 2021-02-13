@@ -8,8 +8,9 @@ const ingredientInstances = ingredientsData.map(ingredient => {
   );
 });
 const ingredientRepo = new IngredientRepo(ingredientInstances);
-const recipeListCard = document.querySelector('.recipe-list');
 const recipesRepo = new RecipeRepo(recipeData);
+let currentRecipe;
+const recipeListCard = document.querySelector('.recipe-list');
 const searchBtn = document.querySelector('#searchRecipes');
 const searchInput = document.querySelector('.search-bar');
 const filterTagSection = document.querySelector('.recipe-tags');
@@ -20,9 +21,6 @@ const singleRecipeList = document.getElementById('singleRecipeList');
 const pageTitleText = document.querySelector('.navigation-title');
 const singleRecipeBtns = document.querySelector('.single-recipe-buttons');
 const topBarNavBtns = document.querySelector('.navigation-buttons');
-const singleRecipeInfo = document.querySelector('.single-recipe-info');
-let currentRecipe;
-
 
 
 window.addEventListener('load', displayPageLoad);
@@ -161,46 +159,7 @@ function unhideHomeView() {
 
 function handleNavButtons(event) {
   if (event.target.innerText === 'Return to Recipes') {
-    console.log(event.target.innerText);
     unhideHomeView();
     pageTitleText.innerText = 'Whats Cookin';
   }
 }
-
-
-// function displayRecipeIngredients(recipe) {
-//   singleRecipeList.innerHTML = '';
-//   const ingredients = findIngredients(recipe);
-//   recipe.ingredients.forEach(ingredient => {
-//     singleRecipeList.innerHTML += `<li class="single-recipe-info">
-//     <p class="single-recipe-number">${ingredient.quantity.amount} ${ingredient.quantity.unit}</p>
-//   </li>`
-//   })
-//   ingredients.forEach(ingredient => {
-//     singleRecipeInfo.innerHTML += `<p class="single-recipe-ingredient">${ingredient}</p>`
-//     // singleRecipeInfo.insertAdjacentHTML('beforeend', ingredientHTML);
-//   })
-// }
-// /* <p class="single-recipe-ingredient">${ingredient.id}</p> */
-
-// function findIngredients(recipe) {
-//   const ingredients = recipe.returnIngredientNames(ingredientInstances)
-//   return ingredients;
-// }
-
-
-// function findRecipeById(recipeId) {
-//   const foundRecipe = recipeData.find(recipe => {
-//     return recipe.id === recipeID
-//   })
-// }
-
-// function displayRecipeIngredients(event) {
-//   const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-//   const clickedRecipe = recipesRepo.recipes.find(recipe => {
-//     return recipe.id === recipeId;
-//   })
-//   console.log(clickedRecipe);
-//   const ingredients = clickedRecipe.returnIngredientNames(ingredientInstances)
-//   console.log(ingredients);
-// }
