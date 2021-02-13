@@ -1,18 +1,13 @@
 const chai = require('chai');
 const expect = chai.expect;
 const User = require('../src/User');
-const Recipe = require('../src/Recipe'); 
+const Recipe = require('../src/Recipe');
+const IngredientRepo = require('../src/IngredientRepo');
 const user = require('../src/User');
 
 describe.only('User', () => {
-  let userData; 
-  let recipe1; 
-  let recipe2; 
-  let recipe3; 
-  let buffaloChicken; 
-  let beefNoodle; 
-  let spaghetti; 
-  let saige; 
+  let userData, ingredientData, recipe1, recipe2, recipe3, buffaloChicken, beefNoodle, spaghetti, saige; 
+
   beforeEach(() => {
     userData = [
       {
@@ -41,7 +36,34 @@ describe.only('User', () => {
           }
         ]
       }
-     ]
+     ];
+     ingredientData = [
+      {
+        id: 98871,
+        name: 'hawaiian sweet rolls',
+        estimatedCostInCents: 142,
+      },
+      {
+        id: 18372,
+        name: 'bicarbonate of soda',
+        estimatedCostInCents: 582,
+      },
+      {
+        id: 1123,
+        name: 'eggs',
+        estimatedCostInCents: 472,
+      },
+      {
+        id: 1001,
+        name: 'butter',
+        estimatedCostInCents: 1,
+      },
+      {
+        id: 11549,
+        name: 'canned tomato sauce',
+        estimatedCostInCents: 200,
+      },
+    ];
      recipe1 = {
       id: 991136,
       image: 'https://spoonacular.com/recipeImages/991136-556x370.jpg',
@@ -262,6 +284,7 @@ describe.only('User', () => {
     saige.addFavoriteRecipe(beefNoodle);
 
     const results = saige.filterFavoritesByIngredients(ingredientData, 'canned tomato sauce')
+
     expect(results).to.have.lengthOf(1);
     expect(results[0].name).to.equal('Spaghetti');
   })
@@ -277,7 +300,7 @@ describe.only('User', () => {
     expect(results).deep.equal([buffaloChicken, spaghetti]);
   });
 
-  it('should return an empty array if no ingredients are in a recipe', () => {
+  it('should return an empty array if no ingredients match a recipe', () => {
 
     saige.addFavoriteRecipe(buffaloChicken);
     saige.addFavoriteRecipe(spaghetti);
