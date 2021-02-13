@@ -26,15 +26,14 @@ class Recipe {
   }
 
   returnIngredientAmounts() {
-      const recipeIngredients = this.ingredients;
-      const amounts = []
-      recipeIngredients.forEach(ingredient => {
-        const amount = Object.values(ingredient.quantity);
-        amounts.push(amount.join(" "));
-      })
-      return amounts
+    const recipeIngredients = this.ingredients;
+    const amounts = []
+    recipeIngredients.forEach(ingredient => {
+      const amount = Object.values(ingredient.quantity);
+      amounts.push(amount.join(" "));
+    })
+    return amounts
     }
-  }
 
    calculateRecipeCost(ingredientData) {
     const costPerUnit = [];
