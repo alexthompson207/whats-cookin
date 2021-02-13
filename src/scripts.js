@@ -95,25 +95,24 @@ function hideAllRecipes() {
 
 function displayCostOfRecipe(event) {
   const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-  const clickedRecipe = recipesRepo.recipes.find(recipe => {
-    return recipe.id === recipeId;
-  })
-  let cost = clickedRecipe.calculateRecipeCost(ingredientInstances);
-  console.log(cost);
+  const clickedRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
+  const totalCost = clickedRecipe.calculateRecipeCost(ingredientInstances);
+  const costHTML = document.querySelector('.single-recipe-info-title');
+  costHTML.children[1].innerText = `Recipe Cost: $${totalCost}`;
 }
 
-function findRecipeById(recipeId) {
-  const foundRecipe = recipeData.find(recipe => {
-    return recipe.id === recipeID
-  })
-}
+// function findRecipeById(recipeId) {
+//   const foundRecipe = recipeData.find(recipe => {
+//     return recipe.id === recipeID
+//   })
+// }
 
-function displayRecipeIngredients(event) {
-  const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-  const clickedRecipe = recipesRepo.recipes.find(recipe => {
-    return recipe.id === recipeId;
-  })
-  console.log(clickedRecipe);
-  const ingredients = clickedRecipe.returnIngredientNames(ingredientInstances)
-  console.log(ingredients);
-}
+// function displayRecipeIngredients(event) {
+//   const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
+//   const clickedRecipe = recipesRepo.recipes.find(recipe => {
+//     return recipe.id === recipeId;
+//   })
+//   console.log(clickedRecipe);
+//   const ingredients = clickedRecipe.returnIngredientNames(ingredientInstances)
+//   console.log(ingredients);
+// }
