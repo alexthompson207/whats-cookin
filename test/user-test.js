@@ -311,4 +311,37 @@ describe.only('User', () => {
     expect(results).deep.equal([]);
   });
 
+  it('should be able to filter recipes by a name', () => {
+
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(spaghetti);
+    saige.addFavoriteRecipe(beefNoodle);
+
+    const results = saige.filterFavoritesByName('Beef Noodle')
+
+    expect(results).deep.equal(beefNoodle);
+  });
+
+  it('should be able to filter recipes by a name if not capitalized correctly', () => {
+
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(spaghetti);
+    saige.addFavoriteRecipe(beefNoodle);
+
+    const results = saige.filterFavoritesByName('beef noodle')
+
+    expect(results).deep.equal(beefNoodle);
+  });
+
+  it("should return undefined if the recipe doesn't exist", () => {
+
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(spaghetti);
+    saige.addFavoriteRecipe(beefNoodle);
+
+    const results = saige.filterFavoritesByName('Fish Tacos')
+
+    expect(results).deep.equal(undefined);
+  });
+
 });
