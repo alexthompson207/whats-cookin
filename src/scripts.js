@@ -163,3 +163,11 @@ function handleNavButtons(event) {
     pageTitleText.innerText = 'Whats Cookin';
   }
 }
+
+function displayFavoriteRecipesView() {
+  allRecipesView.classList.remove('hidden');
+  singleRecipeView.classList.add('hidden');
+  displayAllRecipeCards({ recipes: currentUser.favoriteRecipes });
+  pageTitleText.innerText = 'Favorite Recipes';
+  searchInput.placeholder = 'Search Favorite Recipes';
+}
