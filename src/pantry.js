@@ -11,11 +11,9 @@ class Pantry {
       const condition2 = !this.pantry.find(pantryIngredient => {
         return pantryIngredient.ingredient === recipeIngredient.id;
       })
-      console.log('condition1:', condition1);
-      console.log('condition2:', condition2);
+
       return condition1 || condition2;
     })
-    console.log(result);
     return result;
   }
 
@@ -32,26 +30,9 @@ class Pantry {
 
       return { id: ingredient.id, amount: num, unit: ingredient.quantity.unit };
     })
-    console.log(itemsNeeded);
+
     return itemsNeeded;
   }
-
-  //   {
-  //     "ingredient": 7,
-  //     "amount": 3
-  //   },
-  // {
-  //     "ingredient": 8,
-  //     "amount": 2
-  //   },
-  //   {
-  //     "ingredient": 9,
-  //     "amount": 4
-  //   },
-  //   {
-  //     "ingredient": 10,
-  //     "amount": 3
-  //   }]);
 
   updatePantry(recipe) {
     this.pantry.forEach(item => {
@@ -64,8 +45,6 @@ class Pantry {
     this.pantry = this.pantry.filter(item => item.amount > 0);
     return this.pantry;
   }
-
-
 }
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
