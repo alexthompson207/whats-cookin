@@ -121,11 +121,11 @@ function filterRecipesByTags(event) {
 
 function handleRecipeClick(event) {
   const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-  if(event.target && event.target.matches('img.recipe-img')) {
+  if(event.target.matches('img.recipe-img')) {
     currentRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
     displaySingleRecipe(currentRecipe);
     displayCostOfRecipe(currentRecipe);
-} else if (event.target && event.target.matches('svg.remove-icon')) { 
+} else if (event.target.matches('svg.remove-icon')) { 
     removeFavoriteRecipe(recipeId);
     event.target.parentNode.parentNode.removeChild(event.target.parentNode)
   }
