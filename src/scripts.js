@@ -41,6 +41,20 @@ function displayAllRecipeCards(recipesRepo) {
   })
 }
 
+//function that will display recipe cards with an x icon on it
+function displayFavoriteRecipeCards (favoriteRecipes) {
+  recipeListCard.innerHTML = '';
+  favoriteRecipes.recipes.forEach(recipe => {
+    recipeListCard.innerHTML +=
+      `<div class='recipe-img-container'>
+      <svg class="remove-icon" id="removeIcon" xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close Circle</title><path d='M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z' fill='none' stroke='currentColor' stroke-miterlimit='10' stroke-width='32'/><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M320 320L192 192M192 320l128-128'/></svg>
+    <img class='favorite-recipe-img' id="${recipe.id}" src="${recipe.image}"
+      alt="${recipe.name}">
+      <p class='recipe-name'>${recipe.name}</p>
+  </div>`
+  })
+}
+
 function createNewUser() {
   const randomUser = getRandomIndex(usersData);
   currentUser = new User(randomUser.name, randomUser.id, randomUser.pantry);
@@ -107,9 +121,14 @@ function filterRecipesByTags(event) {
 
 function handleRecipeClick(event) {
   const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-  currentRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
-  displaySingleRecipe(currentRecipe);
-  displayCostOfRecipe(currentRecipe);
+  if(event.target && event.target.matches('img.recipe-img')) {
+    currentRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
+    displaySingleRecipe(currentRecipe);
+    displayCostOfRecipe(currentRecipe);
+} else if (event.target && event.target.matches('svg.remove-icon')) { 
+    removeFavoriteRecipe(recipeId);
+    event.target.parentNode.parentNode.removeChild(event.target.parentNode)
+  }
 }
 
 function displaySingleRecipe(recipe) {
@@ -132,11 +151,11 @@ function displayCostOfRecipe(recipe) {
 }
 
 //Builds an object of recipe names and their ingredient amounts
+// turn two arrays of strings into an array of objects with two keys holding the elements of each array
+  // build one object that holds a key of "chicken"; " 1 tbs"
 function findIngredientInfo(recipe) {
   const amounts = recipe.returnIngredientAmounts()
   const ingredients = recipe.returnIngredientNames(ingredientInstances)
-  // turn two arrays of strings into an array of objects with two keys holding the elements of each array
-  // build one object that holds a key of "chicken"; " 1 tbs"
   const recipeInfo = {}
   ingredients.forEach((ingredient, i) => {
     recipeInfo[ingredient] = amounts[i];
@@ -144,11 +163,11 @@ function findIngredientInfo(recipe) {
   return recipeInfo
 }
 
+// This is an object that holds key value pairs of {ingredientName: amount}
+  // Use destructuring to use [key, value] to then dynamically add values to the HTML
 function displayRecipeIngredients(recipe) {
   singleRecipeList.innerHTML = '';
-  // This is an object that holds key value pairs of {ingredientName: amount}
   const ingredientInfo = findIngredientInfo(recipe);
-  // Use destructuring to use [key, value] to then dynamically add values to the HTML
   for (let [ingredient, amount] of Object.entries(ingredientInfo)) {
     singleRecipeList.innerHTML +=
       `<li class="single-recipe-info">
@@ -188,6 +207,10 @@ function addRecipeToFavorites(newRecipe) {
   currentUser.addFavoriteRecipe(newRecipe);
 }
 
+function removeFavoriteRecipe (id) {
+  currentUser.removeFavoriteRecipe(id);
+}
+
 function unhideHomeView() {
   allRecipesView.classList.remove('hidden');
   singleRecipeView.classList.add('hidden');
@@ -207,7 +230,7 @@ function handleNavButtons(event) {
 function displayFavoriteRecipesView() {
   allRecipesView.classList.remove('hidden');
   singleRecipeView.classList.add('hidden');
-  displayAllRecipeCards({ recipes: currentUser.favoriteRecipes });
+  displayFavoriteRecipeCards({ recipes: currentUser.favoriteRecipes });
   pageTitleText.innerText = 'Favorite Recipes';
   searchInput.placeholder = 'Search Favorite Recipes';
 }
