@@ -276,6 +276,16 @@ body {
     margin: 0px;
   }
 }
+
+/* ------------------favorties--------------------- */
+
+.favorite-recipe-img {
+  flex: 1;
+}
+.remove-icon {
+   height: 40px;
+   align-self: flex-end;
+}
 /* ------------------state---------------------------- */
 
 .hidden {

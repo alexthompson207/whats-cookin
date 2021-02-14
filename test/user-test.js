@@ -3,8 +3,8 @@ const expect = chai.expect;
 const User = require('../src/User');
 const Recipe = require('../src/Recipe');
 
-describe.only('User', () => {
-  let userData, ingredientData, recipe1, recipe2, recipe3, buffaloChicken, beefNoodle, spaghetti, saige; 
+describe('User', () => {
+  let userData, ingredientData, recipe1, recipe2, recipe3, buffaloChicken, beefNoodle, spaghetti, saige;
 
   beforeEach(() => {
     userData = [
@@ -152,27 +152,27 @@ describe.only('User', () => {
     };
     saige = new User(userData[0].name, userData[0].id, userData[0].pantry);
 
-    buffaloChicken = new Recipe(recipe1.id, recipe1.image, recipe1.ingredients, recipe1.instructions, recipe1.name, recipe1.tags); 
+    buffaloChicken = new Recipe(recipe1.id, recipe1.image, recipe1.ingredients, recipe1.instructions, recipe1.name, recipe1.tags);
 
-    beefNoodle = new Recipe(recipe2.id, recipe2.image, recipe2.ingredients, recipe2.instructions, recipe2.name, recipe2.tags); 
+    beefNoodle = new Recipe(recipe2.id, recipe2.image, recipe2.ingredients, recipe2.instructions, recipe2.name, recipe2.tags);
 
-    spaghetti = new Recipe(recipe3.id, recipe3.image, recipe3.ingredients, recipe3.instructions, recipe3.name, recipe3.tags); 
-    
+    spaghetti = new Recipe(recipe3.id, recipe3.image, recipe3.ingredients, recipe3.instructions, recipe3.name, recipe3.tags);
+
   })
 
-  it('should be a function', () => { 
-    expect(User).to.be.a('function'); 
+  it('should be a function', () => {
+    expect(User).to.be.a('function');
   });
 
   it('should be an instance of user', () => {
     const user = new User();
-    expect(user).to.be.an.instanceof(User); 
+    expect(user).to.be.an.instanceof(User);
   })
 
   it('should have a name, id, pantry, favorite recipes, and recipes to cook', () => {
-  
+
     expect(saige.name).to.equal('Saige O\'Kon');
-    expect(saige.id).to.equal(1); 
+    expect(saige.id).to.equal(1);
     expect(saige.pantry).to.deep.equal([
       {
         'ingredient': 11477,
@@ -194,61 +194,61 @@ describe.only('User', () => {
         'ingredient': 11215,
         'amount': 5
       }
-    ]); 
-    expect(saige.favoriteRecipes).to.deep.equal([]); 
+    ]);
+    expect(saige.favoriteRecipes).to.deep.equal([]);
     expect(saige.recipesToCook).to.deep.equal([]);
   })
 
   it('should add recipes to user\'s favorites', () => {
-  
-    saige.addFavoriteRecipe(buffaloChicken);
-    saige.addFavoriteRecipe(beefNoodle); 
 
-    expect(saige.favoriteRecipes).to.have.lengthOf(2); 
-    expect(saige.favoriteRecipes[0]).to.be.an.instanceOf(Recipe); 
+    saige.addFavoriteRecipe(buffaloChicken);
+    saige.addFavoriteRecipe(beefNoodle);
+
+    expect(saige.favoriteRecipes).to.have.lengthOf(2);
+    expect(saige.favoriteRecipes[0]).to.be.an.instanceOf(Recipe);
   });
 
   it('should prevent duplicate recipes from being added to favorites', () => {
-    
+
     saige.addFavoriteRecipe(buffaloChicken);
-    saige.addFavoriteRecipe(buffaloChicken); 
+    saige.addFavoriteRecipe(buffaloChicken);
     saige.addFavoriteRecipe(beefNoodle);
 
-    expect(saige.favoriteRecipes).to.have.lengthOf(2); 
-    expect(saige.favoriteRecipes[1].name).to.equal('Beef Noodle');  
+    expect(saige.favoriteRecipes).to.have.lengthOf(2);
+    expect(saige.favoriteRecipes[1].name).to.equal('Beef Noodle');
 
   })
 
   it('should remove a recipe from user\'s favorites', () => {
-   
+
     saige.addFavoriteRecipe(buffaloChicken);
     saige.addFavoriteRecipe(spaghetti);
-    saige.addFavoriteRecipe(beefNoodle);  
+    saige.addFavoriteRecipe(beefNoodle);
 
-    saige.removeFavoriteRecipe(spaghetti);
+    saige.removeFavoriteRecipe(spaghetti.id);
 
-    expect(saige.favoriteRecipes).to.have.lengthOf(2); 
+    expect(saige.favoriteRecipes).to.have.lengthOf(2);
     expect(saige.favoriteRecipes[1].name).to.equal('Beef Noodle');
 
   });
 
   it('should add recipes to user\'s cook list', () => {
 
-    saige.addToCookList(buffaloChicken); 
-    saige.addToCookList(spaghetti); 
+    saige.addToCookList(buffaloChicken);
+    saige.addToCookList(spaghetti);
 
-    expect(saige.recipesToCook).to.have.lengthOf(2); 
-    expect(saige.recipesToCook[0]).to.be.an.instanceOf(Recipe); 
+    expect(saige.recipesToCook).to.have.lengthOf(2);
+    expect(saige.recipesToCook[0]).to.be.an.instanceOf(Recipe);
   });
 
   it('should prevent duplicate recipes from being added to cook list', () => {
-    
+
     saige.addToCookList(buffaloChicken);
-    saige.addToCookList(buffaloChicken); 
+    saige.addToCookList(buffaloChicken);
     saige.addToCookList(beefNoodle);
 
-    expect(saige.recipesToCook).to.have.lengthOf(2); 
-    expect(saige.recipesToCook[1].name).to.equal('Beef Noodle');  
+    expect(saige.recipesToCook).to.have.lengthOf(2);
+    expect(saige.recipesToCook[1].name).to.equal('Beef Noodle');
 
   })
 
@@ -256,9 +256,9 @@ describe.only('User', () => {
 
     saige.addFavoriteRecipe(buffaloChicken);
     saige.addFavoriteRecipe(spaghetti);
-    saige.addFavoriteRecipe(beefNoodle);  
+    saige.addFavoriteRecipe(beefNoodle);
 
-    const results = saige.filterFavoritesByTag('lunch') 
+    const results = saige.filterFavoritesByTag('lunch')
 
     expect(results).to.have.lengthOf(2)
     expect(results[1].name).to.equal('Spaghetti');
@@ -268,8 +268,8 @@ describe.only('User', () => {
 
     saige.addFavoriteRecipe(buffaloChicken);
     saige.addFavoriteRecipe(spaghetti);
-    saige.addFavoriteRecipe(beefNoodle);  
-   
+    saige.addFavoriteRecipe(beefNoodle);
+
     const result = saige.filterFavoritesByTag('snack');
 
     expect(result).deep.equal([]);
@@ -288,7 +288,7 @@ describe.only('User', () => {
   })
 
   it('should not return duplicate recipes', () => {
-  
+
     saige.addFavoriteRecipe(buffaloChicken);
     saige.addFavoriteRecipe(spaghetti);
     saige.addFavoriteRecipe(beefNoodle);
@@ -305,7 +305,7 @@ describe.only('User', () => {
     saige.addFavoriteRecipe(beefNoodle);
 
     const results = saige.filterFavoritesByIngredients(ingredientData, 'paprika')
-    
+
     expect(results).deep.equal([]);
   });
 
