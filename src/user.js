@@ -1,17 +1,17 @@
-const IngredientRepo = require('./IngredientRepo')
+// const IngredientRepo = require('./IngredientRepo')
 
 class User {
   constructor(name, id, pantry) {
-    this.name = name; 
-    this.id = id; 
-    this.pantry = pantry; 
-    this.favoriteRecipes = []; 
-    this.recipesToCook = []; 
+    this.name = name;
+    this.id = id;
+    this.pantry = pantry;
+    this.favoriteRecipes = [];
+    this.recipesToCook = [];
   }
 
   addFavoriteRecipe(recipe) {
     if (!this.favoriteRecipes.includes(recipe)) {
-      this.favoriteRecipes.push(recipe); 
+      this.favoriteRecipes.push(recipe);
     }
   }
 
@@ -20,12 +20,12 @@ class User {
       return favorite.id === recipe.id
     })
 
-    this.favoriteRecipes.splice(recipeToDelete, 1); 
+    this.favoriteRecipes.splice(recipeToDelete, 1);
   }
 
   addToCookList(recipe) {
     if (!this.recipesToCook.includes(recipe)) {
-      this.recipesToCook.push(recipe); 
+      this.recipesToCook.push(recipe);
     }
   }
 
@@ -47,7 +47,7 @@ class User {
         }
       });
     });
-    return filteredRecipes; 
+    return filteredRecipes;
   }
 
   filterFavoritesByName(recipeName) {
@@ -57,5 +57,5 @@ class User {
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = RecipeRepo;
+  module.exports = User;
 }
