@@ -158,13 +158,7 @@ describe.only('Pantry', () => {
 
   it('should be able to hold contents of ingredients and amounts', () => {
     expect(pantry1.pantry).to.deep.equal(contents1);
-  });
-
-  it('should hold an ingredient id in the contents', () => {
     expect(pantry1.pantry[2].ingredient).to.equal(5);
-  });
-
-  it('should hold an amount in the contents', () => {
     expect(pantry1.pantry[1].amount).to.equal(3);
   });
 
