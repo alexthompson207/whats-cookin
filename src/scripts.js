@@ -1,5 +1,3 @@
-
-
 const ingredientInstances = ingredientsData.map(ingredient => {
   return new Ingredient(
     ingredient.id,
@@ -10,6 +8,7 @@ const ingredientInstances = ingredientsData.map(ingredient => {
 const ingredientRepo = new IngredientRepo(ingredientInstances);
 const recipesRepo = new RecipeRepo(recipeData);
 let currentRecipe;
+let currentUser;
 const recipeListCard = document.querySelector('.recipe-list');
 const searchBtn = document.querySelector('#searchRecipes');
 const searchInput = document.querySelector('.search-bar');
@@ -21,18 +20,16 @@ const singleRecipeList = document.getElementById('singleRecipeList');
 const pageTitleText = document.querySelector('.navigation-title');
 const singleRecipeBtns = document.querySelector('.single-recipe-buttons');
 const topBarNavBtns = document.querySelector('.navigation-buttons');
-
-
+const filterTagBox = document.querySelector('.recipe-tags-title'); //name?
 window.addEventListener('load', displayPageLoad);
 searchBtn.addEventListener('click', handleSearchDropDown);
 filterTagSection.addEventListener('click', filterRecipesByTags);
 recipeListCard.addEventListener('click', handleRecipeClick);
 singleRecipeBtns.addEventListener('click', handleSingleRecipeButtons);
 topBarNavBtns.addEventListener('click', handleNavButtons);
-
-function displayAllRecipeCards(allRecipeData) {
+function displayAllRecipeCards(recipesRepo) {
   recipeListCard.innerHTML = '';
-  allRecipeData.recipes.forEach(recipe => {
+  recipesRepo.recipes.forEach(recipe => {
     recipeListCard.innerHTML +=
       `<div class='recipe-img-container'>
     <img class='recipe-img' id="${recipe.id}" src="${recipe.image}"
