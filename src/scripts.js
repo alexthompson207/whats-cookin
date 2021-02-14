@@ -42,7 +42,7 @@ function displayAllRecipeCards(recipesRepo) {
 }
 
 //function that will display recipe cards with an x icon on it
-function displayFavoriteRecipeCards (favoriteRecipes) {
+function displayFavoriteRecipeCards(favoriteRecipes) {
   recipeListCard.innerHTML = '';
   favoriteRecipes.recipes.forEach(recipe => {
     recipeListCard.innerHTML +=
@@ -121,11 +121,11 @@ function filterRecipesByTags(event) {
 
 function handleRecipeClick(event) {
   const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
-  if(event.target.matches('img.recipe-img')) {
+  if (event.target.matches('img.recipe-img')) {
     currentRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
     displaySingleRecipe(currentRecipe);
     displayCostOfRecipe(currentRecipe);
-} else if (event.target.matches('svg.remove-icon')) { 
+  } else if (event.target.matches('svg.remove-icon')) {
     removeFavoriteRecipe(recipeId);
     event.target.parentNode.parentNode.removeChild(event.target.parentNode)
   }
@@ -152,7 +152,7 @@ function displayCostOfRecipe(recipe) {
 
 //Builds an object of recipe names and their ingredient amounts
 // turn two arrays of strings into an array of objects with two keys holding the elements of each array
-  // build one object that holds a key of "chicken"; " 1 tbs"
+// build one object that holds a key of "chicken"; " 1 tbs"
 function findIngredientInfo(recipe) {
   const amounts = recipe.returnIngredientAmounts()
   const ingredients = recipe.returnIngredientNames(ingredientInstances)
@@ -164,7 +164,7 @@ function findIngredientInfo(recipe) {
 }
 
 // This is an object that holds key value pairs of {ingredientName: amount}
-  // Use destructuring to use [key, value] to then dynamically add values to the HTML
+// Use destructuring to use [key, value] to then dynamically add values to the HTML
 function displayRecipeIngredients(recipe) {
   singleRecipeList.innerHTML = '';
   const ingredientInfo = findIngredientInfo(recipe);
@@ -207,7 +207,7 @@ function addRecipeToFavorites(newRecipe) {
   currentUser.addFavoriteRecipe(newRecipe);
 }
 
-function removeFavoriteRecipe (id) {
+function removeFavoriteRecipe(id) {
   currentUser.removeFavoriteRecipe(id);
 }
 
