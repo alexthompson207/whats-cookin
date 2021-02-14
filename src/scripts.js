@@ -58,6 +58,7 @@ function displayFavoriteRecipeCards(favoriteRecipes) {
 function createNewUser() {
   const randomUser = getRandomIndex(usersData);
   currentUser = new User(randomUser.name, randomUser.id, randomUser.pantry);
+  // const newPantry = new Pantry(currentUser.pantry);
 }
 
 function getRandomIndex(dataSet) {
