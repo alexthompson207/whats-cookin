@@ -15,9 +15,9 @@ class User {
     }
   }
 
-  removeFavoriteRecipe(recipe) {
+  removeFavoriteRecipe(id) {
     const recipeToDelete = this.favoriteRecipes.findIndex(favorite => {
-      return favorite.id === recipe.id
+      return favorite.id === id
     })
 
     this.favoriteRecipes.splice(recipeToDelete, 1);

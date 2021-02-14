@@ -225,7 +225,7 @@ describe('User', () => {
     saige.addFavoriteRecipe(spaghetti);
     saige.addFavoriteRecipe(beefNoodle);
 
-    saige.removeFavoriteRecipe(spaghetti);
+    saige.removeFavoriteRecipe(spaghetti.id);
 
     expect(saige.favoriteRecipes).to.have.lengthOf(2);
     expect(saige.favoriteRecipes[1].name).to.equal('Beef Noodle');
