@@ -59,6 +59,11 @@ function searchFavoriteRecipesByName() {
   const searchResultName = currentUser.filterFavoritesByName(searchInput.value);
   displayAllRecipeCards({ recipes: [searchResultName] });
 }
+function searchFavoriteRecipesByIngredient() {
+  const searchResultRecipes = currentUser.filterFavoritesByIngredients(ingredientsData, searchInput.value);
+  console.log(searchResultRecipes);
+  displayAllRecipeCards({ recipes: searchResultRecipes });
+}
 
 function handleSearchDropDown(event) {
   event.preventDefault();
@@ -70,9 +75,9 @@ function handleSearchDropDown(event) {
   } else if (searchBy === 'recipe' && pageTitleText.innerText === 'Favorite Recipes') {
     searchFavoriteRecipesByName();
   } else if (searchBy === 'ingredient' && pageTitleText.innerText === 'Favorite Recipes') {
-    searchByIngrients();
-    searchInput.value = '';
+    searchFavoriteRecipesByIngredient();
   }
+  searchInput.value = '';
 }
 function displayPageLoad() {
   displayAllRecipeCards(recipesRepo);
