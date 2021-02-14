@@ -2,7 +2,7 @@ const chai = require('chai');
 const expect = chai.expect;
 const Pantry = require('../src/Pantry');
 describe.only('Pantry', () => {
-  let pantry1, pantry2, contents1, contents2, recipe1;
+  let pantry1, pantry2, contents1, contents2, recipe1, recipe2;
   beforeEach(() => {
     contents1 = [{
       "ingredient": 1,
@@ -23,11 +23,11 @@ describe.only('Pantry', () => {
     contents2 = [
       {
         "ingredient": 7,
-        "amount": 3
+        "amount": 8
       },
       {
         "ingredient": 8,
-        "amount": 1
+        "amount": 5
       },
       {
         "ingredient": 9,
@@ -37,7 +37,7 @@ describe.only('Pantry', () => {
         "ingredient": 10,
         "amount": 3
       }];
-    recipe1 = recipe1 = {
+    recipe1 = {
       id: 991136,
       image: 'https://spoonacular.com/recipeImages/991136-556x370.jpg',
       ingredients: [
@@ -64,6 +64,33 @@ describe.only('Pantry', () => {
       name: 'Buffalo Chicken Example',
       tags: ['lunch', 'main course', 'main dish', 'dinner'],
     };
+    recipe2 = {
+      id: 2,
+      image: 'https://spoonacular.com/recipeImages/595736-556x370.jpg',
+      ingredients: [
+        {
+          id: 7,
+          quantity: {
+            amount: 5,
+            unit: 'cup',
+          },
+        },
+        {
+          id: 8,
+          quantity: {
+            amount: 3,
+            unit: 'tbs',
+          },
+        },
+      ],
+      instructions: [
+        { instruction: 'step 1', number: 1 },
+        { instruction: 'step 2', number: 2 },
+        { instruction: 'step 3', number: 3 },
+      ],
+      name: 'Beef Noodle',
+      tags: ['noodles', 'main dish', 'hot dish'],
+    };
     pantry1 = new Pantry(contents1);
     pantry2 = new Pantry(contents2);
   });
@@ -86,6 +113,18 @@ describe.only('Pantry', () => {
 
   it('should hold an amount in the contents', () => {
     expect(pantry1.pantry[1].amount).to.equal(3);
+  });
+
+  it('should be able to evaluate if ingredients are missing to cook a recipe', () => {
+    const result = pantry1.searchPantry(recipe1);
+
+    expect(result).to.deep.equal(false);
+  });
+
+  it('should be able to evaluate if user has all ingredients to cook a recipe', () => {
+    const result = pantry2.searchPantry(recipe2);
+
+    expect(result).to.deep.equal(true);
   });
 
   it('should be able to evaluate what ingredients are needed to cook a recipe', () => {
