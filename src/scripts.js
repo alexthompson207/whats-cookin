@@ -55,15 +55,24 @@ function searchByRecipeName() {
   const searchResultName = recipesRepo.filterRecipesByName(searchInput.value);
   displayAllRecipeCards({ recipes: [searchResultName] });
 }
+function searchFavoriteRecipesByName() {
+  const searchResultName = currentUser.filterFavoritesByName(searchInput.value);
+  displayAllRecipeCards({ recipes: [searchResultName] });
+}
+
 function handleSearchDropDown(event) {
   event.preventDefault();
   let searchBy = document.getElementById('search-recipe-select').value;
-  if (searchBy === 'recipe') {
-    searchByRecipeName(event);
-  } else if (searchBy === 'ingredient') {
-    searchByIngrients(event);
+  if (searchBy === 'recipe' && pageTitleText.innerText === 'Whats Cookin') {
+    searchByRecipeName();
+  } else if (searchBy === 'ingredient' && pageTitleText.innerText === 'Whats Cookin') {
+    searchByIngrients();
+  } else if (searchBy === 'recipe' && pageTitleText.innerText === 'Favorite Recipes') {
+    searchFavoriteRecipesByName();
+  } else if (searchBy === 'ingredient' && pageTitleText.innerText === 'Favorite Recipes') {
+    searchByIngrients();
+    searchInput.value = '';
   }
-  searchInput.value = '';
 }
 function displayPageLoad() {
   displayAllRecipeCards(recipesRepo);
@@ -162,6 +171,7 @@ function unhideHomeView() {
   allRecipesView.classList.remove('hidden');
   singleRecipeView.classList.add('hidden');
   displayAllRecipeCards(recipesRepo);
+  searchInput.placeholder = 'Search Recipes Here';
 }
 function handleNavButtons(event) {
   if (event.target.innerText === 'Return to Recipes') {
@@ -176,5 +186,5 @@ function displayFavoriteRecipesView() {
   singleRecipeView.classList.add('hidden');
   displayAllRecipeCards({ recipes: currentUser.favoriteRecipes });
   pageTitleText.innerText = 'Favorite Recipes';
-  searchInput.placeholder = 'Search Favorite Recipes'
+  searchInput.placeholder = 'Search Favorite Recipes';
 }
