@@ -147,8 +147,15 @@ function handleSingleRecipeButtons(event) {
   if (event.target.innerText === 'View Instructions') {
     displayRecipeInstructions(currentRecipe);
   } else if (event.target.innerText === 'View Ingredients') {
-    displayRecipeIngredients(currentRecipe)
+    displayRecipeIngredients(currentRecipe);
+  } else if (event.target.innerText === 'Add To Favorites') {
+    addRecipeToFavorites(currentRecipe);
+  } else if (event.target.innerText === 'Add To Cook') {
+    currentUser.addToCookList(currentRecipe);
   }
+}
+function addRecipeToFavorites(newRecipe) {
+  currentUser.addFavoriteRecipe(newRecipe);
 }
 
 function unhideHomeView() {
