@@ -1,8 +1,8 @@
 const chai = require('chai');
 const expect = chai.expect;
 const Pantry = require('../src/Pantry');
-describe('Pantry', () => {
-  let pantry1, pantry2, contents1, contents2, recipe1, recipe2, recipe3;
+describe.only('Pantry', () => {
+  let pantry1, pantry2, pantry3, contents1, contents2, contents3, recipe1, recipe2, recipe3;
   beforeEach(() => {
     contents1 = [{
       "ingredient": 1,
@@ -28,6 +28,23 @@ describe('Pantry', () => {
       {
         "ingredient": 8,
         "amount": 5
+      },
+      {
+        "ingredient": 9,
+        "amount": 4
+      },
+      {
+        "ingredient": 10,
+        "amount": 3
+      }];
+    contents3 = [
+      {
+        "ingredient": 7,
+        "amount": 5
+      },
+      {
+        "ingredient": 8,
+        "amount": 3
       },
       {
         "ingredient": 9,
@@ -128,6 +145,7 @@ describe('Pantry', () => {
     };
     pantry1 = new Pantry(contents1);
     pantry2 = new Pantry(contents2);
+    pantry3 = new Pantry(contents3);
   });
 
   it('should be a function', () => {
@@ -156,22 +174,22 @@ describe('Pantry', () => {
     expect(result).to.deep.equal([{ id: 2, quantity: { amount: 12, unit: 'unit' } }]);
   });
 
+  it('should return a list of missing ingredients including ingredients not in users pantry', () => {
+    const result = pantry1.searchPantry(recipe3);
+
+    expect(result).to.deep.equal([
+      { id: 2, quantity: { amount: 6, unit: 'unit' } },
+      { id: 7, quantity: { amount: 4, unit: 'tbs' } }
+    ]);
+  });
+
   it('should return an empty list if user has all recipe ingredients', () => {
     const result = pantry2.searchPantry(recipe2);
 
     expect(result).to.deep.equal([]);
   });
 
-  it('should be able to evaluate an ingredient amount needed to cook a recipe', () => {
-    const missingIngredients = pantry1.searchPantry(recipe1);
-    const result = pantry1.calculateMissingIngredients(missingIngredients);
-
-    expect(result).to.deep.equal([
-      { id: 2, amount: 9, unit: 'unit' }
-    ]);
-  });
-
-  it.only('should be able to evaluate multiple ingredient amounts needed to cook a recipe', () => {
+  it('should be able to return missing ingredient amounts from users pantry', () => {
     const missingIngredients = pantry1.searchPantry(recipe3);
     const result = pantry1.calculateMissingIngredients(missingIngredients);
 
@@ -179,6 +197,42 @@ describe('Pantry', () => {
       { id: 2, amount: 3, unit: 'unit' },
       { id: 7, amount: 4, unit: 'tbs' }
     ]);
+  });
+
+  it('should remove ingredient amount from pantry when recipe is cooked', () => {
+    const result = pantry2.updatePantry(recipe2);
+
+    expect(result).to.deep.equal([
+      {
+        "ingredient": 7,
+        "amount": 3
+      },
+      {
+        "ingredient": 8,
+        "amount": 2
+      },
+      {
+        "ingredient": 9,
+        "amount": 4
+      },
+      {
+        "ingredient": 10,
+        "amount": 3
+      }]);
+  });
+
+  it('should remove ingredients from pantry when all of the ingredient is used', () => {
+    const result = pantry3.updatePantry(recipe2);
+
+    expect(result).to.deep.equal([
+      {
+        "ingredient": 9,
+        "amount": 4
+      },
+      {
+        "ingredient": 10,
+        "amount": 3
+      }]);
   });
 
 });
