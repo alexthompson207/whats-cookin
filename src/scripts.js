@@ -65,6 +65,8 @@ function handleSearchDropDown(event) {
 
 function displayPageLoad() {
   displayAllRecipeCards(recipesRepo);
+  createNewUser();
+  console.log(currentUser);
 }
 
 function filterRecipesByTags(event) {
