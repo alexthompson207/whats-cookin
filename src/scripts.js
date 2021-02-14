@@ -42,6 +42,14 @@ function displayAllRecipeCards(allRecipeData) {
   })
 }
 
+function createNewUser() {
+  const randomUser = getRandomIndex(usersData);
+  currentUser = new User(randomUser.name, randomUser.id, randomUser.pantry);
+}
+function getRandomIndex(dataSet) {
+  return dataSet[Math.floor(Math.random() * dataSet.length)]
+}
+
 function searchByIngrients() {
   const searchResultRecipes = recipesRepo.filterRecipesByIngredients(ingredientsData, searchInput.value);
   displayAllRecipeCards({ recipes: searchResultRecipes });
