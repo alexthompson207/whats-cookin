@@ -231,6 +231,24 @@ function handleCookThisButton() {
   evaluatePantry(recipeSelection);
 }
 
+function evaluatePantry(recipe) {
+  console.log(currentUser.pantry.pantry);
+  const missingIngredients = currentUser.pantry.searchPantry(recipe);
+  console.log(missingIngredients);
+  if (missingIngredients.length === 0) {
+    currentUser.pantry.updatePantry(recipe);
+    displayUserPantry();
+    pantryMessage.innerText = "Recipe cooked! Your pantry has been updated."
+  } else {
+    const ingredientsNeeded = currentUser.pantry.calculateMissingIngredients(missingIngredients);
+    ingredientsNeeded.map(ingredient => {
+      return ingredient.name = ingredientRepo.returnIngredientName(ingredient.id);
+    })
+    console.log(ingredientsNeeded);
+    displayMissingIngredients(ingredientsNeeded);
+  }
+}
+
 function addRecipeToFavorites(newRecipe) {
   currentUser.addFavoriteRecipe(newRecipe);
 }
