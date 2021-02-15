@@ -227,6 +227,7 @@ function handleCookThisButton() {
     if (recipe.checked) {
       recipeSelection = recipesRepo.filterRecipesByName(recipe.value);
     } else {
+      //What should happen here
       console.log("Please make a selection");
     }
   })
@@ -234,9 +235,7 @@ function handleCookThisButton() {
 }
 
 function evaluatePantry(recipe) {
-  console.log(currentUser.pantry.pantry);
   const missingIngredients = currentUser.pantry.searchPantry(recipe);
-  console.log(missingIngredients);
   if (missingIngredients.length === 0) {
     currentUser.pantry.updatePantry(recipe);
     displayUserPantry();
@@ -245,8 +244,7 @@ function evaluatePantry(recipe) {
     const ingredientsNeeded = currentUser.pantry.calculateMissingIngredients(missingIngredients);
     ingredientsNeeded.map(ingredient => {
       return ingredient.name = ingredientRepo.returnIngredientName(ingredient.id);
-    })
-    console.log(ingredientsNeeded);
+    });
     displayMissingIngredients(ingredientsNeeded);
   }
 }
