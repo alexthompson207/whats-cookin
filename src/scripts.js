@@ -249,6 +249,18 @@ function evaluatePantry(recipe) {
   }
 }
 
+function displayMissingIngredients(ingredients) {
+  pantryMessage.innerText = "You don't have enough ingredients to cook this meal...Here's a list of what you'll need:"
+  pantryMissingIngredientList.innerHTML = '';
+  ingredients.forEach(ingredient => {
+    pantryMissingIngredientList.innerHTML += ` <li class="pantry-missing-item">
+    <p class="pantry-missing-ingredient">${ingredient.name}</p>
+    <p class="pantry-missing-amount">${ingredient.amount}</p>
+    <p class="pantry-missing-unit">${ingredient.unit}</p>
+  </li>`
+  })
+}
+
 function addRecipeToFavorites(newRecipe) {
   currentUser.addFavoriteRecipe(newRecipe);
 }
@@ -310,16 +322,4 @@ function findPantryIngredientNames() {
     return ingredient.name =
       ingredientRepo.returnIngredientName(ingredient.ingredient)
   });
-}
-
-function evaluatePantry() {
-  let cookSelection;
-  const cookList = document.querySelectorAll('.pantry-btn');
-  console.log(cookList);
-  cookList.forEach(recipe => {
-    if (recipe.value.checked) {
-      cookSelection = recipe;
-      console.log(cookSelection);
-    }
-  })
 }
