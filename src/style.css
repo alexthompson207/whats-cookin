@@ -15,6 +15,10 @@ body {
   font-family: Verdana, sans-serif;
 }
 
+main {
+  height: 75%; 
+}
+
 .navigation-title {
   font-size: 2em;
 }
@@ -290,6 +294,7 @@ body {
 /* ------------------pantry----------------------------- */
 
 .pantry {
+  height: 100%; 
   display: flex;
   justify-content: space-around; 
   margin-top: 50px;  
@@ -321,12 +326,14 @@ body {
 }
 
 
-/* ---------------List of cook items----------------- */.pangty-cook-area {
+/* ---------------List of cook items----------------- */.pantry-cook-area {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
+  justify-content: space-between; 
 }
 
-.pantry-cook-container {
+.pantry-cook-container { 
+  flex-basis: 45%;  
   background-color: #e3f086;
   border-radius: 10px; 
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
@@ -357,9 +364,39 @@ body {
   padding: 15px; 
 }
 
-.pantry-cook-message {
+/* ----------------pantry message area--------------- */
+
+
+.pantry-info-container { 
+  flex-basis: 50%;  
+  border-radius: 10px; 
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
   background-color: #e3f086;
 }
+
+.pantry-message {
+  padding: 20px; 
+  border-bottom: solid black; 
+}
+
+.pantry-missing-ingredients-list {
+  list-style-type: none;
+  padding: 20px; 
+}
+
+.pantry-missing-item {
+  display: flex; 
+}
+
+.pantry-missing-ingredient {
+  flex: 1; 
+}
+
+.pantry-missing-amount {
+  padding: 0px 5px;  
+}
+
+
 
 
 /* ------------------state---------------------------- */
