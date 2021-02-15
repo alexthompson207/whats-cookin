@@ -23,6 +23,7 @@ const singleRecipeBtns = document.querySelector('.single-recipe-buttons');
 const topBarNavBtns = document.querySelector('.navigation-buttons');
 const pantryView = document.getElementById('pantryView');
 const pantryList = document.getElementById('pantryList');
+const pantryCookList = document.getElementById('pantryCookList');
 
 window.addEventListener('load', displayPageLoad);
 searchBtn.addEventListener('click', handleSearchDropDown);
@@ -202,32 +203,17 @@ function handleSingleRecipeButtons(event) {
   } else if (event.target.innerText === 'Add To Favorites') {
     addRecipeToFavorites(currentRecipe);
   } else if (event.target.innerText === 'Add To Cook') {
-    currentUser.addToCookList(currentRecipe);
+    displayRecipeToCook();
   }
 }
 
-//IDEA for how to dynamically add radio buttons that represent 
-//the recipe the user chooses to cook
-//
-//cook button = document.getElementById('click'), function() {
-//   var cookItem = document.createElement('input');
-//   cookItem.type = 'radio';
-//   cookItem.id = 'cook${recipeid}'; //need to have an id that doesn't start with a number...so put cook behind each unique id??
-//   cookItem.value = '${recipe.name';
-
-//   var label = document.createElement('label')
-//   label.htmlFor = 'cook${recipe.id';
-
-//   var description = document.createTextNode('Email');
-//   label.appendChild(description);
-
-//   var newline = document.createElement('br');
-
-//   var container = document.getElementById('container');
-//   container.appendChild(radiobox);
-//   container.appendChild(label);
-//   container.appendChild(newline);
-// }
+function displayRecipeToCook() {
+  currentUser.addToCookList(currentRecipe);
+  pantryCookList.innerHTML += ` <li class="pantry-cook-item">
+  <input type="radio" id="cook${currentRecipe.id}" name="cook-recipe" value="${currentRecipe.name}" />
+<label class="pantry-cook-item-label" for="${currentRecipe.name}">${currentRecipe.name}</label>
+</li>`
+}
 
 function addRecipeToFavorites(newRecipe) {
   currentUser.addFavoriteRecipe(newRecipe);
