@@ -320,18 +320,23 @@ body {
   padding: 15px;  
 }
 
-.pantry-cook-area {
-  flex-basis: 45%; 
+
+/* ---------------List of cook items----------------- */.pangty-cook-area {
+  display: flex;
+  flex-direction: column; 
+}
+
+.pantry-cook-container {
+  background-color: #e3f086;
+  border-radius: 10px; 
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
 .pantry-cook-title-container {
   display: flex; 
   justify-content: space-around; 
   padding: 20px; 
-}
-
-.pantry-cook-title {
-  flex: 1; 
+  border-bottom: solid black; 
 }
 
 .pantry-cook-button {
@@ -339,12 +344,17 @@ body {
   color: #e3f086;
 }
 
+.pantry-cook-title {
+  flex: 1; 
+  align-self: center; 
+}
+
 .pantry-cook-list {
-  background-color: #e3f086;
-  border-radius: 10px; 
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+  list-style-type: none;
+}
 
-
+.pantry-cook-item {
+  padding: 15px; 
 }
 
 .pantry-cook-message {
