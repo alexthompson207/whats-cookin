@@ -24,6 +24,7 @@ const topBarNavBtns = document.querySelector('.navigation-buttons');
 const pantryView = document.getElementById('pantryView');
 const pantryList = document.getElementById('pantryList');
 const pantryCookList = document.getElementById('pantryCookList');
+const cookThisBtn = document.getElementById('cookThisBtn');
 
 window.addEventListener('load', displayPageLoad);
 searchBtn.addEventListener('click', handleSearchDropDown);
@@ -31,6 +32,7 @@ filterTagSection.addEventListener('click', filterRecipesByTags);
 recipeListCard.addEventListener('click', handleRecipeClick);
 singleRecipeBtns.addEventListener('click', handleSingleRecipeButtons);
 topBarNavBtns.addEventListener('click', handleNavButtons);
+cookThisBtn.addEventListener('click', evaluatePantry);
 
 function displayAllRecipeCards(recipesRepo) {
   recipeListCard.innerHTML = '';
@@ -61,7 +63,8 @@ function displayFavoriteRecipeCards(favoriteRecipes) {
 function createNewUser() {
   const randomUser = getRandomIndex(usersData);
   currentUser = new User(randomUser.name, randomUser.id, randomUser.pantry);
-  // const newPantry = new Pantry(currentUser.pantry);
+  const newPantry = new Pantry(currentUser.pantry);
+  currentUser.pantry = newPantry;
 }
 
 function getRandomIndex(dataSet) {
@@ -210,9 +213,22 @@ function handleSingleRecipeButtons(event) {
 function displayRecipeToCook() {
   currentUser.addToCookList(currentRecipe);
   pantryCookList.innerHTML += ` <li class="pantry-cook-item">
-  <input type="radio" id="cook${currentRecipe.id}" name="cook-recipe" value="${currentRecipe.name}" />
+  <input class ="pantry-btn" type="radio" id="cook${currentRecipe.id}" name="cook-recipe" value="${currentRecipe.name}" />
 <label class="pantry-cook-item-label" for="${currentRecipe.name}">${currentRecipe.name}</label>
 </li>`
+}
+
+function handleCookThisButton() {
+  let recipeSelection;
+  const cookList = document.querySelectorAll(".pantry-btn")
+  cookList.forEach(recipe => {
+    if (recipe.checked) {
+      recipeSelection = recipesRepo.filterRecipesByName(recipe.value);
+    } else {
+      console.log("Please make a selection");
+    }
+  })
+  evaluatePantry(recipeSelection);
 }
 
 function addRecipeToFavorites(newRecipe) {
@@ -262,7 +278,7 @@ function displayFavoriteRecipesView() {
 function displayUserPantry() {
   findPantryIngredientNames();
   pantryList.innerHTML = '';
-  currentUser.pantry.forEach(ingredient => {
+  currentUser.pantry.pantry.forEach(ingredient => {
     pantryList.innerHTML +=
       `<li class="single-recipe-info">
     <p class="single-recipe-number">${ingredient.amount}</p>
@@ -272,8 +288,20 @@ function displayUserPantry() {
 }
 
 function findPantryIngredientNames() {
-  currentUser.pantry.map(ingredient => {
+  currentUser.pantry.pantry.map(ingredient => {
     return ingredient.name =
       ingredientRepo.returnIngredientName(ingredient.ingredient)
   });
+}
+
+function evaluatePantry() {
+  let cookSelection;
+  const cookList = document.querySelectorAll('.pantry-btn');
+  console.log(cookList);
+  cookList.forEach(recipe => {
+    if (recipe.value.checked) {
+      cookSelection = recipe;
+      console.log(cookSelection);
+    }
+  })
 }
