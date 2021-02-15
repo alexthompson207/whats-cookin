@@ -204,6 +204,29 @@ function handleSingleRecipeButtons(event) {
   }
 }
 
+//IDEA for how to dynamically add radio buttons that represent 
+//the recipe the user chooses to cook
+//
+//cook button = document.getElementById('click'), function() {
+//   var cookItem = document.createElement('input');
+//   cookItem.type = 'radio';
+//   cookItem.id = 'cook${recipeid}'; //need to have an id that doesn't start with a number...so put cook behind each unique id??
+//   cookItem.value = '${recipe.name';
+ 
+//   var label = document.createElement('label')
+//   label.htmlFor = 'cook${recipe.id';
+ 
+//   var description = document.createTextNode('Email');
+//   label.appendChild(description);
+ 
+//   var newline = document.createElement('br');
+ 
+//   var container = document.getElementById('container');
+//   container.appendChild(radiobox);
+//   container.appendChild(label);
+//   container.appendChild(newline);
+// }
+
 function addRecipeToFavorites(newRecipe) {
   currentUser.addFavoriteRecipe(newRecipe);
 }
