@@ -25,6 +25,8 @@ const pantryView = document.getElementById('pantryView');
 const pantryList = document.getElementById('pantryList');
 const pantryCookList = document.getElementById('pantryCookList');
 const cookThisBtn = document.getElementById('cookThisBtn');
+const pantryMessage = document.getElementById('pantryMessage');
+const pantryMissingIngredientList = document.getElementById("missingIngredientsList");
 
 window.addEventListener('load', displayPageLoad);
 searchBtn.addEventListener('click', handleSearchDropDown);
@@ -32,7 +34,7 @@ filterTagSection.addEventListener('click', filterRecipesByTags);
 recipeListCard.addEventListener('click', handleRecipeClick);
 singleRecipeBtns.addEventListener('click', handleSingleRecipeButtons);
 topBarNavBtns.addEventListener('click', handleNavButtons);
-cookThisBtn.addEventListener('click', evaluatePantry);
+cookThisBtn.addEventListener('click', handleCookThisButton);
 
 function displayAllRecipeCards(recipesRepo) {
   recipeListCard.innerHTML = '';
