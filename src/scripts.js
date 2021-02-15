@@ -260,6 +260,7 @@ function displayPantryView() {
   allRecipesView.classList.add('hidden');
   singleRecipeView.classList.add('hidden');
   pantryView.classList.remove('hidden');
+  displayUserPantry();
   pageTitleText.innerText = 'My Pantry';
 }
 
@@ -273,12 +274,20 @@ function displayFavoriteRecipesView() {
 }
 
 function displayUserPantry() {
-  const recipeInstructions = recipe.returnRecipeInstructions();
+  findPantryIngredientNames();
   pantryList.innerHTML = '';
-  recipeInstructions.forEach(instruction => {
-    singleRecipeList.innerHTML +=
+  currentUser.pantry.forEach(ingredient => {
+    pantryList.innerHTML +=
       `<li class="single-recipe-info">
-    <p class="single-recipe-number">${instruction.number}</p>
-    <p class="single-recipe-ingredient">${instruction.instruction}</p>
+    <p class="single-recipe-number">${ingredient.amount}</p>
+    <p class="single-recipe-ingredient">${ingredient.name}</p>
      </li>`
   })
+}
+
+function findPantryIngredientNames() {
+  currentUser.pantry.map(ingredient => {
+    return ingredient.name =
+      ingredientRepo.returnIngredientName(ingredient.ingredient)
+  });
+}
