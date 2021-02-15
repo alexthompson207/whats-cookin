@@ -21,6 +21,8 @@ const singleRecipeList = document.getElementById('singleRecipeList');
 const pageTitleText = document.querySelector('.navigation-title');
 const singleRecipeBtns = document.querySelector('.single-recipe-buttons');
 const topBarNavBtns = document.querySelector('.navigation-buttons');
+const pantryView = document.getElementById('pantryView');
+const pantryList = document.getElementById('pantryList');
 
 window.addEventListener('load', displayPageLoad);
 searchBtn.addEventListener('click', handleSearchDropDown);
@@ -212,15 +214,15 @@ function handleSingleRecipeButtons(event) {
 //   cookItem.type = 'radio';
 //   cookItem.id = 'cook${recipeid}'; //need to have an id that doesn't start with a number...so put cook behind each unique id??
 //   cookItem.value = '${recipe.name';
- 
+
 //   var label = document.createElement('label')
 //   label.htmlFor = 'cook${recipe.id';
- 
+
 //   var description = document.createTextNode('Email');
 //   label.appendChild(description);
- 
+
 //   var newline = document.createElement('br');
- 
+
 //   var container = document.getElementById('container');
 //   container.appendChild(radiobox);
 //   container.appendChild(label);
@@ -238,6 +240,7 @@ function removeFavoriteRecipe(id) {
 function unhideHomeView() {
   allRecipesView.classList.remove('hidden');
   singleRecipeView.classList.add('hidden');
+  pantryView.classList.add('hidden');
   displayAllRecipeCards(recipesRepo);
   searchInput.placeholder = 'Search Recipes Here';
 }
@@ -248,13 +251,34 @@ function handleNavButtons(event) {
     pageTitleText.innerText = 'Whats Cookin';
   } else if (event.target.innerText === 'My Favorites') {
     displayFavoriteRecipesView();
+  } else if (event.target.innerText === 'My Pantry') {
+    displayPantryView();
   }
+}
+
+function displayPantryView() {
+  allRecipesView.classList.add('hidden');
+  singleRecipeView.classList.add('hidden');
+  pantryView.classList.remove('hidden');
+  pageTitleText.innerText = 'My Pantry';
 }
 
 function displayFavoriteRecipesView() {
   allRecipesView.classList.remove('hidden');
+  pantryView.classList.add('hidden');
   singleRecipeView.classList.add('hidden');
   displayFavoriteRecipeCards({ recipes: currentUser.favoriteRecipes });
   pageTitleText.innerText = 'Favorite Recipes';
   searchInput.placeholder = 'Search Favorite Recipes';
 }
+
+function displayUserPantry() {
+  const recipeInstructions = recipe.returnRecipeInstructions();
+  pantryList.innerHTML = '';
+  recipeInstructions.forEach(instruction => {
+    singleRecipeList.innerHTML +=
+      `<li class="single-recipe-info">
+    <p class="single-recipe-number">${instruction.number}</p>
+    <p class="single-recipe-ingredient">${instruction.instruction}</p>
+     </li>`
+  })
