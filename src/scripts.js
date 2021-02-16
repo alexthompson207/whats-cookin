@@ -163,9 +163,9 @@ function displayCostOfRecipe(recipe) {
 // turn two arrays of strings into an array of objects with two keys holding the elements of each array
 // build one object that holds a key of "chicken"; " 1 tbs"
 function findIngredientInfo(recipe) {
-  const amounts = recipe.returnIngredientAmounts()
-  const ingredients = recipe.returnIngredientNames(ingredientInstances)
-  const recipeInfo = {}
+  const amounts = recipe.returnIngredientAmounts();
+  const ingredients = recipe.returnIngredientNames(ingredientInstances);
+  const recipeInfo = {};
   ingredients.forEach((ingredient, i) => {
     recipeInfo[ingredient] = amounts[i];
   })
