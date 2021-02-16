@@ -306,7 +306,7 @@ function displayFavoriteRecipesView() {
 }
 
 function displayUserPantry() {
-  findPantryIngredientNames();
+  addIngredientNames();
   pantryList.innerHTML = '';
   currentUser.pantry.pantry.forEach(ingredient => {
     pantryList.innerHTML +=
@@ -317,7 +317,7 @@ function displayUserPantry() {
   })
 }
 
-function findPantryIngredientNames() {
+function addIngredientNames() {
   currentUser.pantry.pantry.map(ingredient => {
     return ingredient.name =
       ingredientRepo.returnIngredientName(ingredient.ingredient)
