@@ -21,6 +21,12 @@ const singleRecipeList = document.getElementById('singleRecipeList');
 const pageTitleText = document.querySelector('.navigation-title');
 const singleRecipeBtns = document.querySelector('.single-recipe-buttons');
 const topBarNavBtns = document.querySelector('.navigation-buttons');
+const pantryView = document.getElementById('pantryView');
+const pantryList = document.getElementById('pantryList');
+const pantryCookList = document.getElementById('pantryCookList');
+const cookThisBtn = document.getElementById('cookThisBtn');
+const pantryMessage = document.getElementById('pantryMessage');
+const pantryMissingIngredientList = document.getElementById("missingIngredientsList");
 
 window.addEventListener('load', displayPageLoad);
 searchBtn.addEventListener('click', handleSearchDropDown);
@@ -28,6 +34,7 @@ filterTagSection.addEventListener('click', filterRecipesByTags);
 recipeListCard.addEventListener('click', handleRecipeClick);
 singleRecipeBtns.addEventListener('click', handleSingleRecipeButtons);
 topBarNavBtns.addEventListener('click', handleNavButtons);
+cookThisBtn.addEventListener('click', handleCookThisButton);
 
 function displayAllRecipeCards(recipesRepo) {
   recipeListCard.innerHTML = '';
@@ -58,7 +65,8 @@ function displayFavoriteRecipeCards(favoriteRecipes) {
 function createNewUser() {
   const randomUser = getRandomIndex(usersData);
   currentUser = new User(randomUser.name, randomUser.id, randomUser.pantry);
-  // const newPantry = new Pantry(currentUser.pantry);
+  const newPantry = new Pantry(currentUser.pantry);
+  currentUser.pantry = newPantry;
 }
 
 function getRandomIndex(dataSet) {
@@ -200,32 +208,58 @@ function handleSingleRecipeButtons(event) {
   } else if (event.target.innerText === 'Add To Favorites') {
     addRecipeToFavorites(currentRecipe);
   } else if (event.target.innerText === 'Add To Cook') {
-    currentUser.addToCookList(currentRecipe);
+    displayRecipeToCook();
   }
 }
 
-//IDEA for how to dynamically add radio buttons that represent 
-//the recipe the user chooses to cook
-//
-//cook button = document.getElementById('click'), function() {
-//   var cookItem = document.createElement('input');
-//   cookItem.type = 'radio';
-//   cookItem.id = 'cook${recipeid}'; //need to have an id that doesn't start with a number...so put cook behind each unique id??
-//   cookItem.value = '${recipe.name';
- 
-//   var label = document.createElement('label')
-//   label.htmlFor = 'cook${recipe.id';
- 
-//   var description = document.createTextNode('Email');
-//   label.appendChild(description);
- 
-//   var newline = document.createElement('br');
- 
-//   var container = document.getElementById('container');
-//   container.appendChild(radiobox);
-//   container.appendChild(label);
-//   container.appendChild(newline);
-// }
+function displayRecipeToCook() {
+  currentUser.addToCookList(currentRecipe);
+  pantryCookList.innerHTML += ` <li class="pantry-cook-item">
+  <input class ="pantry-btn" type="radio" id="cook${currentRecipe.id}" name="cook-recipe" value="${currentRecipe.name}" />
+<label class="pantry-cook-item-label" for="${currentRecipe.name}">${currentRecipe.name}</label>
+</li>`
+}
+
+function handleCookThisButton() {
+  let recipeSelection;
+  const cookList = document.querySelectorAll(".pantry-btn")
+  cookList.forEach(recipe => {
+    if (recipe.checked) {
+      recipeSelection = recipesRepo.filterRecipesByName(recipe.value);
+    } else {
+      //What should happen here
+      console.log("Please make a selection");
+    }
+  })
+  evaluatePantry(recipeSelection);
+}
+
+function evaluatePantry(recipe) {
+  const missingIngredients = currentUser.pantry.searchPantry(recipe);
+  if (missingIngredients.length === 0) {
+    currentUser.pantry.updatePantry(recipe);
+    displayUserPantry();
+    pantryMessage.innerText = "Recipe cooked! Your pantry has been updated."
+  } else {
+    const ingredientsNeeded = currentUser.pantry.calculateMissingIngredients(missingIngredients);
+    ingredientsNeeded.map(ingredient => {
+      return ingredient.name = ingredientRepo.returnIngredientName(ingredient.id);
+    });
+    displayMissingIngredients(ingredientsNeeded);
+  }
+}
+
+function displayMissingIngredients(ingredients) {
+  pantryMessage.innerText = "You don't have enough ingredients to cook this meal...Here's a list of what you'll need:"
+  pantryMissingIngredientList.innerHTML = '';
+  ingredients.forEach(ingredient => {
+    pantryMissingIngredientList.innerHTML += ` <li class="pantry-missing-item">
+    <p class="pantry-missing-ingredient">${ingredient.name}</p>
+    <p class="pantry-missing-amount">${ingredient.amount}</p>
+    <p class="pantry-missing-unit">${ingredient.unit}</p>
+  </li>`
+  })
+}
 
 function addRecipeToFavorites(newRecipe) {
   currentUser.addFavoriteRecipe(newRecipe);
@@ -238,6 +272,7 @@ function removeFavoriteRecipe(id) {
 function unhideHomeView() {
   allRecipesView.classList.remove('hidden');
   singleRecipeView.classList.add('hidden');
+  pantryView.classList.add('hidden');
   displayAllRecipeCards(recipesRepo);
   searchInput.placeholder = 'Search Recipes Here';
 }
@@ -248,13 +283,43 @@ function handleNavButtons(event) {
     pageTitleText.innerText = 'Whats Cookin';
   } else if (event.target.innerText === 'My Favorites') {
     displayFavoriteRecipesView();
+  } else if (event.target.innerText === 'My Pantry') {
+    displayPantryView();
   }
+}
+
+function displayPantryView() {
+  allRecipesView.classList.add('hidden');
+  singleRecipeView.classList.add('hidden');
+  pantryView.classList.remove('hidden');
+  displayUserPantry();
+  pageTitleText.innerText = 'My Pantry';
 }
 
 function displayFavoriteRecipesView() {
   allRecipesView.classList.remove('hidden');
+  pantryView.classList.add('hidden');
   singleRecipeView.classList.add('hidden');
   displayFavoriteRecipeCards({ recipes: currentUser.favoriteRecipes });
   pageTitleText.innerText = 'Favorite Recipes';
   searchInput.placeholder = 'Search Favorite Recipes';
+}
+
+function displayUserPantry() {
+  addIngredientNames();
+  pantryList.innerHTML = '';
+  currentUser.pantry.pantry.forEach(ingredient => {
+    pantryList.innerHTML +=
+      `<li class="single-recipe-info">
+    <p class="single-recipe-number">${ingredient.amount}</p>
+    <p class="single-recipe-ingredient">${ingredient.name}</p>
+     </li>`
+  })
+}
+
+function addIngredientNames() {
+  currentUser.pantry.pantry.map(ingredient => {
+    return ingredient.name =
+      ingredientRepo.returnIngredientName(ingredient.ingredient)
+  });
 }

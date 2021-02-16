@@ -18,7 +18,7 @@
     </div>
   </section>
   <main>
-    <section class="all-recipes hidden">
+    <section class="all-recipes">
       <form class="search">
         <div class="search-container">
           <label class="search-options-label" for="search-recipe-select">Select</label>
@@ -110,10 +110,10 @@
         </div>
       </div>
     </section>
-    <section class="pantry">
+    <section class="pantry hidden" id="pantryView">
       <article class="pantry-contents">
         <h2 class="pantry-title">Current Pantry Stock</h2>
-        <ul class="pantry-list">
+        <ul class="pantry-list" id="pantryList">
           <li class="pantry-item">
             <p class="pantry-ingredient">Ingredient</p>
             <o class="pantry-amount">Amount</p>
@@ -136,27 +136,15 @@
         <article class="pantry-cook-container">
           <div class="pantry-cook-title-container">
             <h2 class="pantry-cook-title">Meals To Cook</h2>
-            <button class="button pantry-cook-button">Cook This</button>
+            <button class="button pantry-cook-button" id="cookThisBtn">Cook This</button>
           </div>
           <ul class="pantry-cook-list" id="pantryCookList">
-            <li class="pantry-cook-item">
-              <input type="radio" id="cook595736" name="cook-recipe" value="loaded choclate chip pudding cups" />
-            <label class="pantry-cook-item-label" for="">Loaded Chocolate Chip Pudding Cookie Cups</label>
-            </li>
-            <li class="pantry-cook-item">
-              <input type="radio" id="cook595736" name="cook-recipe" value="loaded choclate chip pudding cups" />
-            <label class="pantry-cook-item-label" for="cook595736">Loaded Chocolate Chip Pudding Cookie Cups</label>
-            </li>
           </ul>
-        </article> 
+        </article>
         <article class="pantry-info-container">
-          <p class="pantry-message">You don't have enough ingredients to cook this meal..Here's a list of what you'll need</p>
-          <ul class="pantry-missing-ingredients-list">
-            <li class="pantry-missing-item">
-              <p class="pantry-missing-ingredient">Item</p>
-              <p class="pantry-missing-amount">3</p>
-              <p class="pantry-missing-unit">cups</p>
-            </li>
+          <p class="pantry-message" id="pantryMessage">Lets check your pantry to see if you have enough ingredients to
+            cook a meal!</p>
+          <ul class="pantry-missing-ingredients-list" id="missingIngredientsList">
           </ul>
         </article>
       </section>
@@ -170,6 +158,7 @@
   <script type="text/javascript" src="./recipe.js"></script>
   <script type="text/javascript" src="./ingredient.js"></script>
   <script type="text/javascript" src="./user.js"></script>
+  <script type="text/javascript" src="./pantry.js"></script>
   <script type="text/javascript" src="./scripts.js"></script>
 </body>
 

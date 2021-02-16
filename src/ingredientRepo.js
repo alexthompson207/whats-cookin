@@ -15,6 +15,11 @@ class IngredientRepo {
     }
     return ingredient.id;
   }
+  //make a test for this method
+  returnIngredientName(ingredientId) {
+    const ingredient = this.ingredients.find(ingredient => ingredient.id === ingredientId);
+    return ingredient.name;
+  }
 }
 if (typeof module !== 'undefined') {
   module.exports = IngredientRepo;
