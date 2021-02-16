@@ -10,15 +10,15 @@
 
 <body>
   <section class="navigation">
-    <h1 class="navigation-title">Whats Cookin</h1>
-    <div class="navigation-buttons">
+    <h1 class="navigation-title" id="navTitle">Whats Cookin</h1>
+    <div class="navigation-buttons" id="navBtns">
       <button class="button" id="returnToRecipes">Return to Recipes</button>
       <button class="button" id="myFavorites">My Favorites</button>
       <button class="button" id="myPantry">My Pantry</button>
     </div>
   </section>
   <main>
-    <section class="all-recipes">
+    <section class="all-recipes" id="allRecipes">
       <form class="search">
         <div class="search-container">
           <label class="search-options-label" for="search-recipe-select">Select</label>
@@ -26,11 +26,11 @@
             <option value="recipe">Recipe Name</option>
             <option value="ingredient">Ingredient</option>
           </select>
-          <input class="search-bar" type="text" placeholder="Search Recipes Here" />
+          <input class="search-bar" id="searchBar" type="text" placeholder="Search Recipes Here" />
           <button class="button" id="searchRecipes">Search Recipes</button>
         </div>
       </form>
-      <form class="recipe-tags">
+      <form class="recipe-tags" id="recipeTags">
         <h2 class="recipe-tags-title">Filter Recipes</h2>
         <div class="recipe-tag">
           <input type="radio" id="allRecipes" name="recipe-tag" value="all recipes" />
@@ -82,14 +82,14 @@
         </div>
       </form>
       <section class="recipes">
-        <section class="recipe-list recipe-row">
+        <section class="recipe-list recipe-row" id="recipeList">
         </section>
       </section>
     </section>
-    <section class="single-recipe hidden">
+    <section class="single-recipe hidden" id="singleRecipeView">
       <img class="single-recipe-image" id="singleRecipeImage"
         src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="loaded choclate chip pudding cups" />
-      <div class="single-recipe-buttons">
+      <div class="single-recipe-buttons" id="singleRecipeBtns">
         <button class="button" id="viewInstructions">
           View Instructions
         </button>
