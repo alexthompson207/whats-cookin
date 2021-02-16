@@ -3,7 +3,6 @@ class Pantry {
     this.pantry = pantry;
   }
 
-
   searchPantry(recipe) {
     const result = recipe.ingredients.filter(recipeIngredient => {
       const condition1 = this.pantry.find(pantryIngredient => {
