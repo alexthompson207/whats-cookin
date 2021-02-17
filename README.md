@@ -93,7 +93,7 @@ In this project I created an application/game from scratch that enables two user
 
 [<img src="https://img.shields.io/badge/LinkedIn-elizabeth--hahn-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0077b5"/>][linkedin2]
 [<img src="https://img.shields.io/badge/Gmail-ahthomps1@gmail.com-informational?style=for-the-badge&labelColor=black&logoColor=d14836&logo=microsoft&color=d14836"/>][gmail2]
-[<img src="https://img.shields.io/badge/Github-ElizabethHahn-informational?style=for-the-badge&labelColor=black&logo=github&color=7d88e6"/>][github2]
+[<img src="https://img.shields.io/badge/Github-elizhahn-informational?style=for-the-badge&labelColor=black&logo=github&color=7d88e6"/>][github2]
 
 
 
