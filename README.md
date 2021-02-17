@@ -1,51 +1,97 @@
-# What's Cookin'? Starter Kit 
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)](https://www.linkedin.com/in/alex-thompson-309070a2/ )
 
-The details of this project are outlined in the <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">project spec</a>.
+[![GitHub](https://img.shields.io/badge/GitHub-black.svg?&style=flat-square&logo=github&logoColor=white)](https://github.com/alexthompson207)
 
-## Set Up 
+<p align="center">
+  <a href="https://github.com/alexthompson207/whats-cookin">
+    <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
+  </a>
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. Both group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run npm install to install project dependencies.
-4. Run open src/index.html in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-5. Make sure both members of your team are collaborators on the forked repo.
-
-## Testing 
-
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran npm install, then the tooling you need to start testing is already installed (mocha and chai).
-
-## Linting Your Code 
-
-Run the command in your terminal npm run lint to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
-
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+  <h1 align="left">What's Cookin'?</h1>
 
 
-## Data Model
-### Users
-```js
-{
-  "id": [number],
-  "name": [string],
-  "pantry": [array of objects with amount and ingredient id properties]
-},
-```
 
-### Recipes
-```js
-{
-  "ingredients" [array of objects with ingredients ids(connection to ingredients), ingredient names, and quantity data],
-  "instructions": [array of objects with instructions properties and numbered steps],
-  "name": [string],
-  "tags": [array of strings representing info about the recipes]
-}
-```
+## Table of Contents
 
-### Ingredients
-```js
-{
-  "estimatedCostInCents": [number],
-  "id": [number -- connection to users and recipes],
-  "name": [string]
-}
-```
+- [About the Project](#about-the-project)
+  - [Built With](#built-with)
+- [Set-up Instructions](#set-up-instructions)
+- [Learning Goals](#learning-goals)
+- [Challenges](#challenges)
+- [Wins](#wins)
+- [Functionality](#functionality)
+- [Future Iterations](#future-iterations)
+- [Contributors](#contributors)
+- [Contact](#contact)
+
+## About The Project
+
+In this project I created an application/game from scratch that enables two users (players) to use the same keyboard to play the card game of Slapjack. The users can play as many full games as they would like, and their win totals persist on page reload using `local storage`. The rules to Slapjack gameplay and user controls are explained in detail in the `Project Rubic` and also on the locally hosted site (see below).
+
+- [Project Brief and Rubric](https://frontend.turing.io/projects/whats-cookin.html)
+
+  
+
+#### Built With:
+
+- [![JavaScript](https://img.shields.io/badge/-JavaScript-black?style=flat-square&logo=javascript)](https://www.javascript.com/) with `ES6` implementations
+
+- ![HTML5](https://img.shields.io/badge/-HTML5-black?style=flat-square&logo=html5&logoColor=white)
+
+- ![CSS3](https://img.shields.io/badge/-CSS3-black?style=flat-square&logo=css3)
+
+  
+
+## Set-up Instructions
+
+1. Fork this [Github repository](https://github.com/alexthompson207/whats-cookin) and clone it down to your local machine using the `git clone` command in your Terminal.
+2. Move into that directory with `cd whats-cookin` in your Terminal.
+3. To see the code itself locally, run `<name of text editor> .`
+4. To see how the tests are run:
+  - Run `npm install`
+  - Rum `npm test`
+5. To see the application locally, run `open index.html` 
+
+
+
+## Learning Goals
+
+
+
+
+
+## Challenges
+
+
+
+## Wins
+
+
+
+## Functionality
+
+
+
+## Future Iterations
+
+
+
+## Contributers
+
+* [Alex Thompson](https://github.com/alexthompson207) - Application Co-creator
+* [Elizabeth Hahn](https://github.com/elizhahn) - Application Co-creator
+* [Travis Rollins](https://github.com/Kalikoze) - Project Manager
+
+## Contact
+
+[<img src="https://img.shields.io/badge/LinkedIn-alex--thompson-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0077b5"/>][linkedin]
+[<img src="https://img.shields.io/badge/Gmail-ahthomps1@gmail.com-informational?style=for-the-badge&labelColor=black&logoColor=d14836&logo=microsoft&color=d14836"/>][gmail]
+[<img src="https://img.shields.io/badge/Github-AlexThompson207-informational?style=for-the-badge&labelColor=black&logo=github&color=7d88e6"/>][github]
+
+
+
+<!-- Personal Definitions  -->
+
+[linkedin]: https://www.linkedin.com/in/alex-thompson-309070a2/
+[Gmail]: mailto:ahthomps1@gmail.com
+[github]: https://github.com/alexthompson207
