@@ -65,7 +65,7 @@ function displayFavoriteRecipeCards(favoriteRecipes) {
     recipeListCard.innerHTML +=
       `<div class='recipe-img-container'>
       <svg class="remove-icon" id="removeIcon" xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close Circle</title><path d='M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z' fill='none' stroke='currentColor' stroke-miterlimit='10' stroke-width='32'/><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M320 320L192 192M192 320l128-128'/></svg>
-    <img class='favorite-recipe-img' id="${recipe.id}" src="${recipe.image}"
+    <img class='recipe-img favorite-recipe-img' id="${recipe.id}" src="${recipe.image}"
       alt="${recipe.name}">
       <p class='recipe-name'>${recipe.name}</p>
   </div>`
@@ -151,7 +151,6 @@ function handleRecipeClick(event) {
 }
 
 function displayTitle(title) {
-  console.log(title);
   if (title === "My Favorites" || title === "Whats Cookin" || title === "My Pantry") {
     pageTitleText.innerText = title;
     pageTitleText.classList.remove("single-recipe-title");
@@ -230,11 +229,14 @@ function handleSingleRecipeButtons(event) {
 
 function displayRecipeToCook() {
   currentUser.addToCookList(currentRecipe);
+  pantryCookList.innerHTML = '';
+  currentUser.recipesToCook.forEach(recipe => {
   pantryCookList.innerHTML += ` <li class="pantry-cook-item">
-  <input class ="pantry-btn" type="radio" id="cook${currentRecipe.id}" name="cook-recipe" value="${currentRecipe.name}" />
-<label class="pantry-cook-item-label" for="${currentRecipe.name}">${currentRecipe.name}</label>
-</li>`
-}
+  <input class ="pantry-btn" type="radio" id="cook${recipe.id}" name="cook-recipe" value="${recipe.name}" />
+  <label class="pantry-cook-item-label" for="${recipe.name}">${recipe.name}</label>
+  </li>`
+ });
+};
 
 function handleCookThisButton() {
   let recipeSelection;
@@ -242,12 +244,11 @@ function handleCookThisButton() {
   cookList.forEach(recipe => {
     if (recipe.checked) {
       recipeSelection = recipesRepo.filterRecipesByName(recipe.value);
+      evaluatePantry(recipeSelection);
     } else {
-      //What should happen here
-      console.log("Please make a selection");
+      pantryMessage.innerText = "Please select a meal to cook..."
     }
   })
-  evaluatePantry(recipeSelection);
 }
 
 function evaluatePantry(recipe) {
@@ -261,12 +262,12 @@ function evaluatePantry(recipe) {
     ingredientsNeeded.map(ingredient => {
       return ingredient.name = ingredientRepo.returnIngredientName(ingredient.id);
     });
-    displayMissingIngredients(ingredientsNeeded);
+    displayMissingIngredients(recipe.name, ingredientsNeeded);
   }
 }
 
-function displayMissingIngredients(ingredients) {
-  pantryMessage.innerText = "You don't have enough ingredients to cook this meal...Here's a list of what you'll need:"
+function displayMissingIngredients(recipe, ingredients) {
+  pantryMessage.innerText = `You don't have enough ingredients to cook ${recipe}...Here's a list of what you'll need:`
   pantryMissingIngredientList.innerHTML = '';
   ingredients.forEach(ingredient => {
     pantryMissingIngredientList.innerHTML += ` <li class="pantry-missing-item">

@@ -237,6 +237,10 @@ main {
 
 /* ------------------favorties--------------------- */
 
+.favorite-recipe-img {
+  border-radius: 0px; 
+}
+
 .remove-icon {
    height: 40px;
    align-self: flex-end;
