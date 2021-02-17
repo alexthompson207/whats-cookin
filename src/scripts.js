@@ -10,17 +10,17 @@ const ingredientRepo = new IngredientRepo(ingredientInstances);
 const recipesRepo = new RecipeRepo(recipeData);
 let currentRecipe;
 let currentUser;
-const recipeListCard = document.querySelector('.recipe-list');
-const searchBtn = document.querySelector('#searchRecipes');
-const searchInput = document.querySelector('.search-bar');
-const filterTagSection = document.querySelector('.recipe-tags');
-const allRecipesView = document.querySelector('.all-recipes');
-const singleRecipeView = document.querySelector('.single-recipe');
+const recipeListCard = document.getElementById('recipeList');
+const searchBtn = document.getElementById('searchRecipes');
+const searchInput = document.getElementById('searchBar');
+const filterTagSection = document.getElementById('recipeTags');
+const allRecipesView = document.getElementById('allRecipes');
+const singleRecipeView = document.getElementById('singleRecipeView');
 const singleRecipeImage = document.getElementById('singleRecipeImage');
 const singleRecipeList = document.getElementById('singleRecipeList');
-const pageTitleText = document.querySelector('.navigation-title');
-const singleRecipeBtns = document.querySelector('.single-recipe-buttons');
-const topBarNavBtns = document.querySelector('.navigation-buttons');
+const pageTitleText = document.getElementById('navTitle');
+const singleRecipeBtns = document.getElementById('singleRecipeBtns');
+const topBarNavBtns = document.getElementById('navBtns');
 const pantryView = document.getElementById('pantryView');
 const pantryList = document.getElementById('pantryList');
 const pantryCookList = document.getElementById('pantryCookList');
@@ -163,9 +163,9 @@ function displayCostOfRecipe(recipe) {
 // turn two arrays of strings into an array of objects with two keys holding the elements of each array
 // build one object that holds a key of "chicken"; " 1 tbs"
 function findIngredientInfo(recipe) {
-  const amounts = recipe.returnIngredientAmounts()
-  const ingredients = recipe.returnIngredientNames(ingredientInstances)
-  const recipeInfo = {}
+  const amounts = recipe.returnIngredientAmounts();
+  const ingredients = recipe.returnIngredientNames(ingredientInstances);
+  const recipeInfo = {};
   ingredients.forEach((ingredient, i) => {
     recipeInfo[ingredient] = amounts[i];
   })
