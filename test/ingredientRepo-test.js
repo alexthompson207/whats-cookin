@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const Ingredient = require('../src/Ingredient');
-const IngredientRepo = require('../src/IngredientRepo');
+const IngredientRepo = require('../src/ingredientRepo');
 
 describe('Ingredient Repo', () => {
   let ingredientList, defaultIngredientList, ingredientData, ingredientRepo;
@@ -44,39 +44,43 @@ describe('Ingredient Repo', () => {
     ingredientRepo = new IngredientRepo(ingredientList);
   });
 
-  it('should be a function', () => {
-    expect(IngredientRepo).to.be.a('function');
+  describe('Properties', () => {
+    it('should be a function', () => {
+      expect(IngredientRepo).to.be.a('function');
+    });
+
+    it('should create an instance of IngredientRepo', () => {
+      expect(ingredientRepo).to.be.an.instanceof(IngredientRepo);
+    });
+
+    it('should have no Ingredients by default', () => {
+      expect(defaultIngredientList.ingredients).to.deep.equal([]);
+    });
+
+    it('should hold a list of Ingredients', () => {
+      expect(ingredientRepo.ingredients[0]).to.be.an.instanceof(Ingredient);
+    });
   });
 
-  it('should create an instance of IngredientRepo', () => {
-    expect(ingredientRepo).to.be.an.instanceof(IngredientRepo);
-  });
+  describe('Methods', () => {
+    it('should return an ingredient id', () => {
+      const ingredientId = ingredientRepo.returnIngredientId('butter');
+      expect(ingredientId).to.equal(1001);
+    });
 
-  it('should have no Ingredients by default', () => {
-    expect(defaultIngredientList.ingredients).to.deep.equal([]);
-  });
+    it('should return false if ingredient id is not found', () => {
+      const ingredientId = ingredientRepo.returnIngredientId('water');
+      expect(ingredientId).to.equal(false);
+    });
 
-  it('should hold a list of Ingredients', () => {
-    expect(ingredientRepo.ingredients[0]).to.be.an.instanceof(Ingredient);
-  });
+    it('should return an ingredient name', () => {
+      const ingredientName = ingredientRepo.returnIngredientName(1001);
+      expect(ingredientName).to.equal('butter');
+    });
 
-  it('should return an ingredient id', () => {
-    const ingredientId = ingredientRepo.returnIngredientId('butter');
-    expect(ingredientId).to.equal(1001);
-  });
-
-  it('should return false if ingredient id is not found', () => {
-    const ingredientId = ingredientRepo.returnIngredientId('water');
-    expect(ingredientId).to.equal(false);
-  });
-
-  it('should return an ingredient name', () => {
-    const ingredientName = ingredientRepo.returnIngredientName(1001);
-    expect(ingredientName).to.equal('butter');
-  });
-
-  it('should return false if ingredient name is not found', () => {
-    const ingredientName = ingredientRepo.returnIngredientName(111);
-    expect(ingredientName).to.equal(false);
+    it('should return false if ingredient name is not found', () => {
+      const ingredientName = ingredientRepo.returnIngredientName(111);
+      expect(ingredientName).to.equal(false);
+    });
   });
 });

@@ -1,5 +1,3 @@
-// const IngredientRepo = require('./IngredientRepo')
-
 class User {
   constructor(name, id, pantry) {
     this.name = name;
