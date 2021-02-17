@@ -61,13 +61,16 @@ In this project we created a recipe tracking/meal planning application. We were 
 - Deeper understanding of array prototype methods, and combining that with DOM manipulation.
 - Practice using array iterator methods on double-datasets to manipulate data.
 - A better understanding of OOP and how to plan/structure classes.
-- More practice with HTML and CSS, and creating a responive layout for modible, tablet, and desktop views.
+- More practice with HTML and CSS, and creating a responive layout for mobile, tablet, and desktop views.
 - Using proper Event Delegation while providing a clean and easy to use user interface. 
 
 
 
-
 ## Challenges
+
+1. Planning:
+2. Working between multiple datasets where the only commonality to match them was an `id`. Then creating functions and methods that could be reused later in the projects progression. 
+
 
 
 
@@ -76,6 +79,7 @@ In this project we created a recipe tracking/meal planning application. We were 
 
 
 ## Functionality
+giphs:
 
 
 
