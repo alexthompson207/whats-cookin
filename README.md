@@ -91,6 +91,10 @@ In this project I created an application/game from scratch that enables two user
 [<img src="https://img.shields.io/badge/Gmail-ahthomps1@gmail.com-informational?style=for-the-badge&labelColor=black&logoColor=d14836&logo=microsoft&color=d14836"/>][gmail]
 [<img src="https://img.shields.io/badge/Github-AlexThompson207-informational?style=for-the-badge&labelColor=black&logo=github&color=7d88e6"/>][github]
 
+[<img src="https://img.shields.io/badge/LinkedIn-elizabeth--hahn-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0077b5"/>][linkedin2]
+[<img src="https://img.shields.io/badge/Gmail-ahthomps1@gmail.com-informational?style=for-the-badge&labelColor=black&logoColor=d14836&logo=microsoft&color=d14836"/>][gmail2]
+[<img src="https://img.shields.io/badge/Github-ElizabethHahn-informational?style=for-the-badge&labelColor=black&logo=github&color=7d88e6"/>][github2]
+
 
 
 <!-- Personal Definitions  -->
@@ -98,3 +102,6 @@ In this project I created an application/game from scratch that enables two user
 [linkedin]: https://www.linkedin.com/in/alex-thompson-309070a2/
 [Gmail]: mailto:ahthomps1@gmail.com
 [github]: https://github.com/alexthompson207
+[linkedin2]: https://www.linkedin.com/in/elizabeth-s-hahn/
+[Gmail2]: mailto:ahthomps1@gmail.com
+[github2]: https://github.com/elizhahn
