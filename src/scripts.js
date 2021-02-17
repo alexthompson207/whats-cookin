@@ -17,7 +17,6 @@ const recipeInstances = recipeData.map(recipe => {
   );
 });
 
-
 const ingredientRepo = new IngredientRepo(ingredientInstances);
 const recipesRepo = new RecipeRepo(recipeInstances);
 let currentRecipe;
@@ -60,7 +59,6 @@ function displayAllRecipeCards(recipesRepo) {
   })
 }
 
-//function that will display recipe cards with an x icon on it
 function displayFavoriteRecipeCards(favoriteRecipes) {
   recipeListCard.innerHTML = '';
   favoriteRecipes.recipes.forEach(recipe => {
@@ -152,11 +150,22 @@ function handleRecipeClick(event) {
   }
 }
 
+function displayTitle(title) {
+  console.log(title);
+  if (title === "My Favorites" || title === "Whats Cookin" || title === "My Pantry") {
+    pageTitleText.innerText = title;
+    pageTitleText.classList.remove("single-recipe-title");
+  } else {
+    pageTitleText.innerText = title;
+    pageTitleText.classList.add("single-recipe-title");
+  }
+}
+
 function displaySingleRecipe(recipe) {
   hideAllRecipes();
   singleRecipeImage.src = recipe.image;
   singleRecipeImage.alt = recipe.name;
-  pageTitleText.innerText = recipe.name;
+  displayTitle(recipe.name);
   displayRecipeIngredients(recipe);
 }
 
@@ -171,9 +180,6 @@ function displayCostOfRecipe(recipe) {
   costHTML.children[1].innerText = `Recipe Cost: $${totalCost}`;
 }
 
-//Builds an object of recipe names and their ingredient amounts
-// turn two arrays of strings into an array of objects with two keys holding the elements of each array
-// build one object that holds a key of "chicken"; " 1 tbs"
 function findIngredientInfo(recipe) {
   const amounts = recipe.returnIngredientAmounts();
   const ingredients = recipe.returnIngredientNames(ingredientInstances);
@@ -184,8 +190,6 @@ function findIngredientInfo(recipe) {
   return recipeInfo
 }
 
-// This is an object that holds key value pairs of {ingredientName: amount}
-// Use destructuring to use [key, value] to then dynamically add values to the HTML
 function displayRecipeIngredients(recipe) {
   singleRecipeList.innerHTML = '';
   const ingredientInfo = findIngredientInfo(recipe);
@@ -284,15 +288,14 @@ function removeFavoriteRecipe(id) {
 function unhideHomeView() {
   allRecipesView.classList.remove('hidden');
   singleRecipeView.classList.add('hidden');
-  pantryView.classList.add('hidden');
   displayAllRecipeCards(recipesRepo);
+  displayTitle("Whats Cookin");
   searchInput.placeholder = 'Search Recipes Here';
 }
 
 function handleNavButtons(event) {
   if (event.target.innerText === 'Return to Recipes') {
     unhideHomeView();
-    pageTitleText.innerText = 'Whats Cookin';
   } else if (event.target.innerText === 'My Favorites') {
     displayFavoriteRecipesView();
   } else if (event.target.innerText === 'My Pantry') {
@@ -305,7 +308,7 @@ function displayPantryView() {
   singleRecipeView.classList.add('hidden');
   pantryView.classList.remove('hidden');
   displayUserPantry();
-  pageTitleText.innerText = 'My Pantry';
+  displayTitle("My Pantry");
 }
 
 function displayFavoriteRecipesView() {
@@ -313,7 +316,7 @@ function displayFavoriteRecipesView() {
   pantryView.classList.add('hidden');
   singleRecipeView.classList.add('hidden');
   displayFavoriteRecipeCards({ recipes: currentUser.favoriteRecipes });
-  pageTitleText.innerText = 'Favorite Recipes';
+  displayTitle("My Favorites");
   searchInput.placeholder = 'Search Favorite Recipes';
 }
 
