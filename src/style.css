@@ -402,7 +402,6 @@ main {
     width: 90%; 
   }
   
-
   .pantry-list {
     margin: 10px; 
   }
@@ -445,16 +444,18 @@ main {
   }
 
   /* all recipes */
-  .recipes {
-    flex-direction: column; 
-  }
-
-  .recipes {
-    width: 100%;
+   .recipes {
+    width: 95%;
+    flex-direction: column;
   }
 
   .recipe-tags {
-    width: 75%;
+    width: 91%;
+    margin: 15px; 
+  }
+
+  .recipe-list {
+    margin: 15px; 
   }
 
   .recipe-tags-title {
