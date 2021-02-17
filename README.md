@@ -29,7 +29,7 @@
 
 ## About The Project
 
-In this project I created an application/game from scratch that enables two users (players) to use the same keyboard to play the card game of Slapjack. The users can play as many full games as they would like, and their win totals persist on page reload using `local storage`. The rules to Slapjack gameplay and user controls are explained in detail in the `Project Rubic` and also on the locally hosted site (see below).
+In this project we created a recipe tracking/meal planning application that 
 
 - [Project Brief and Rubric](https://frontend.turing.io/projects/whats-cookin.html)
 
