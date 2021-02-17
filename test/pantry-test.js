@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const Pantry = require('../src/Pantry');
-describe.only('Pantry', () => {
+describe('Pantry', () => {
   let pantry1, pantry2, pantry3, contents1, contents2, contents3, recipe1, recipe2, recipe3;
   beforeEach(() => {
     contents1 = [{

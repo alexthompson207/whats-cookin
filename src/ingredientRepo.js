@@ -18,6 +18,9 @@ class IngredientRepo {
   //make a test for this method
   returnIngredientName(ingredientId) {
     const ingredient = this.ingredients.find(ingredient => ingredient.id === ingredientId);
+    if (!ingredient) {
+      return false;
+    }
     return ingredient.name;
   }
 }

@@ -62,4 +62,14 @@ describe('Ingredient Repo', () => {
     const ingredientId = ingredientList.returnIngredientId('water');
     expect(ingredientId).to.equal(false);
   });
+
+  it('should return an ingredient name', () => {
+    const ingredientName = ingredientList.returnIngredientName(1001);
+    expect(ingredientName).to.equal('butter');
+  });
+
+  it('should return false if ingredient name is not found', () => {
+    const ingredientName = ingredientList.returnIngredientName(111);
+    expect(ingredientName).to.equal(false);
+  });
 });
