@@ -262,12 +262,12 @@ function evaluatePantry(recipe) {
     ingredientsNeeded.map(ingredient => {
       return ingredient.name = ingredientRepo.returnIngredientName(ingredient.id);
     });
-    displayMissingIngredients(ingredientsNeeded);
+    displayMissingIngredients(recipe.name, ingredientsNeeded);
   }
 }
 
-function displayMissingIngredients(ingredients) {
-  pantryMessage.innerText = "You don't have enough ingredients to cook this meal...Here's a list of what you'll need:"
+function displayMissingIngredients(recipe, ingredients) {
+  pantryMessage.innerText = `You don't have enough ingredients to cook ${recipe}...Here's a list of what you'll need:`
   pantryMissingIngredientList.innerHTML = '';
   ingredients.forEach(ingredient => {
     pantryMissingIngredientList.innerHTML += ` <li class="pantry-missing-item">
