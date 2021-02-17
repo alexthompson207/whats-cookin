@@ -284,8 +284,9 @@ main {
 /* ------------------favorties--------------------- */
 
 .favorite-recipe-img {
-  flex: 1;
+  border-radius: 0px
 }
+
 .remove-icon {
    height: 40px;
    align-self: flex-end;
