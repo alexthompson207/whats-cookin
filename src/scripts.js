@@ -214,11 +214,14 @@ function handleSingleRecipeButtons(event) {
 
 function displayRecipeToCook() {
   currentUser.addToCookList(currentRecipe);
+  pantryCookList.innerHTML = ''; 
+  currentUser.recipesToCook.forEach(recipe => {
   pantryCookList.innerHTML += ` <li class="pantry-cook-item">
-  <input class ="pantry-btn" type="radio" id="cook${currentRecipe.id}" name="cook-recipe" value="${currentRecipe.name}" />
-<label class="pantry-cook-item-label" for="${currentRecipe.name}">${currentRecipe.name}</label>
-</li>`
-}
+  <input class ="pantry-btn" type="radio" id="cook${recipe.id}" name="cook-recipe" value="${recipe.name}" />
+  <label class="pantry-cook-item-label" for="${recipe.name}">${recipe.name}</label>
+  </li>`
+ });
+};
 
 function handleCookThisButton() {
   let recipeSelection;
@@ -227,8 +230,7 @@ function handleCookThisButton() {
     if (recipe.checked) {
       recipeSelection = recipesRepo.filterRecipesByName(recipe.value);
     } else {
-      //What should happen here
-      console.log("Please make a selection");
+      pantryMessage.innerText = "Please select a meal to cook..."
     }
   })
   evaluatePantry(recipeSelection);
@@ -294,6 +296,8 @@ function displayPantryView() {
   pantryView.classList.remove('hidden');
   displayUserPantry();
   pageTitleText.innerText = 'My Pantry';
+  pantryMessage.innerText = "Let's check your pantry to see if you have enough ingredients to cook a meal!"
+  pantryMissingIngredientList.innerHTML = ""; 
 }
 
 function displayFavoriteRecipesView() {
