@@ -3,17 +3,7 @@
 
 class RecipeRepo {
   constructor(recipeData = []) {
-    this.recipes = recipeData.map(
-      recipe =>
-        new Recipe(
-          recipe.id,
-          recipe.image,
-          recipe.ingredients,
-          recipe.instructions,
-          recipe.name,
-          recipe.tags
-        )
-    );
+    this.recipes = recipeData;
   }
 
   filterRecipesByTag(tag) {

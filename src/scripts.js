@@ -6,8 +6,20 @@ const ingredientInstances = ingredientsData.map(ingredient => {
   );
 });
 
+const recipeInstances = recipeData.map(recipe => {
+  return new Recipe(
+    recipe.id,
+    recipe.image,
+    recipe.ingredients,
+    recipe.instructions,
+    recipe.name,
+    recipe.tags
+  );
+});
+
+
 const ingredientRepo = new IngredientRepo(ingredientInstances);
-const recipesRepo = new RecipeRepo(recipeData);
+const recipesRepo = new RecipeRepo(recipeInstances);
 let currentRecipe;
 let currentUser;
 const recipeListCard = document.getElementById('recipeList');
