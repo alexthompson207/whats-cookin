@@ -83,8 +83,8 @@ function getRandomIndex(dataSet) {
   return dataSet[Math.floor(Math.random() * dataSet.length)]
 }
 
-function searchByIngrients() {
-  const searchResultRecipes = recipesRepo.filterRecipesByIngredients(ingredientsData, searchInput.value);
+function searchByIngredients() {
+  const searchResultRecipes = recipesRepo.filterRecipesByIngredients(ingredientRepo, searchInput.value);
   displayAllRecipeCards({ recipes: searchResultRecipes });
 }
 
@@ -99,7 +99,7 @@ function searchFavoriteRecipesByName() {
 }
 
 function searchFavoriteRecipesByIngredient() {
-  const searchResultRecipes = currentUser.filterFavoritesByIngredients(ingredientsData, searchInput.value);
+  const searchResultRecipes = currentUser.filterFavoritesByIngredients(ingredientRepo, searchInput.value);
   console.log(searchResultRecipes);
   displayAllRecipeCards({ recipes: searchResultRecipes });
 }
@@ -110,7 +110,7 @@ function handleSearchDropDown(event) {
   if (searchBy === 'recipe' && pageTitleText.innerText === 'Whats Cookin') {
     searchByRecipeName();
   } else if (searchBy === 'ingredient' && pageTitleText.innerText === 'Whats Cookin') {
-    searchByIngrients();
+    searchByIngredients();
   } else if (searchBy === 'recipe' && pageTitleText.innerText === 'Favorite Recipes') {
     searchFavoriteRecipesByName();
   } else if (searchBy === 'ingredient' && pageTitleText.innerText === 'Favorite Recipes') {
@@ -139,9 +139,9 @@ function filterRecipesByTags(event) {
 }
 
 function handleRecipeClick(event) {
-  const recipeId = Number(event.target.closest('.recipe-img-container').children[0].id);
+  const recipeId = Number(event.target.id);
+  currentRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId); 
   if (event.target.matches('img.recipe-img')) {
-    currentRecipe = recipesRepo.recipes.find(recipe => recipe.id === recipeId);
     displaySingleRecipe(currentRecipe);
     displayCostOfRecipe(currentRecipe);
   } else if (event.target.matches('svg.remove-icon')) {
@@ -161,6 +161,7 @@ function displayTitle(title) {
 }
 
 function displaySingleRecipe(recipe) {
+  console.log(recipe); 
   hideAllRecipes();
   singleRecipeImage.src = recipe.image;
   singleRecipeImage.alt = recipe.name;
