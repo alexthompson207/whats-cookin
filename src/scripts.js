@@ -151,7 +151,6 @@ function handleRecipeClick(event) {
 }
 
 function displayTitle(title) {
-  console.log(title);
   if (title === "My Favorites" || title === "Whats Cookin" || title === "My Pantry") {
     pageTitleText.innerText = title;
     pageTitleText.classList.remove("single-recipe-title");
@@ -242,12 +241,11 @@ function handleCookThisButton() {
   cookList.forEach(recipe => {
     if (recipe.checked) {
       recipeSelection = recipesRepo.filterRecipesByName(recipe.value);
+      evaluatePantry(recipeSelection);
     } else {
-      //What should happen here
-      console.log("Please make a selection");
+      pantryMessage.innerText = "Please select a meal to cook..."
     }
   })
-  evaluatePantry(recipeSelection);
 }
 
 function evaluatePantry(recipe) {
