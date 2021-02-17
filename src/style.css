@@ -401,6 +401,25 @@ main {
   .recipe-list {
     width: 90%; 
   }
+
+  /* single recipe view */
+  .navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation-title {
+    text-align: center; 
+  }
+
+  .single-recipe-container {
+    width: 80%; 
+  }
+
+  .single-recipe-buttons {
+    margin-left: 25px; 
+  }
+  
   
   .pantry-list {
     margin: 10px; 
