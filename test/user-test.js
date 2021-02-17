@@ -2,9 +2,11 @@ const chai = require('chai');
 const expect = chai.expect;
 const User = require('../src/User');
 const Recipe = require('../src/Recipe');
+const IngredientRepo = require('../src/IngredientRepo');
+const Ingredient = require('../src/Ingredient');
 
 describe('User', () => {
-  let userData, ingredientData, recipe1, recipe2, recipe3, buffaloChicken, beefNoodle, spaghetti, saige;
+  let userData, ingredientData, ingredientRepo, ingredientList, recipe1, recipe2, recipe3, buffaloChicken, beefNoodle, spaghetti, saige;
 
   beforeEach(() => {
     userData = [
@@ -62,6 +64,14 @@ describe('User', () => {
         estimatedCostInCents: 200,
       },
     ];
+    ingredientList = ingredientData.map(ingredient => {
+      return new Ingredient(
+        ingredient.id,
+        ingredient.name,
+        ingredient.estimatedCostInCents
+      );
+    });
+    ingredientRepo = new IngredientRepo(ingredientList);
     recipe1 = {
       id: 991136,
       image: 'https://spoonacular.com/recipeImages/991136-556x370.jpg',
@@ -281,7 +291,7 @@ describe('User', () => {
     saige.addFavoriteRecipe(spaghetti);
     saige.addFavoriteRecipe(beefNoodle);
 
-    const results = saige.filterFavoritesByIngredients(ingredientData, 'canned tomato sauce')
+    const results = saige.filterFavoritesByIngredients(ingredientRepo, 'canned tomato sauce')
 
     expect(results).to.have.lengthOf(1);
     expect(results[0].name).to.equal('Spaghetti');
@@ -293,7 +303,7 @@ describe('User', () => {
     saige.addFavoriteRecipe(spaghetti);
     saige.addFavoriteRecipe(beefNoodle);
 
-    const results = saige.filterFavoritesByIngredients(ingredientData, 'butter')
+    const results = saige.filterFavoritesByIngredients(ingredientRepo, 'butter')
 
     expect(results).deep.equal([buffaloChicken, spaghetti]);
   });
@@ -304,7 +314,7 @@ describe('User', () => {
     saige.addFavoriteRecipe(spaghetti);
     saige.addFavoriteRecipe(beefNoodle);
 
-    const results = saige.filterFavoritesByIngredients(ingredientData, 'paprika')
+    const results = saige.filterFavoritesByIngredients(ingredientRepo, 'paprika')
 
     expect(results).deep.equal([]);
   });

@@ -37,8 +37,7 @@ class User {
   }
 
   filterFavoritesByIngredients(ingredientData, ingredientName) {
-    const ingredients = new IngredientRepo(ingredientData);
-    const ingredientId = ingredients.returnIngredientId(ingredientName);
+    const ingredientId = ingredientData.returnIngredientId(ingredientName);
     const filteredRecipes = [];
     this.favoriteRecipes.filter(recipe => {
       recipe.ingredients.forEach(ingredient => {
