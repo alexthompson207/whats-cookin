@@ -5,7 +5,8 @@ const ingredientInstances = ingredientsData.map(ingredient => {
     ingredient.estimatedCostInCents
   );
 });
-
+//make recipeInstances to pass into recipeReop
+//make instances in the test file in the beforeEach
 const ingredientRepo = new IngredientRepo(ingredientInstances);
 const recipesRepo = new RecipeRepo(recipeData);
 let currentRecipe;
@@ -35,6 +36,9 @@ recipeListCard.addEventListener('click', handleRecipeClick);
 singleRecipeBtns.addEventListener('click', handleSingleRecipeButtons);
 topBarNavBtns.addEventListener('click', handleNavButtons);
 cookThisBtn.addEventListener('click', handleCookThisButton);
+
+
+
 
 function displayAllRecipeCards(recipesRepo) {
   recipeListCard.innerHTML = '';
@@ -140,11 +144,22 @@ function handleRecipeClick(event) {
   }
 }
 
+function displayTitle(title) {
+  console.log(title); 
+  if(title === "My Favorites" || title === "Whats Cookin" || title === "My Pantry") { 
+    pageTitleText.innerText = title; 
+    pageTitleText.classList.remove("single-recipe-title"); 
+  } else {
+    pageTitleText.innerText = title;
+    pageTitleText.classList.add("single-recipe-title");
+  }
+}
+
 function displaySingleRecipe(recipe) {
   hideAllRecipes();
   singleRecipeImage.src = recipe.image;
   singleRecipeImage.alt = recipe.name;
-  pageTitleText.innerText = recipe.name;
+  displayTitle(recipe.name);
   displayRecipeIngredients(recipe);
 }
 
@@ -272,17 +287,16 @@ function removeFavoriteRecipe(id) {
 function unhideHomeView() {
   allRecipesView.classList.remove('hidden');
   singleRecipeView.classList.add('hidden');
-  pantryView.classList.add('hidden');
   displayAllRecipeCards(recipesRepo);
+  displayTitle("Whats Cookin");
   searchInput.placeholder = 'Search Recipes Here';
 }
 
 function handleNavButtons(event) {
   if (event.target.innerText === 'Return to Recipes') {
     unhideHomeView();
-    pageTitleText.innerText = 'Whats Cookin';
   } else if (event.target.innerText === 'My Favorites') {
-    displayFavoriteRecipesView();
+    displayFavoriteRecipesView(); 
   } else if (event.target.innerText === 'My Pantry') {
     displayPantryView();
   }
@@ -293,7 +307,7 @@ function displayPantryView() {
   singleRecipeView.classList.add('hidden');
   pantryView.classList.remove('hidden');
   displayUserPantry();
-  pageTitleText.innerText = 'My Pantry';
+  displayTitle("My Pantry"); 
 }
 
 function displayFavoriteRecipesView() {
@@ -301,7 +315,7 @@ function displayFavoriteRecipesView() {
   pantryView.classList.add('hidden');
   singleRecipeView.classList.add('hidden');
   displayFavoriteRecipeCards({ recipes: currentUser.favoriteRecipes });
-  pageTitleText.innerText = 'Favorite Recipes';
+  displayTitle("My Favorites"); 
   searchInput.placeholder = 'Search Favorite Recipes';
 }
 
