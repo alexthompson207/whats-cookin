@@ -2,12 +2,14 @@ const chai = require('chai');
 const expect = chai.expect;
 const RecipeRepo = require('../src/RecipeRepo');
 const Recipe = require('../src/Recipe');
+const IngredientRepo = require('../src/IngredientRepo');
+const Ingredient = require('../src/Ingredient');
 
 describe('RecipeRepo', () => {
-  let recipeList, buffaloChicken, beefNoodle, spaghetti, ingredientData;
+  let defaultRecipeList, recipeList, recipeData, recipeInstances, buffaloChicken, beefNoodle, spaghetti, ingredientData, ingredientList, ingredientRepo;
 
   beforeEach(() => {
-    recipeList = new RecipeRepo();
+    defaultRecipeList = new RecipeRepo();
     buffaloChicken = {
       id: 991136,
       image: 'https://spoonacular.com/recipeImages/991136-556x370.jpg',
@@ -123,6 +125,27 @@ describe('RecipeRepo', () => {
         estimatedCostInCents: 200,
       },
     ];
+    ingredientList = ingredientData.map(ingredient => {
+      return new Ingredient(
+        ingredient.id,
+        ingredient.name,
+        ingredient.estimatedCostInCents
+      );
+    });
+    ingredientRepo = new IngredientRepo(ingredientList);
+    recipeData = [buffaloChicken, beefNoodle, spaghetti];
+    recipeInstances = recipeData.map(recipe => {
+      return new Recipe(
+        recipe.id,
+        recipe.image,
+        recipe.ingredients,
+        recipe.instructions,
+        recipe.name,
+        recipe.tags
+      );
+    });
+
+    recipeList = new RecipeRepo(recipeInstances);
   });
 
   describe('Properties', () => {
@@ -131,25 +154,24 @@ describe('RecipeRepo', () => {
     });
 
     it('should be an instance of RecipeRepo', () => {
-      expect(recipeList).to.be.an.instanceof(RecipeRepo);
+      expect(defaultRecipeList).to.be.an.instanceof(RecipeRepo);
     });
 
     it('should have no recipe(s) by default', () => {
-      expect(recipeList.recipes).to.deep.equal([]);
+      expect(defaultRecipeList.recipes).to.deep.equal([]);
     });
 
     it('should be able to hold a recipe if passed in', () => {
-      recipeList = new RecipeRepo([buffaloChicken]);
-      expect(recipeList.recipes).to.deep.equal([buffaloChicken]);
+      defaultRecipeList = new RecipeRepo([buffaloChicken]);
+      expect(defaultRecipeList.recipes).to.deep.equal([buffaloChicken]);
     });
 
     it('should be able to hold mutiple recipes', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle]);
-      expect(recipeList.recipes).to.deep.equal([buffaloChicken, beefNoodle]);
+      defaultRecipeList = new RecipeRepo([buffaloChicken, beefNoodle]);
+      expect(defaultRecipeList.recipes).to.deep.equal([buffaloChicken, beefNoodle]);
     });
 
     it('should create a Recipe instance from a recipe passed in', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle]);
       expect(recipeList.recipes[0]).to.be.an.instanceof(Recipe);
       expect(recipeList.recipes[1]).to.be.an.instanceof(Recipe);
     });
@@ -157,71 +179,61 @@ describe('RecipeRepo', () => {
 
   describe('Methods', () => {
     it('should be able to filter recipes by a tag', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle]);
       const result = recipeList.filterRecipesByTag('noodles');
 
       expect(result).deep.equal([beefNoodle]);
     });
 
     it('should be able to return multiple recipes if they share the same tag', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle, spaghetti]);
       const result = recipeList.filterRecipesByTag('dinner');
 
       expect(result).deep.equal([buffaloChicken, spaghetti]);
     });
 
     it("should return an empty array if tag isn't found", () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle]);
       const result = recipeList.filterRecipesByTag('snack');
 
       expect(result).deep.equal([]);
     });
 
     it('should be able to filter recipes by a name', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle]);
       const result = recipeList.filterRecipesByName('Beef Noodle');
 
       expect(result).deep.equal(beefNoodle);
     });
 
     it('should be able to filter recipes by a name if not capitalized correctly', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle]);
       const result = recipeList.filterRecipesByName('beef noodle');
 
       expect(result).deep.equal(beefNoodle);
     });
 
     it("should return undefined if the recipe doesn't exist", () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle]);
       const result = recipeList.filterRecipesByName('Pork Tacos');
 
       expect(result).deep.equal(undefined);
     });
 
     it('should be able to filter recipes by an ingredient', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle, spaghetti]);
-      const result = recipeList.filterRecipesByIngredients(ingredientData, 'hawaiian sweet rolls');
+      const result = recipeList.filterRecipesByIngredients(ingredientRepo, 'hawaiian sweet rolls');
 
       expect(result).deep.equal([buffaloChicken]);
     });
 
     it('should be able return all recipes that include an ingredient', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle, spaghetti]);
-      const result = recipeList.filterRecipesByIngredients(ingredientData, 'butter');
+      const result = recipeList.filterRecipesByIngredients(ingredientRepo, 'butter');
 
       expect(result).deep.equal([buffaloChicken, spaghetti]);
     });
 
     it('should not return duplicate recipes', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle, spaghetti]);
-      const result = recipeList.filterRecipesByIngredients(ingredientData, 'butter');
+      const result = recipeList.filterRecipesByIngredients(ingredientRepo, 'butter');
 
       expect(result).deep.equal([buffaloChicken, spaghetti]);
     });
 
     it('should return an empty array if no ingredients are in a recipe', () => {
-      recipeList = new RecipeRepo([buffaloChicken, beefNoodle, spaghetti]);
-      const result = recipeList.filterRecipesByIngredients(ingredientData, 'paprika');
+      const result = recipeList.filterRecipesByIngredients(ingredientRepo, 'paprika');
 
       expect(result).deep.equal([]);
     });

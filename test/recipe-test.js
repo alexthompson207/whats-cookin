@@ -3,15 +3,7 @@ const expect = chai.expect;
 const Recipe = require('../src/recipe.js');
 
 describe('Recipe', () => {
-  let ingredientData;
-  let ingredient1;
-  let ingredient2;
-  let ingredient3;
-  let ingredient4;
-  let instruction1;
-  let instruction2;
-  let instruction3;
-  let recipe1;
+  let ingredient1, ingredient2, ingredient3, ingredient4, instruction1, instruction2, instruction3, recipe1;
 
   beforeEach(() => {
     ingredientData = [
@@ -96,88 +88,92 @@ describe('Recipe', () => {
     );
   });
 
-  it('should be a function', () => {
-    expect(Recipe).to.be.a('function');
+  describe('Properties', () => {
+    it('should be a function', () => {
+      expect(Recipe).to.be.a('function');
+    });
+
+    it('should be an instance of Recipe class', () => {
+      expect(recipe1).to.be.an.instanceof(Recipe);
+    });
+
+    it('should have an id, image, ingredients, instructions, name, and tags', () => {
+      expect(recipe1.id).to.equal(1);
+      expect(recipe1.image).to.equal(
+        'https://spoonacular.com/recipeImages/595736-556x370.jpg'
+      );
+      expect(recipe1.ingredients).to.deep.equal([
+        ingredient1,
+        ingredient2,
+        ingredient3,
+        ingredient4,
+      ]);
+
+      expect(recipe1.instructions).to.deep.equal([
+        instruction1,
+        instruction2,
+        instruction3,
+      ]);
+      expect(recipe1.name).to.equal('Choclate Chip Cookies');
+      expect(recipe1.tags).to.deep.equal(['dessert', 'starter', 'snack']);
+    });
   });
 
-  it('should be an instance of Recipe class', () => {
-    expect(recipe1).to.be.an.instanceof(Recipe);
-  });
+  describe('Methods', () => {
+    it('should find a list of ingredients', () => {
+      const listOfIngredients = recipe1.findIngredients(ingredientData);
+      expect(listOfIngredients).to.deep.equal([
+        {
+          id: 20081,
+          name: 'wheat flour',
+          estimatedCostInCents: 142,
+        },
+        {
+          id: 18372,
+          name: 'bicarbonate of soda',
+          estimatedCostInCents: 582,
+        },
+        {
+          id: 1123,
+          name: 'eggs',
+          estimatedCostInCents: 472,
+        },
+        {
+          id: 1123,
+          name: 'eggs',
+          estimatedCostInCents: 472,
+        },
+      ]);
+    });
 
-  it('should have an id, image, ingredients, instructions, name, and tags', () => {
-    expect(recipe1.id).to.equal(1);
-    expect(recipe1.image).to.equal(
-      'https://spoonacular.com/recipeImages/595736-556x370.jpg'
-    );
-    expect(recipe1.ingredients).to.deep.equal([
-      ingredient1,
-      ingredient2,
-      ingredient3,
-      ingredient4,
-    ]);
+    it('should return a unique list of ingredients', () => {
+      const ingredientNames = recipe1.returnIngredientNames(ingredientData);
 
-    expect(recipe1.instructions).to.deep.equal([
-      instruction1,
-      instruction2,
-      instruction3,
-    ]);
-    expect(recipe1.name).to.equal('Choclate Chip Cookies');
-    expect(recipe1.tags).to.deep.equal(['dessert', 'starter', 'snack']);
-  });
+      expect(ingredientNames).deep.equal([
+        'wheat flour',
+        'bicarbonate of soda',
+        'eggs',
+      ]);
+    });
 
-  it('should find a list of ingredients', () => {
-    const listOfIngredients = recipe1.findIngredients(ingredientData);
-    expect(listOfIngredients).to.deep.equal([
-      {
-        id: 20081,
-        name: 'wheat flour',
-        estimatedCostInCents: 142,
-      },
-      {
-        id: 18372,
-        name: 'bicarbonate of soda',
-        estimatedCostInCents: 582,
-      },
-      {
-        id: 1123,
-        name: 'eggs',
-        estimatedCostInCents: 472,
-      },
-      {
-        id: 1123,
-        name: 'eggs',
-        estimatedCostInCents: 472,
-      },
-    ]);
-  });
+    it('should return the amount of each ingredient', () => {
+      const ingredientAmount = recipe1.returnIngredientAmounts(ingredientData);
 
-  it('should return a unique list of ingredients', () => {
-    const ingredientNames = recipe1.returnIngredientNames(ingredientData);
+      expect(ingredientAmount).to.deep.equal(['1.5 c', '0.5 tsp', '1 large', '2 large'])
+    });
 
-    expect(ingredientNames).deep.equal([
-      'wheat flour',
-      'bicarbonate of soda',
-      'eggs',
-    ]);
-  });
+    it('should return the total cost of all ingredients in recipe', () => {
+      const totalCost = recipe1.calculateRecipeCost(ingredientData);
+      expect(totalCost).to.equal('19.20');
+    });
 
-  it('should return the amount of each ingredient', () => {
-    const ingredientAmount = recipe1.returnIngredientAmounts(ingredientData);
-
-    expect(ingredientAmount).to.deep.equal(['1.5 c', '0.5 tsp', '1 large', '2 large'])
-  });
-
-  it('should return the total cost of all ingredients in recipe', () => {
-    const totalCost = recipe1.calculateRecipeCost(ingredientData);
-    expect(totalCost).to.equal(19.20);
-  });
-
-  it('should return the instructions for the recipe', () => {
-    const instructions = recipe1.returnRecipeInstructions();
-    expect(instructions).to.deep.equal([
-      instruction1,
-      instruction2,
-      instruction3,
-    ]);
+    it('should return the instructions for the recipe', () => {
+      const instructions = recipe1.returnRecipeInstructions();
+      expect(instructions).to.deep.equal([
+        instruction1,
+        instruction2,
+        instruction3,
+      ]);
+    });
   });
 });
