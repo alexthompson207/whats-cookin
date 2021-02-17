@@ -27,12 +27,13 @@ class Recipe {
 
   returnIngredientAmounts() {
     const recipeIngredients = this.ingredients;
-    const amounts = []
+    const amounts = [];
     recipeIngredients.forEach(ingredient => {
-      const amount = Object.values(ingredient.quantity);
-      amounts.push(amount.join(" "));
+      const roundedAmount = Math.round(ingredient.quantity.amount * 100) / 100;
+      const amountAndUnit = [roundedAmount, ingredient.quantity.unit];
+      amounts.push(amountAndUnit.join(" "));
     })
-    return amounts
+    return amounts;
   }
 
   calculateRecipeCost(ingredientData) {
@@ -41,7 +42,7 @@ class Recipe {
       return costPerUnit.push((recipeIngredient.quantity.amount) * (ingredientData.find(ingredient => recipeIngredient.id === ingredient.id).estimatedCostInCents));
     });
     const cost = costPerUnit.reduce((totalCost, ingredientCost) => totalCost + ingredientCost, 0);
-    return Number((cost / 100).toFixed(2));
+    return Number(cost / 100).toFixed(2);
   }
 
   returnRecipeInstructions() {
