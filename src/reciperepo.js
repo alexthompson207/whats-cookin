@@ -1,6 +1,3 @@
-// const Recipe = require('../src/Recipe');
-// const IngredientRepo = require('../src/IngredientRepo');
-
 class RecipeRepo {
   constructor(recipeData = []) {
     this.recipes = recipeData;
@@ -19,15 +16,12 @@ class RecipeRepo {
   }
 
   filterRecipesByIngredients(ingredientData, ingredientName) {
-    const ingredients = new IngredientRepo(ingredientData);
-    const ingredientId = ingredients.returnIngredientId(ingredientName);
+    const ingredientId = ingredientData.returnIngredientId(ingredientName);
     const filteredRecipes = [];
     this.recipes.filter(recipe => {
       recipe.ingredients.forEach(ingredient => {
         if (ingredient.id === ingredientId && !filteredRecipes.includes(recipe)) {
           filteredRecipes.push(recipe);
-          console.log(ingredient.id);
-          console.log(ingredientId);
         }
       });
     });
