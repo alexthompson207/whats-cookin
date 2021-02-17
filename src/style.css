@@ -75,6 +75,10 @@ main {
   font-size: 1.2em;
 }
 
+.search-recipe-button {
+  margin-top: 0px; 
+}
+
 
 /* ----------------filter and recipe list area------------ */
 
@@ -84,11 +88,15 @@ main {
   margin-bottom: 20px;
 }
 
+.recipe-tags-container {
+  list-style-type: none;
+}
+
 .recipe-tags {
   align-self: flex-start; 
-  width: 15%;
+  width: 20%;
   background-color: #e3f086;
-  padding: 40px;
+  padding: 15px;
   border-radius: 10px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   margin: 20px;
@@ -221,10 +229,6 @@ main {
 
 /* ------------------favorties--------------------- */
 
-/* .favorite-recipe-img {
-  flex: 1; 
-} */
-
 .remove-icon {
    height: 40px;
    align-self: flex-end;
@@ -355,8 +359,6 @@ main {
 @media screen and (max-width: 900px) {
 
   /* all recipes */
-
-
   .navigation {
     flex-direction: column;
     align-items: center;
@@ -365,6 +367,41 @@ main {
   .button {
     margin: 10px;
   }
+
+  .search-container {
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .search-options-container {
+    width: 40%; 
+    margin-bottom: 10px; 
+  }
+
+  .search-bar {
+    width: 100%; 
+  }
+  
+  .recipes {
+    flex-direction: column; 
+  }
+
+  .recipe-tags {
+    width: 90%; 
+  }
+
+  .recipe-tags-container {
+    display: flex; 
+  }
+
+  .recipe-tag-column {
+    flex: 1; 
+  }
+
+  .recipe-list {
+    width: 90%; 
+  }
+  
 
   .pantry-list {
     margin: 10px; 
@@ -407,29 +444,9 @@ main {
     margin: 10px;
   }
 
-/* single recipe view */
-  .single-recipe {
-    margin-top: 25px;
-  }
-
-  .single-recipe-container {
-    width: 95%;
-  }
-
-  .single-recipe-image {
-    width: 95%;
-  }
-
-  .single-recipe-list-container {
-    margin: 0px;
-  }
-
-
-/* all recipes */
-  .recipes,
-  .recipe-tags {
-    display: block;
-
+  /* all recipes */
+  .recipes {
+    flex-direction: column; 
   }
 
   .recipes {
@@ -453,6 +470,22 @@ main {
     padding: 5px;
   }
 
+/* single recipe view */
+  .single-recipe {
+    margin-top: 25px;
+  }
+
+  .single-recipe-container {
+    width: 95%;
+  }
+
+  .single-recipe-image {
+    width: 95%;
+  }
+
+  .single-recipe-list-container {
+    margin: 0px;
+  }
 
 /* searach area */
   .search-container {
