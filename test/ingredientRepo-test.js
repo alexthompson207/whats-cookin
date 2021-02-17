@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const Ingredient = require('../src/Ingredient');
-const IngredientRepo = require('../src/ingredientRepo');
+const IngredientRepo = require('../src/IngredientRepo');
 
 describe('Ingredient Repo', () => {
   let ingredientList, defaultIngredientList, ingredientData, ingredientRepo;
