@@ -3,15 +3,7 @@ const expect = chai.expect;
 const Recipe = require('../src/recipe.js');
 
 describe('Recipe', () => {
-  let ingredientData;
-  let ingredient1;
-  let ingredient2;
-  let ingredient3;
-  let ingredient4;
-  let instruction1;
-  let instruction2;
-  let instruction3;
-  let recipe1;
+  let ingredient1, ingredient2, ingredient3, ingredient4, instruction1, instruction2, instruction3, recipe1;
 
   beforeEach(() => {
     ingredientData = [
