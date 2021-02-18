@@ -162,35 +162,21 @@ function handleSearchDropDown(event) {
 function filterRecipesByTags(event) {
   const filteredRecipes = recipesRepo.filterRecipesByTag(event.target.value);
   const filteredFavoriteRecipes = currentUser.filterFavoritesByTag(event.target.value);
-  if (event.target.value === 'all recipes' && pageTitleText.innerText === 'Whats Cookin') {
+  switch(true) { 
+  case event.target.value === 'all recipes' && pageTitleText.innerText === 'Whats Cookin':
     displayAllRecipeCards(recipesRepo);
-  } else if (pageTitleText.innerText === 'Whats Cookin') {
+    break; 
+  case pageTitleText.innerText === 'Whats Cookin':
     displayAllRecipeCards({ recipes: filteredRecipes });
-  } else if (event.target.value === 'all recipes' && pageTitleText.innerText === 'My Favorites') {
+    break; 
+  case event.target.value === 'all recipes' && pageTitleText.innerText === 'My Favorites':
     displayAllRecipeCards({ recipes: currentUser.favoriteRecipes });
-  } else if (pageTitleText.innerText === 'My Favorites') {
+    break; 
+  case pageTitleText.innerText === 'My Favorites':
     displayAllRecipeCards({ recipes: filteredFavoriteRecipes });
+    break; 
   }
 }
-
-// function filterRecipesByTags(event) {
-//   const filteredRecipes = recipesRepo.filterRecipesByTag(event.target.value);
-//   const filteredFavoriteRecipes = currentUser.filterFavoritesByTag(event.target.value);
-//   switch(true) { 
-//   case event.target.value === 'all recipes' && pageTitleText.innerText === 'Whats Cookin':
-//     displayAllRecipeCards(recipesRepo);
-//     break; 
-//   case pageTitleText.innerText === 'Whats Cookin':
-//     displayAllRecipeCards({ recipes: filteredRecipes });
-//     break; 
-//   case event.target.value === 'all recipes' && pageTitleText.innerText === 'Favorite Recipes':
-//     displayAllRecipeCards({ recipes: currentUser.favoriteRecipes });
-//     break; 
-//   case pageTitleText.innerText === 'Favorite Recipes':
-//     displayAllRecipeCards({ recipes: filteredFavoriteRecipes });
-//     break; 
-//   }
-// }
 
 function searchByIngredients() {
   const searchResultRecipes = recipesRepo.filterRecipesByIngredients(ingredientRepo, searchInput.value);
