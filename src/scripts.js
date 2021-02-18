@@ -147,16 +147,21 @@ function displayUserPantry() {
 function handleSearchDropDown(event) {
   event.preventDefault();
   let searchBy = document.getElementById('search-recipe-select').value;
-  if (searchBy === 'recipe' && pageTitleText.innerText === 'Whats Cookin') {
+  switch(true) {
+  case searchBy === 'recipe' && pageTitleText.innerText === 'Whats Cookin':
     searchByRecipeName();
-  } else if (searchBy === 'ingredient' && pageTitleText.innerText === 'Whats Cookin') {
+    break; 
+  case searchBy === 'ingredient' && pageTitleText.innerText === 'Whats Cookin':
     searchByIngredients();
-  } else if (searchBy === 'recipe' && pageTitleText.innerText === 'My Favorites') {
+    break; 
+  case searchBy === 'recipe' && pageTitleText.innerText === 'My Favorites':
     searchFavoriteRecipesByName();
-  } else if (searchBy === 'ingredient' && pageTitleText.innerText === 'My Favorites') {
+    break; 
+  case searchBy === 'ingredient' && pageTitleText.innerText === 'My Favorites':
     searchFavoriteRecipesByIngredient();
+    break; 
   }
-  searchInput.value = '';
+ searchInput.value = '';
 }
 
 function filterRecipesByTags(event) {
