@@ -232,12 +232,12 @@ function displayRecipeToCook() {
   currentUser.addToCookList(currentRecipe);
   pantryCookList.innerHTML = '';
   currentUser.recipesToCook.forEach(recipe => {
-  pantryCookList.innerHTML += ` <li class="pantry-cook-item">
-  <input class ="pantry-btn" type="radio" id="cook${recipe.id}" name="cook-recipe" value="${recipe.name}" />
-  <label class="pantry-cook-item-label" for="${recipe.name}">${recipe.name}</label>
-  </li>`
- });
-};
+    pantryCookList.innerHTML += ` <li class="pantry-cook-item">
+    <input class ="pantry-btn" type="radio" id="cook${recipe.id}" name="cook-recipe" value="${recipe.name}" />
+    <label class="pantry-cook-item-label" for="${recipe.name}">${recipe.name}</label>
+    </li>`
+  });
+}
 
 function handleCookThisButton() {
   let recipeSelection;
