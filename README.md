@@ -27,11 +27,6 @@
 - [Contact](#contact)
 
 ## About The Project
-Implement ES6 classes that communicate to each other as needed
-Use object and array prototype methods to perform data manipulation
-Create a user interface that is easy to use and displays information in a clear way on multiple screens
-Write modular, reusable code that follows SRP (Single Responsibility Principle)
-Implement a robust testing suite using TDD
 
 In this project we created a recipe tracking/meal planning application. Users have the ability search/filter a list of recipes and favorite recipes. They also have a dedicated pantry with special features for analyzing the items they have in stock. Each recipe can be inspected by the user and relevant information is provided to them such as an ingredient list, instruction set, and cost to make the recipe. 
 
