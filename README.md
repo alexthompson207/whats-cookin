@@ -1,16 +1,14 @@
-[![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)](https://www.linkedin.com/in/alex-thompson-309070a2/ ) [![GitHub](https://img.shields.io/badge/GitHub-black.svg?&style=flat-square&logo=github&logoColor=white)](https://github.com/alexthompson207) - A.T.
-
-[![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)](https://www.linkedin.com/in/elizabeth-s-hahn/) [![GitHub](https://img.shields.io/badge/GitHub-black.svg?&style=flat-square&logo=github&logoColor=white)](https://github.com/elizhahn) - E. H.
-
-
-
-
 <p align="center">
   <a href="https://github.com/alexthompson207/whats-cookin">
     <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
   </a>
 
   <h1 align="left">What's Cookin'?</h1>
+  
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)](https://www.linkedin.com/in/alex-thompson-309070a2/ ) [![GitHub](https://img.shields.io/badge/GitHub-black.svg?&style=flat-square&logo=github&logoColor=white)](https://github.com/alexthompson207) - Alex Thompson
+
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)](https://www.linkedin.com/in/elizabeth-s-hahn/) [![GitHub](https://img.shields.io/badge/GitHub-black.svg?&style=flat-square&logo=github&logoColor=white)](https://github.com/elizhahn) - Elizabeth Hahn
+
 
 
 
