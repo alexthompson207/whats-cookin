@@ -100,14 +100,19 @@ function displayAllRecipeCards(recipesRepo) {
 }
 
 function handleNavButtons(event) {
-  if (event.target.innerText === 'Return to Recipes') {
+  switch(true) {
+  case event.target.innerText === 'Return to Recipes':
     unhideHomeView();
-  } else if (event.target.innerText === 'My Favorites') {
+    break; 
+  case event.target.innerText === 'My Favorites':
     displayFavoriteRecipesView();
-  } else if (event.target.innerText === 'My Pantry') {
+    break; 
+  case event.target.innerText === 'My Pantry':
     displayPantryView();
+    break; 
   }
 }
+
 function displayFavoriteRecipesView() {
   allRecipesView.classList.remove('hidden');
   pantryView.classList.add('hidden');
