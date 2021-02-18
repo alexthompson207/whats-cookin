@@ -28,12 +28,11 @@
 
 ## About The Project
 
-In this project we created a recipe tracking/meal planning [application](https://alexthompson207.github.io/whats-cookin/). Users have the ability search/filter a list of recipes and favorite recipes. They also have a dedicated pantry with special features for analyzing the items they have in stock. Each recipe can be inspected by the user and relevant information is provided to them such as an ingredient list, instruction set, and cost to make the recipe. 
+In this project we created a recipe tracking/meal planning application. Users have the ability search/filter a list of recipes and favorite recipes. They also have a dedicated pantry with special features for analyzing the items they have in stock. Each recipe can be inspected by the user and relevant information is provided to them such as an ingredient list, instruction set, and cost to make the recipe. 
 
 The focus of this project was to implement ES6 classes and use an Object Oriented Programming structure. We implemented a robust testing suite using test driven development and utilized the `Mocha Framework` and `Chai Assertion Library`. In addition to planning the structure of our data we designed a user interface that is fully responsive and displays information in a clear way on multiple screens. 
 
 - [Project Brief and Rubric](https://frontend.turing.io/projects/whats-cookin.html)
-- [GitHub Pages Site](https://alexthompson207.github.io/whats-cookin/)
   
 
 #### Built With:
