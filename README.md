@@ -77,7 +77,7 @@ In this project we created a recipe tracking/meal planning application. We were 
 ## Wins
 
 1. Built MVP ....
-2. The testing suite is specific with sad pathing outcomes and 61 total it blocks.
+2. The testing suite is specific with happy/sad path outcomes and 61 total it blocks.
 
 
 ## Functionality
