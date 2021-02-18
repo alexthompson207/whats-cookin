@@ -245,14 +245,19 @@ function displayRecipeIngredients(recipe) {
 }
 
 function handleSingleRecipeButtons(event) {
-  if (event.target.innerText === 'View Instructions') {
-    displayRecipeInstructions(currentRecipe);
-  } else if (event.target.innerText === 'View Ingredients') {
-    displayRecipeIngredients(currentRecipe);
-  } else if (event.target.innerText === 'Add To Favorites') {
-    addRecipeToFavorites(currentRecipe);
-  } else if (event.target.innerText === 'Add To Cook') {
-    displayRecipeToCook();
+  switch(true) {
+    case event.target.innerText === 'View Instructions':
+      displayRecipeInstructions(currentRecipe);
+      break; 
+    case event.target.innerText === 'Add To Favorites':
+      addRecipeToFavorites(currentRecipe);
+      break; 
+    case event.target.innerText === 'View Ingredients': 
+      displayRecipeIngredients(currentRecipe);
+      break;
+    case event.target.innerText === 'Add To Cook':
+      displayRecipeToCook();
+      break; 
   }
 }
 
