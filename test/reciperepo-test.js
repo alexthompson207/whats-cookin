@@ -6,7 +6,9 @@ const IngredientRepo = require('../src/IngredientRepo');
 const Ingredient = require('../src/Ingredient');
 
 describe('RecipeRepo', () => {
-  let defaultRecipeList, recipeList, recipeData, recipeInstances, buffaloChicken, beefNoodle, spaghetti, ingredientData, ingredientList, ingredientRepo;
+  let defaultRecipeList, recipeList, recipeData, recipeInstances, 
+    buffaloChicken, beefNoodle, spaghetti, ingredientData, 
+    ingredientList, ingredientRepo;
 
   beforeEach(() => {
     defaultRecipeList = new RecipeRepo();
