@@ -100,7 +100,7 @@ function displayAllRecipeCards(recipesRepo) {
 }
 
 function handleNavButtons(event) {
-  switch(true) {
+  switch (true) {
   case event.target.innerText === 'Return to Recipes':
     unhideHomeView();
     break; 
@@ -152,7 +152,7 @@ function displayUserPantry() {
 function handleSearchDropDown(event) {
   event.preventDefault();
   let searchBy = document.getElementById('search-recipe-select').value;
-  switch(true) {
+  switch (true) {
   case searchBy === 'recipe' && pageTitleText.innerText === 'Whats Cookin':
     searchByRecipeName();
     break; 
@@ -166,13 +166,13 @@ function handleSearchDropDown(event) {
     searchFavoriteRecipesByIngredient();
     break; 
   }
- searchInput.value = '';
+  searchInput.value = '';
 }
 
 function filterRecipesByTags(event) {
   const filteredRecipes = recipesRepo.filterRecipesByTag(event.target.value);
   const filteredFavoriteRecipes = currentUser.filterFavoritesByTag(event.target.value);
-  switch(true) { 
+  switch (true) { 
   case event.target.value === 'all recipes' && pageTitleText.innerText === 'Whats Cookin':
     displayAllRecipeCards(recipesRepo);
     break; 
@@ -260,19 +260,19 @@ function displayRecipeIngredients(recipe) {
 }
 
 function handleSingleRecipeButtons(event) {
-  switch(true) {
-    case event.target.innerText === 'View Instructions':
-      displayRecipeInstructions(currentRecipe);
-      break; 
-    case event.target.innerText === 'Add To Favorites':
-      addRecipeToFavorites(currentRecipe);
-      break; 
-    case event.target.innerText === 'View Ingredients': 
-      displayRecipeIngredients(currentRecipe);
-      break;
-    case event.target.innerText === 'Add To Cook':
-      displayRecipeToCook();
-      break; 
+  switch (true) {
+  case event.target.innerText === 'View Instructions':
+    displayRecipeInstructions(currentRecipe);
+    break; 
+  case event.target.innerText === 'Add To Favorites':
+    addRecipeToFavorites(currentRecipe);
+    break; 
+  case event.target.innerText === 'View Ingredients': 
+    displayRecipeIngredients(currentRecipe);
+    break;
+  case event.target.innerText === 'Add To Cook':
+    displayRecipeToCook();
+    break; 
   }
 }
 
