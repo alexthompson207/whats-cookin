@@ -84,7 +84,11 @@ In this project we created a recipe tracking/meal planning application. We were 
 
 
 ## Functionality
-giphs:
+![Home and favorites view](https://media.giphy.com/media/67eOsnDMA2vhXbdBM0/giphy.gif)
+
+![Pantry and Cook View](https://media.giphy.com/media/sTtMez9JeFZ4gfm9vb/giphy.gif)
+
+![Search and Filter View]()
 
 
 
