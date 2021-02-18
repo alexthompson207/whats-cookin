@@ -79,7 +79,7 @@ In this project we created a recipe tracking/meal planning application. We were 
 ## Wins
 
 1. We built the minimum viable product (MVP) where the user can view, filter, search, and favorite recipes without encountering any bugs.
-2. The testing suite is specific with happy/sad path outcomes and 61 total it blocks.
+2. The testing suite is specific with happy/sad path outcomes and 61 total `it` blocks.
 3. Creating a user interface that is easy to use and displays information on multiple screens.
 
 
