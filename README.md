@@ -3,7 +3,7 @@
     <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
   </a>
 
-  <h1 align="center">What's Cookin'?</h1>
+  <h1 align="left">What's Cookin'?</h1>
   
   
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)](https://www.linkedin.com/in/alex-thompson-309070a2/ ) [![GitHub](https://img.shields.io/badge/GitHub-black.svg?&style=flat-square&logo=github&logoColor=white)](https://github.com/alexthompson207) - Alex Thompson
@@ -27,10 +27,15 @@
 - [Contact](#contact)
 
 ## About The Project
+Implement ES6 classes that communicate to each other as needed
+Use object and array prototype methods to perform data manipulation
+Create a user interface that is easy to use and displays information in a clear way on multiple screens
+Write modular, reusable code that follows SRP (Single Responsibility Principle)
+Implement a robust testing suite using TDD
 
-In this project we created a recipe tracking/meal planning application. We were provided three separate data files of users, ingredients, and recipes. Using the data, we built an application from scratch for users to view a list of recipes, search and filter recipes, favorite their own recipes, and add recipes to a cook list. If the user doesn't have enough ingredients in their pantry to cook a recipe from their cook list, we provided a 'shopping list' of missing ingredients and amounts. Finally, if the user does have enough ingredients for the recipe they select to cook, those ingredients are taken out of their pantry. We implemented a robust testing suite using the `Mocha Framework` and `Chai Assertion Library` for `TDD`.
+In this project we created a recipe tracking/meal planning application. Users have the ability search/filter a list of recipes and favorite recipes. They also have a dedicated pantry with special features for analyzing the items they have in stock. Each recipe can be inspected by the user and relevant information is provided to them such as an ingredient list, instruction set, and cost to make the recipe. 
 
-// maybe delete? Our application allows a user to view all the recipes from the data file, filter recipes by name, ingredient, or keyword, and interact with these recipes by clicking on a recipe to display its total cost, a list of the ingredients, and instructions on how to cook the recipe. Furthermore, we provided a view of the ingredients that are currently in the user's pantry and an area where a user can select a recipe to cook from their cook list. 
+The focus of this project was to implement ES6 classes and use an Object Oriented Programming structure. We implemented a robust testing suite using test driven development and utilized the `Mocha Framework` and `Chai Assertion Library`. In addition to planning the structure of our data we designed a user interface that is fully responsive and displays information in a clear way on multiple screens. 
 
 - [Project Brief and Rubric](https://frontend.turing.io/projects/whats-cookin.html)
 
