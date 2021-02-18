@@ -128,5 +128,5 @@ In this project we created a recipe tracking/meal planning application. We were 
 [Gmail]: mailto:ahthomps1@gmail.com
 [github]: https://github.com/alexthompson207
 [linkedin2]: https://www.linkedin.com/in/elizabeth-s-hahn/
-[Gmail2]: mailto:ahthomps1@gmail.com
+[Gmail2]: mailto:elizshahn@gmail.com
 [github2]: https://github.com/elizhahn
