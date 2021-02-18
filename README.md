@@ -29,7 +29,9 @@
 
 ## About The Project
 
-In this project we created a recipe tracking/meal planning application. We were provided three separate data files of users, ingredients, and recipes. Using the data, we built an application from scratch for users to view, search, filter, favorite, and add recipes to a cook list. Our application allows a user to view all the recipes from the data file, filter recipes by name, ingredient, or keyword, and interact with these recipes by clicking on a recipe to display its total cost, a list of the ingredients, and instructions on how to cook the recipe. Furthermore, we provided a view of the ingredients that are currently in the user's pantry and an area where a user can select a recipe to cook from their cook list. If the user doesn't have enough ingredients in their pantry to cook a recipe from their cook list, we provided a 'shopping list' of missing ingredients and amounts. Finally, if the user does have enough ingredients for the recipe they select to cook, those ingredients are taken out of their pantry.
+In this project we created a recipe tracking/meal planning application. We were provided three separate data files of users, ingredients, and recipes. Using the data, we built an application from scratch for users to view a list of recipes, search and filter recipes, favorite their own recipes, and add recipes to a cook list. If the user doesn't have enough ingredients in their pantry to cook a recipe from their cook list, we provided a 'shopping list' of missing ingredients and amounts. Finally, if the user does have enough ingredients for the recipe they select to cook, those ingredients are taken out of their pantry. We implemented a robust testing suite using the `Mocha Framework` and `Chai Assertion Library` for `TDD`.
+
+// maybe delete? Our application allows a user to view all the recipes from the data file, filter recipes by name, ingredient, or keyword, and interact with these recipes by clicking on a recipe to display its total cost, a list of the ingredients, and instructions on how to cook the recipe. Furthermore, we provided a view of the ingredients that are currently in the user's pantry and an area where a user can select a recipe to cook from their cook list. 
 
 - [Project Brief and Rubric](https://frontend.turing.io/projects/whats-cookin.html)
 
@@ -68,7 +70,7 @@ In this project we created a recipe tracking/meal planning application. We were 
 
 ## Challenges
 
-1. Planning:
+1. Planning: intentionally planning an overall strategy before writing code. This included class structures and methods, and their respective tests, creating a wireframe for all the layouts, and implementing a detailed `gitHub` project board.
 2. Working between multiple datasets where the only commonality to match them was an `id`. Then creating functions and methods that could be reused later in the projects progression. 
 
 
@@ -76,8 +78,9 @@ In this project we created a recipe tracking/meal planning application. We were 
 
 ## Wins
 
-1. Built MVP ....
+1. We built the minimum viable product (MVP) where the user can view, filter, search, and favorite recipes without encountering any bugs.
 2. The testing suite is specific with happy/sad path outcomes and 61 total it blocks.
+3. Creating a user interface that is easy to use and displays information on multiple screens.
 
 
 ## Functionality
@@ -89,7 +92,7 @@ giphs:
 
 1. Allow a user to input their own pantry upon page load.
 2. Implement a rating system for recipes, such as a 5 star rating system, or a way to leave a review.
-3. Error handling....
+3. Error handling when searching for recipes by ingredient or name. Implementing a more robust search so users can search by part of a recipe name.
 
 
 
