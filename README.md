@@ -41,9 +41,9 @@ In this project we created a recipe tracking/meal planning application. We were 
 
 - [![JavaScript](https://img.shields.io/badge/-JavaScript-black?style=flat-square&logo=javascript)](https://www.javascript.com/) with `ES6` implementations
 
-- [![HTML5](https://img.shields.io/badge/-HTML5-black?style=flat-square&logo=html5&logoColor=white)]
+- [![HTML5](https://img.shields.io/badge/-HTML5-black?style=flat-square&logo=html5&logoColor=white)]()
 
-- [![CSS3](https://img.shields.io/badge/-CSS3-black?style=flat-square&logo=css3)]
+- [![CSS3](https://img.shields.io/badge/-CSS3-black?style=flat-square&logo=css3)]()
 
   
 
