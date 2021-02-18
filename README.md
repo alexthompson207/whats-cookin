@@ -76,6 +76,8 @@ In this project we created a recipe tracking/meal planning application. We were 
 
 ## Wins
 
+1. Built MVP ....
+2. The testing suite is specific with sad pathing outcomes and 61 total it blocks.
 
 
 ## Functionality
@@ -87,6 +89,7 @@ giphs:
 
 1. Allow a user to input their own pantry upon page load.
 2. Implement a rating system for recipes, such as a 5 star rating system, or a way to leave a review.
+3. Error handling....
 
 
 
